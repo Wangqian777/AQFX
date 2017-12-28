@@ -1,0 +1,756 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>孔智云</title>
+    <link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.min.css" />
+    <link href="/images/mainlogo.png" rel="shortcut icon" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+    <link rel="stylesheet" href="/cdn/font-awesome.min.css" />
+    <link rel="stylesheet" href="/cdn/ionicons.min.css" />
+    <link href="/module/dist/form.css" rel="stylesheet" />
+    <!--<link rel="stylesheet" href="/bootstraptable/dist/bootstrap-table.min.css" />-->
+    <link rel="stylesheet" href="/module/dist/SlickGrid/slick.grid.css" type="text/css" />
+    <link rel="stylesheet" href="/module/dist/SlickGrid/css/smoothness/jquery-ui-1.11.3.custom.css" type="text/css" />
+    <!--<link rel="stylesheet" href="/module/dist/SlickGrid/slick-default-theme.css" type="text/css" />-->
+    <link rel="stylesheet" href="/module/dist/SlickGrid/examples/examples.css" type="text/css" />
+    <style>
+        .mc-cell {
+            text-align: center;
+        }
+        
+        .control-label {
+            font-weight: normal !important;
+        }
+        
+        .nav-tabs li a {
+            border: solid 1px #bdc3c7 !important;
+            color: #000 !important;
+        }
+        
+        .nav-tabs li.active a {
+            background-color: #3498db !important;
+            color: #fff !important;
+        }
+        
+        .tab-content {
+            border: solid 1px #bdc3c7 !important;
+        }
+        
+        .cell-title {
+            text-align: center;
+        }
+        #searchresultbm    
+    {    
+        /*width: 200px;*/    
+        position: absolute;    
+        z-index: 1;    
+        overflow: hidden;    
+        left: -210px;    
+        top: 35px;    
+        background: #fff;    
+        border-top: none;    
+        border:1px solid #bdc3c7;
+        border-radius:4px;  
+    }
+        #searchresultzb    
+    {    
+        /*width: 200px;*/    
+        position: absolute;    
+        z-index: 1;    
+        overflow: hidden;    
+        left: -210px!important;    
+        top: 35px!important;  
+        background: #fff;    
+        border-top: none;    
+        border:1px solid #bdc3c7;
+        border-radius:4px;  
+    }
+        .slick-cell-checkboxsel {
+            text-align: center;
+            background: #f0f0f0;
+            border-right-color: silver;
+            border-right-style: solid;
+        }
+        
+        .slick-row.selected .cell-selection {
+            background-color: #016a9f;
+        }
+        #input_group_btn_zhibiao {
+            top:32px;
+        }
+        #input_group_btn_bumen {
+            top:32px;
+        }
+        #worktb   
+    {    
+        /*font-size: 18px;*/    
+        background: #fff;    
+        /*width: 140px;*/    
+        padding:0px;  
+    } 
+        .line    
+    {    
+        /*font-size: 18px;*/    
+        background: #fff;    
+        /*width: 140px;*/    
+        padding:0px;  
+    }    
+    .hover    
+    {    
+        background: #007ab8;    
+        width: 214px;    
+        color: #fff;    
+    } 
+        .std    
+    {    
+       font-size: 16px;  
+       width: 220px; 
+    }
+    </style>
+
+</head>
+
+<body>
+    <div id="container">
+        <div class="mdatafield" style="overflow:hidden;">
+          <div class="form_form"> 
+            <div class="toolbar">
+                <div class="btn-group " id="btn-group-tz" style="margin-top:5px; padding-left:16px;">
+                    <button type="button" class="btn btn-default" id="btntable-save" disabled="disabled"><i class="fa fa-save"></i>&nbsp;保存</button>
+                    <button type="button" class="btn btn-default" id="btntable-search-list"><i class="fa fa-search"></i>&nbsp;查询</button>
+                    <button type="button" class="btn btn-default" id="btntable-search"><i class="fa fa-search"></i>&nbsp;初始化</button>
+                    <button type="button" class="btn btn-default" id="btntable-chongzhi"><i class="fa fa-search"></i>&nbsp;重置</button>
+                    <button type="button" class="btn btn-default" id="btntable-delete"><i class="fa fa-trash-o"></i>&nbsp;删除</button>
+                    <!--<div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-sliders"></i>&nbsp;更多<span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li id="btntable-dev"><a href="#"><i class="fa fa-code"></i>&nbsp;开发模式</a></li>
+                            <li id="btntable-config"><a href="#"><i class="fa fa-cogs"></i>&nbsp;配置</a></li>
+                        </ul>
+                    </div>-->
+
+                </div>
+            </div>
+            <div class="table_input">
+                 <table id="tb_datamodel"></table>
+            </div>
+            <div id="xianshi" style="padding:30px 10px; font-size:13px;margin-top:-20px;">
+                <input type="hidden" name="" id="mc_json_data" data-mc_json="" />
+                <form class="form-horizontal" role="form" id="frmdata" data-table="KHA考核_指标数据">
+                   
+                    <!--主表区域-->
+                    <div id="input_xiaao">
+                    <div class="form-group" id="form_year_month">
+                        <label class="col-sm-1 col-md-1 control-label" style="min-width:130px;">年</label>
+                        <div class="col-sm-4 col-md-4">
+                            <select name="单据年" class="form-control" id="form_year">
+                            </select>
+                        </div>
+                        <label class="col-sm-1 col-md-1 control-label" style="min-width:130px;">月</label>
+                        <div class="col-sm-4 col-md-4">
+                             <select name="单据月" class="form-control" id="form_month">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" id="form_group">
+                        <label class="col-sm-1 col-md-1 control-label" style="min-width:130px;">单位名称</label>
+                        <div class="col-sm-4 col-md-4">
+                            <!--自定义下拉控件-->
+                            <!--自定义下拉控件-->
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="部门名称" id="txtModuleType" data-id="" value="" />
+                                <div class="input-group-btn" id="txtModuleType_btn">
+                                    <div id="searchresultbm" style="display: none;"></div>
+                                    <button id="input_group_btn_bumen_s" class="btn btn-default btn-info dropdown-toggle cm-dropdown-toggle" data-toggle="dropdown" type="button" style="height:34px" data-target="txtModuleType" data><i class="fa fa-lightbulb-o"></i></button>
+                                    <div class="dropdown-menu pull-right cm-dropdown-menu" id="input_group_btn_bumen" style="width:250px;height:300px; overflow:auto" data-target="txtModuleType">
+                                        <!--可以是iframe-->
+                                        <div id="tree"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--自定义下拉控件-->
+                        </div>
+
+                        <label class="col-sm-1 col-md-1 control-label" style="min-width:130px;">指标名称</label>
+                        <div class="col-sm-4 col-md-4">
+                            <!--自定义下拉控件-->
+                            <!--自定义下拉控件-->
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="名称" id="txtzbmc" data-id="" value="" />
+                                <div class="input-group-btn" id="Div1">
+                                    <div id="searchresultzb" style="display: none;"></div>
+                                    <button id="txtzhibiao" class="btn btn-default btn-info dropdown-toggle cm-dropdown-toggle" data-toggle="dropdown" type="button" style="height:34px" data-target="txtzbmc" data><i class="fa fa-lightbulb-o"></i></button>
+                                    <div class="dropdown-menu pull-right cm-dropdown-menu" id="input_group_btn_zhibiao" style="width:250px;height:300px; overflow:auto" data-target="txtzbmc">
+                                        <!--可以是iframe-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!--自定义下拉控件-->
+                        </div>
+                    </div>
+                      <div class="form-group" id="form-group1" style="display:none;">
+                        <label class="col-sm-1 col-md-1 control-label" style="min-width:130px;">计量单位</label>
+                        <div class="col-sm-4 col-md-4">
+                            <input class="form-control" id="计量单位" name="计量单位" data-type="字符串"  value=" " type="text" placeholder="" />
+                        </div>
+                        <label class="col-sm-1 col-md-1 control-label" style="min-width:130px;">本月实际</label>
+                        <div class="col-sm-4 col-md-4">
+                            <input class="form-control" id="值" name="值" data-type="小数型" type="text" placeholder="" />
+                        </div>
+                    </div>
+                        </div>
+                    <div class="form-group" id="form-group2" style="display:none;">
+                        <label class="col-sm-1 col-md-1 control-label" style="min-width:130px;">调整量</label>
+                        <div class="col-sm-4 col-md-4">
+                            <input class="form-control" id="Text3" name="调整量" onkeyup="value=value.replace(/[^\-\d\.]/g,'')" data-type="字符串" type="text" placeholder="" value="1" />
+                        </div>
+
+                        <label class="col-sm-1 col-md-1 control-label" style="min-width:130px;">调整结果</label>
+                        <div class="col-sm-4 col-md-4">                                 
+                               <input type="text" class="form-control" name="调整结果" onkeyup="value=value.replace(/[^\-\d\.]/g,'')"  id="Text4" data-id="" />                        
+                        </div>
+
+                    </div>
+                     <div class="form-group" id="form-group3" style="display:none;">
+                        <label class="col-sm-1 col-md-1 control-label" style="min-width:130px;">调整原因</label>
+                        <div class="col-sm-4 col-md-4">
+                            <textarea class="form-control" id="Text5" name="调整原因" data-type="字符串"></textarea>
+                        </div>
+                        <label class="col-sm-1 col-md-1 control-label" style="min-width:130px;">调整历史</label>
+                        <div class="col-sm-4 col-md-4">
+                            <textarea  class="form-control" id="Text6" name="调整历史" data-type="小数型">
+
+                            </textarea>
+                           
+                        </div>
+                    </div>
+                    <div class="form-group" style="display:none;">
+                    <input type="text" class="form-control" id="Text1" name="单据类型"  value="考核调整"/></div>
+                    <!--</div>-->
+                    <div style="display:none;">
+                        <input name="部门ID" id="bumen_id" data-type="字符串" type="text" value="" />
+                        <input name="指标ID" id="zhibiao_id" data-type="字符串" type="text" />
+                        <input  name="ID" type="text" value="" id="ID" />
+                        <input  name="来源单据ID" type="text" value="" id="JHID" />
+                    </div>
+                </form>
+             </div>
+              </div>
+                     <!--主表区域-->
+                    <!--子表区域-->
+                    <!--子表tab-->
+                    <ul id="myTab" class="nav nav-tabs"  hidden="hidden">
+                        <li class="active">
+                            <a href="#tab_1" data-toggle="tab"> 月度考核调整  </a>
+                        </li>
+                      
+                    </ul>
+                    <!--子表tab-->
+                    <!--子表区域-->
+                    <div id="myTabContent" class="tab-content" hidden="hidden">
+
+                        <div class="tab-pane fade in active" id="tab_1">
+                            <div id="grid_2" class="detail-table" style="width:100%;height:300px;" data-table="KHA考核_指标数据"></div>
+                        </div>                    
+                    </div>
+
+                    <!--子表区域-->
+               
+
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.write('<script src="/script/commonFile/ver.js?ver=' + Math.random() + '" type="text/javascript"> </s' + 'cript>');
+    </script>
+
+    <script>
+        document.write('<script src="/script/commonFile/common.js?ver=' + mc_WebVer + '" type="text/javascript"> </s' + 'cript>');
+    </script>
+
+
+    <script src="/module/dist/SlickGrid/lib/firebugx.js"></script>
+
+    <!--<script src="/module/dist/SlickGrid/lib/jquery-1.11.2.min.js"></script>-->
+    <script src="/module/dist/SlickGrid/lib/jquery-ui-1.11.3.min.js"></script>
+    <script src="/module/dist/SlickGrid/lib/jquery.event.drag-2.3.0.js"></script>
+
+    <script src="/module/dist/SlickGrid/slick.core.js"></script>
+    <script src="/module/dist/SlickGrid/slick.dataview.js"></script>
+
+    <!--<script src="/module/dist/SlickGrid/plugins/slick.checkboxselectcolumn.js"></script>-->
+    <script src="/module/dist/SlickGrid/plugins/slick.cellrangedecorator.js"></script>
+    <script src="/module/dist/SlickGrid/plugins/slick.cellrangeselector.js"></script>
+    <script src="/module/dist/SlickGrid/plugins/slick.cellselectionmodel.js"></script>
+    <script src="/module/dist/SlickGrid/plugins/slick.rowselectionmodel.js"></script>
+
+    <script src="/module/dist/SlickGrid/controls/slick.columnpicker.js"></script>
+    <script src="/module/dist/SlickGrid/slick.formatters.js"></script>
+
+
+    <script src="/module/dist/SlickGrid/slick.editors.js"></script>
+    <script src="/module/dist/SlickGrid/slick.grid.js"></script>
+
+    <script src="/module/dist/jquery.formFill.js"></script>
+
+    <!--script 顺序很重要  -->
+    <!--<script src="/module/dist/masterdetail/form_md.js"></script>-->
+    <!--form_md.js 中用到上面的 mc_grid_dic 等信息,若放到上面则报错 -->
+    <!--权限及工作流集成，不允许修改 （平台模块）-->
+    <script>
+     <!--年份-->
+        var oDate = new Date(); //实例一个时间对象；
+        var year = oDate.getFullYear();   //获取系统的年
+        var year1 = oDate.getFullYear() + 5;   //获取系统的年
+        var year2 = oDate.getFullYear() + 5;   //获取系统的年
+        var i = 0;
+        var html = "";
+        while (i++ < 8) {
+            if (year1 === year) {
+                html += "<option value='" + year + "' selected='selected'>" + year + "</option>";
+                year1 = year - 1;
+                year2 = year - 1;
+            }
+            else {
+                html += "<option value='" + year1-- + "'>" + year2-- + "</option>";
+            }
+        }
+        $("#form_year").html(html);//年份id
+        //月份
+    var month = oDate.getMonth();
+    var select = document.getElementById('form_month');
+    var option = select.getElementsByTagName('option');
+    for (var i = 0; i < option.length; i++) {
+        if (parseInt("" + option[i].value + "", 10) === month + 1) {
+            option[i].setAttribute("selected", "selected");
+        };
+    };
+
+    
+    //点击部门按钮选择
+    $("#input_group_btn_bumen_s").click(function () {
+        $("#input_group_btn_bumen").slideToggle(500);
+    });
+    //点击指标按钮选择
+    $("#txtzhibiao").click(function () {
+        $("#input_group_btn_zhibiao").slideToggle(500);
+    });
+
+
+    $(".cm-dropdown-item").bind("click", function (e) {
+        e.stopPropagation(); //  阻止事件冒泡
+    });
+    $(".cm-dropdown-item").bind("focus", function (e) {
+        e.stopPropagation(); //  阻止事件冒泡
+    });
+
+    $(".cm-dropdown-toggle").bind("click", function (e) {
+        //  e.stopPropagation();    //  阻止事件冒泡
+    });
+
+
+    ////////////////////////////////////////////
+    $.datepicker.regional['zh-CN'] = {
+        clearText: '清除',
+        clearStatus: '清除已选日期',
+        closeText: '关闭',
+        closeStatus: '不改变当前选择',
+        prevText: '< 上月',
+        prevStatus: '显示上月',
+        prevBigText: '<<',
+        prevBigStatus: '显示上一年',
+        nextText: '下月>',
+        nextStatus: '显示下月',
+        nextBigText: '>>',
+        nextBigStatus: '显示下一年',
+        currentText: '今天',
+        currentStatus: '显示本月',
+        monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+        monthNamesShort: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+        monthStatus: '选择月份',
+        yearStatus: '选择年份',
+        weekHeader: '周',
+        weekStatus: '年内周次',
+        dayNames: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+        dayNamesShort: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+        dayNamesMin: ['日', '一', '二', '三', '四', '五', '六'],
+        dayStatus: '设置 DD 为一周起始',
+        dateStatus: '选择 m月 d日, DD',
+        dateFormat: 'yy-mm-dd',
+        firstDay: 1,
+        initStatus: '请选择日期',
+        isRTL: false
+    };
+    $.datepicker.setDefaults($.datepicker.regional['zh-CN']);
+
+    var mc_grid_dic = new Array();
+
+    var dataview;
+    var grid;
+
+    $(function () {
+        //子表
+        //var dataView;
+        //var grid;
+        //var data = [];
+
+        var columns = [
+          {
+              id: "单据年",
+              name: "年",
+              field: "单据年",
+              cssClass: "cell-title",
+              //editor: Slick.Editors.Text
+          }, {
+              id: "单据月",
+              name: "月",
+              field: "单据月",
+              cssClass: "cell-title",
+              //editor: Slick.Editors.Text
+          }, {
+              id: "单位名称",
+              name: "单位名称",
+              field: "部门名称",
+              cssClass: "cell-title",
+              //editor: Slick.Editors.Text
+          }, {
+              id: "名称",
+              name: "指标名称",
+              field: "名称",
+              cssClass: "cell-title",
+              // editor: Slick.Editors.Text
+          }, {
+              id: "计量单位",
+              name: "计量单位",
+              field: "计量单位",
+              cssClass: "cell-title",
+              // editor: Slick.Editors.Text
+          }, {
+              id: "值",
+              name: "本月实际",
+              field: "值",
+              cssClass: "cell-title",
+              // editor: Slick.Editors.Text
+          }, {
+              id: "调整量",
+              name: "调整量",
+              field: "调整量",
+              cssClass: "cell-title",
+              formatter: NameFormatter,
+              editor: Slick.Editors.Text
+             
+          }, {
+              id: "调整结果",
+              name: "调整结果",
+              field: "调整结果",
+              cssClass: "cell-title",
+              formatter: NameFormatter1,
+              editor: Slick.Editors.Text
+          }, {
+              id: "调整原因",
+              name: "调整原因",
+              field: "调整原因",
+              cssClass: "cell-title",
+              editor: Slick.Editors.Text
+          }
+
+        ];
+
+        var options = {
+            editable: true,
+            enableAddRow: false,
+            enableCellNavigation: true
+        };
+
+
+        dataview = new Slick.Data.DataView();
+
+        grid = new Slick.Grid("#grid_2", dataview, columns, options);
+        grid.setSelectionModel(new Slick.RowSelectionModel());
+        // wire up model events to drive the grid
+        dataview.onRowCountChanged.subscribe(function (e, args) {
+          
+            grid.updateRowCount();
+            grid.render();
+        });
+
+        dataview.onRowsChanged.subscribe(function (e, args) {
+            grid.invalidateRows(args.rows);
+            grid.render();
+        });
+        function NameFormatter1(row, cell, value, columnDef, dataContext) {
+
+            var jh = dataContext["值"];
+          
+            if (dataContext["调整量"] == undefined) {
+                dataContext["调整量"] = 0;
+            }
+            var sj = parseFloat(dataContext["调整量"]);
+            var e = /^(\+\d+|\d+|\-\d+|\d+\.\d+|\+\d+\.\d+|\-\d+\.\d+)$/;
+            if (!e.test(sj)) {
+                top.window.layer.msg("必须数字");
+                // sj = 0;
+                dataContext["调整量"] = 0;
+                return;
+            }
+            if (dataContext["调整量"] == undefined) {
+                dataContext["调整量"] = 0;
+            }
+            value = eval("sj+jh");
+            console.log(sj);
+            if (isNaN(value)) {
+
+                value = 0;
+            }
+
+
+            var rtn = {
+                text: value,
+            };
+            dataContext["调整结果"] = value;
+
+            return rtn;
+        }
+        function NameFormatter(row, cell, value, columnDef, dataContext) {
+
+            var jh = dataContext["值"];
+
+            if (dataContext["调整结果"] == undefined) {
+                dataContext["调整结果"] = dataContext["调整量"];
+            }
+            var sj = dataContext["调整结果"];
+            console.log(sj);
+            //   console.log(dataContext);
+            //  console.log(jh);
+            //  console.log(sj);
+            value = eval("sj-jh");
+            if (isNaN(value)) {
+
+                value = '0';
+            }
+            var rtn = {
+                text: value,
+            };
+            dataContext["调整量"] = value;
+            return rtn;
+
+        }
+
+        mc_grid_dic["grid_2"] = grid;
+        // console.log(mc_grid_dic);
+
+        
+       // dataview.setItems([{ id: 0, 单据年: 2017, 单据月: 2 }, { id: 1, 单据年: 2017, 单据月: 1 }]);
+
+
+    });
+        $("input[name=调整量]").change(function () {
+            var 值 = $("#值").val() * 1;
+            var 调整量 = $("input[name=调整量]").val() * 1;
+            $("input[name=调整结果]").val(值 + 调整量);
+            
+        
+    });
+    $("input[name=调整结果]").change(function () {
+
+        var 调整结果 = $("input[name=调整结果]").val() * 1;
+        var 值 = $("#值").val() * 1;
+        $("input[name=调整量]").val(调整结果 - 值);
+        
+    });
+    ////判断数字
+    //$('#Text3').bind('input propertychange', function () {
+    //    var haha = $('#Text3').val();
+    //    var flag = haha.substring(0, 1);
+    //    if (isNaN(haha)) {
+    //        if(flag!="-"){
+    //            top.window.layer.msg("请输入数字");
+    //            return;
+    //        }
+    //      }
+    //});
+    //$('#Text4').bind('input propertychange', function () {
+    //    var haha = $('#Text3').val();
+    //    var flag = haha.substring(0, 1);
+    //    if (isNaN(haha)) {
+    //        if (flag != "-") {
+    //            top.window.layer.msg("请输入数字");
+    //            return;
+    //        }
+    //    }
+    //});
+        ////////////////////////////////////////////////////////////
+    var dept_treedata = [];
+   
+    function BindDept() {
+        //R C M D
+        var json = { "json": [""] };
+
+        var __str = JSON.stringify(json);
+        $.ajax({
+            type: "POST",
+            url: "/BAPI/BAPI_ASHX.ashx",
+            data: { "api": "MC.YMJYGL.Server.YMJYGL.common.Select.BAPI_查询_部门数据", "type": "json", "ticket": pub.State.Ticket, "data": __str },
+            dataType: "Json",
+            error: function (xhr, status, error) {
+                alert(error);
+            },
+            success: function (data) {
+                
+                console.log(data.json.Data);
+                if (data.json.State == "1") {
+                    dept_treedata = data.json.Data;
+                    JSON.stringify(dept_treedata);
+                    $('#input_group_btn_bumen').treeview({
+                        data: dept_treedata.root,
+                        collapseIcon: "glyphicon glyphicon-chevron-right",
+                        expandIcon: "glyphicon glyphicon-chevron-down",
+                        onNodeSelected: function (event, data) {
+                            var name = data.text;//获取文本
+                            var id = data.ID;//获取id
+                            bmflag = 1;
+                            $('#bumen_id').val(id);
+                            $("#txtModuleType").val(name);
+                            if (data.state.expanded == false) {
+                                var arrnode = $('#input_group_btn_bumen').treeview('getSiblings', data.nodeId);
+                                $('#input_group_btn_bumen').treeview('expandNode', [data.nodeId, { silent: true }]);
+                                for (var i = 0; i <= arrnode.length; i++) {
+                                    if (data.nodeId == arrnode[i]) {
+                                        $('#input_group_btn_bumen').treeview('collapseNode', [arrnode[i], { silent: true, ignoreChildren: false }]);
+                                    }
+                                }; //$("#tree1").val(data.nodeId);
+                            }
+                            else {
+                                var arrnode = $('#input_group_btn_bumen').treeview('getSiblings', data.nodeId);
+                                $('#input_group_btn_bumen').treeview('collapseNode', [data.nodeId, { silent: true }]);
+                                for (var i = 0; i <= arrnode.length; i++) {
+                                    if (data.nodeId == arrnode[i]) {
+                                        $('#input_group_btn_bumen').treeview('expandNode', [arrnode[i], { silent: true, ignoreChildren: true }]);
+                                    }
+                                };// $("#tree1").val(data.nodeId);
+                            }
+                        }
+                    });
+
+                } else {
+                    if (data.json.Message != "") {
+                        //后台提示
+                        top.window.layer.msg(data.json.Message);
+                    } else {
+                        top.window.layer.msg("操作失败");
+                    }
+                }
+            }
+
+        });
+    }
+    BindDept();
+
+
+    //指标名称 tree
+    ////////////////////////////////////////////////////////////
+    var dept_treedata1 = [];
+
+    
+    
+    function BindDept1() {
+        //R C M D
+        var json = { "json": [""] };
+
+        var __str = JSON.stringify(json);
+        $.ajax({
+            type: "POST",
+            url: "/BAPI/BAPI_ASHX.ashx",
+            data: { "api": "MC.YMJYGL.Server.YMJYGL.common.Select.BAPI_查询_指标数据", "type": "json", "ticket": pub.State.Ticket, "data": __str },
+            dataType: "Json",
+            error: function (xhr, status, error) {
+                alert(error);
+            },
+            success: function (data) {
+                console.log(data.json.Data);
+                if (data.json.State == "1") {
+                    dept_treedata1 = data.json.Data;
+                    //设置tree 的合并
+                    var i = 0;
+                    for (; i < dept_treedata1.root.length; i++) {
+                        dept_treedata1.root[i].state = {
+                            expanded: false,
+                        };
+                    }
+                    JSON.stringify(dept_treedata1);
+                    $('#input_group_btn_zhibiao').treeview({
+                        data: dept_treedata1.root,
+                        collapseIcon: "glyphicon glyphicon-chevron-right",
+                        expandIcon: "glyphicon glyphicon-chevron-down",
+                        onNodeSelected: function (event, data) {
+                            var name = data.text;//获取文本
+                            var id = data.ID;//获取id
+                            zbflag = 1;
+                            $('#zhibiao_id').val(id);
+                            $("#txtzbmc").val(name);
+                            if (data.state.expanded == false) {
+                                var arrnode = $('#input_group_btn_zhibiao').treeview('getSiblings', data.nodeId);
+                                $('#input_group_btn_zhibiao').treeview('expandNode', [data.nodeId, { silent: true }]);
+                                for (var i = 0; i <= arrnode.length; i++) {
+                                    if (data.nodeId == arrnode[i]) {
+                                        $('#input_group_btn_zhibiao').treeview('collapseNode', [arrnode[i], { silent: true, ignoreChildren: false }]);
+                                    }
+                                }; //$("#tree1").val(data.nodeId);
+                            }
+                            else {
+                                var arrnode = $('#input_group_btn_zhibiao').treeview('getSiblings', data.nodeId);
+                                $('#input_group_btn_zhibiao').treeview('collapseNode', [data.nodeId, { silent: true }]);
+                                for (var i = 0; i <= arrnode.length; i++) {
+                                    if (data.nodeId == arrnode[i]) {
+                                        $('#input_group_btn_zhibiao').treeview('expandNode', [arrnode[i], { silent: true, ignoreChildren: true }]);
+                                    }
+                                };// $("#tree1").val(data.nodeId);
+                            }
+                        }
+                    });
+
+                } else {
+                    if (data.json.Message != "") {
+                        //后台提示
+                        top.window.layer.msg(data.json.Message);
+                    } else {
+                        top.window.layer.msg("操作失败");
+                    }
+                }
+            }
+
+        });
+    }
+    BindDept1();
+    //点击指标按钮选择
+    $("#form_group").mouseleave(function () {
+        $("#input_group_btn_bumen").slideUp(500);
+        $("#input_group_btn_zhibiao").slideUp(500);
+    });
+    </script>
+
+    
+  <script src="form_md.js"></script>
+
+</body>
+
+</html>

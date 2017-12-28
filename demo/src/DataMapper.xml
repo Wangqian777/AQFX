@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="nsDataDao">
+	<select id="getData" parameterType="String" resultType="java.util.LinkedHashMap">
+		${value}
+	</select>
+	<update id="updateData" parameterType="String">
+		${value}
+	</update>
+	<insert id="insertData" parameterType="String">
+		${value}
+	</insert>
+	<select id="getDataCounts" parameterType="String" resultType="Integer">
+		${value}
+	</select>
+	<delete id="deleteData" parameterType="String">
+		${value}
+	</delete>
+	<update id="dropTable" parameterType="String">
+        drop table ${value}
+    </update>
+	
+</mapper>

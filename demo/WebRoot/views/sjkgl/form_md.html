@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>form_md.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <link rel="stylesheet" href="../../plugins/bootstraptable/dist/bootstrap-table.min.css"/>
+    <link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap.min.css" type="text/css"></link>
+    <link rel="stylesheet" href="../../plugins/fancytree/skin-bootstrap/ui.fancytree.css" type="text/css"></link>
+    <link rel="stylesheet" href="../../plugins/font-awesome/css/font-awesome.css" type="text/css"></link>
+    <link rel="stylesheet" href="../../plugins/layui/css/layui.css" type="text/css"></link>
+    <script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="form_md_list.js"></script>
+  	<script type="text/javascript" src="../../plugins/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../plugins/bootstrap/js/bootstrap-treeview.js"></script>
+	<script type="text/javascript" src="../../plugins/bootstraptable/dist/bootstrap-table.js"></script>
+	<script type="text/javascript" src="../../plugins/layer/layer.js"></script>
+	<script type="text/javascript" src="../../js/jquery.formFill.js"></script>
+	
+	  
+  </head>
+  
+  <body>
+  	<div class="mdatafield" style="overflow:hidden;">
+          <div class="form_form"> 
+            <div class="toolbar">
+                <div class="btn-group " id="btn-group-tz" style="margin-top:5px; padding-left:16px;">
+                   <button type="button" class="btn btn-default"  id="btntable-save1"><i class="fa fa-save"></i>&nbsp;保存</button>
+                   <button type="button" class="btn btn-default" id="btntable-chongzhi"><i class="fa fa-search"></i>&nbsp;重置</button>   
+                 </div>
+            </div>
+            <div class="table_input">
+                 <table id="tb_datamodel"></table>
+            </div>
+            <div style="padding:30px 10px; font-size:13px;margin-top:-20px;">
+                <input type="hidden" name="" id="mc_json_data" data-mc_json="" />
+                <form class="form-horizontal" role="form" id="frmdata" >
+                   	
+                    <!--主表区域-->
+                    <div class="form-group" id="form_year_month">
+                        <label class="col-sm-1 col-md-1 control-label" style="min-width:130px;">列名</label>
+                        <div class="col-sm-4 col-md-4">
+                            <input class="form-control" id="列名" name="列名"     data-type="字符串" type="text" placeholder="" value="" />
+                        </div>
+                        <label class="col-sm-1 col-md-1 control-label" style="min-width:130px;">数据类型</label>
+                        <div class="col-sm-2 col-md-2">
+                            <select name="数据类型" class="form-control" id="dataType">
+                                <option value="begint">begint</option>
+                                <option value="binary">binary</option>
+                                <option value="bit">bit</option>
+                                <option value="char">char</option>
+                                <option value="data">data</option>
+                                <option value="datatime">datatime</option>
+                                <option value="datetimeoffset">datetimeoffset</option>
+                                <option value="decimal">decimal</option>
+                                <option value="float">float</option>
+                                <option value="geography">geography</option>
+                                <option value="geometry">geometry</option>
+                                <option value="hierarchyid">hierarchyid</option>
+                                <option value="image">image</option>
+                                <option value="int">int</option>
+                                <option value="money">money</option>
+                                <option value="nchar">nchar</option>
+                                <option value="ntext">ntext</option>
+                                <option value="numeric">numeric</option>
+                                <option value="nvarchar">nvarchar</option>
+                                <option value="real">real</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" id="form_year_month">
+                        <label class="col-sm-1 col-md-1 control-label" style="min-width:130px;">数据长度</label>
+                        <div class="col-sm-4 col-md-4">
+                            <input class="form-control" id="数据长度" name="数据长度"     data-type="字符串" type="text" placeholder="" value="" />
+                        </div>
+                        <label class="col-sm-1 col-md-1 control-label" style="min-width:130px;">允许null值</label>
+                        <div class="col-sm-4 col-md-4">
+                             <input class="form-control" id="路径" name="路径"     data-type="字符串" type="text" placeholder="" value="" />
+                        </div>
+                    </div>
+                    <!--</div>-->
+                    <div style="display:none;">
+                        <input name="id" id="id" data-type="字符串" type="text" value="" />
+                        <input name="pid" id="pid" data-type="字符串" type="text" />
+                    </div>
+                </form>
+     	</div>        
+		</div>
+      </div>
+  </body>
+  <script type="text/javascript" src="form_md.js"></script>
+</html>

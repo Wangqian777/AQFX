@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>form_md_list.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="../../plugins/bootstraptable/dist/bootstrap-table.min.css"/>
+    <link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap.min.css" type="text/css"></link>
+    <link rel="stylesheet" href="../../plugins/fancytree/skin-bootstrap/ui.fancytree.css" type="text/css"></link>
+    <link rel="stylesheet" href="../../plugins/font-awesome/css/font-awesome.css" type="text/css"></link>
+    <link rel="stylesheet" href="../../plugins/layui/css/layui.css" type="text/css"></link>
+    <link rel="stylesheet" href="../../plugins/bootstrap3-editable/css/bootstrap-editable.css" type="text/css"></link>
+    <link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap-treeview.min.css" type="text/css"></link>
+    <script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../../plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../plugins/bootstrap/js/bootstrap-treeview.min.js"></script>
+	<script type="text/javascript" src="../../plugins/bootstrap3-editable/js/bootstrap-editable.js"></script>
+	<script type="text/javascript" src="../../plugins/bootstraptable/dist/bootstrap-table.js"></script>
+	<script type="text/javascript" src="../../plugins/layer/layer.js"></script>
+	<script type="text/javascript" src="../../js/jquery.formFill.js"></script>
+	<script type="text/javascript" src="../../plugins/bootstraptable/dist/extensions/editable/bootstrap-table-editable.js"></script>
+	<script type="text/javascript" src="../../plugins/bootstraptable/dist/locale/bootstrap-table-zh-CN.js"></script>
+	</head>
+  <body >
+      <!-- 工具栏-->
+            <div class="row" id="treeSection" >
+                <div class="col-xs-4" style="width:27%;float:left;">
+                    <div class="box  box-solid box-default">
+                        <div class="box-header" style="background-color:#F3F3F3;height:40px;padding:10px 0px;border:1px solid #D2D6DE;border-radius:5px;">
+                             &nbsp;&nbsp;&nbsp;&nbsp;菜单管理
+                             <span class="pull-right">
+                                <i class="glyphicon glyphicon-refresh fa-fw"></i>
+                                <i class="fa fa-save ifa_style fa-fw"></i>
+                            </span>
+                        </div      >
+                        <div class="box-body" style="border:1px solid #D2D6DE;height:620px;border-radius:5px;">
+                                <div id="treeview" class="fontstyle">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="background-color:#F3F3F3;padding:10px 5px 0px;border:1px solid #D2D6DE;border-radius:5px;width:70%; height:40px;float: left;margin-left:13px;">
+                	明细数据
+            	</div>
+            	<div class="toolbar ">
+		            <div class="btn-group " style="margin-top:5px;margin-bottom:5px; margin-left:11px; padding-left:2px;">
+		                <button type="button" class="btn btn-default" id="btntable-addtj"><i class="fa fa-plus"></i>&nbsp;新增同级</button>
+		                <button type="button" class="btn btn-default" id="btntable-addxj"><i class="fa fa-plus"></i>&nbsp;新增下级</button>
+		                <button type="button" class="btn btn-default" id="btntable-save"><i class="fa fa-save"></i>&nbsp;保存</button>
+		                <button type="button" class="btn btn-default" id="btntable-delete"><i class="fa fa-trash-o"></i>&nbsp;删除</button>
+		                <button type="button" class="btn btn-default" id="btntable-refresh"><i class="fa fa-refresh"></i>&nbsp;初始化</button>
+		            </div>
+        		</div>
+        		<div style="border:1px solid #D2D6DE;border-radius:5px;width:70%; height:580px;float: left;margin-left:13px;">
+            	<form id="frmdata" data-table="菜单">
+            		<input type="hidden" id="id" name="id"/>
+            		<input type="hidden" id="pid" name="pid"/>
+            		
+                		<div class="form-group">
+						    <label for="inputPassword" class="col-sm-2 control-label">菜单编码</label>
+						    <div class="col-lg-4">
+						      <input type="text" class="form-control" id="编码" name="编码" >
+						    </div>
+						    <label for="inputPassword" class="col-sm-2 control-label">菜单名称</label>
+						    <div class="col-lg-4">
+						      <input type="text" class="form-control" id="名称" name="名称" >
+						    </div>
+					    </div>
+					    <div class="form-group">
+						    <label for="inputPassword" class="col-sm-2 control-label">图标</label>
+						    <div class="col-lg-4">
+						      <input type="text" class="form-control" id="图标名" name="图标名" >
+						    </div>
+						    <label for="inputPassword" class="col-sm-2 control-label">业务路径</label>
+						    <div class="col-lg-4">
+						      <input type="text" class="form-control" id="路径" name="路径" >
+						    </div>
+					    </div>
+					    <div class="form-group">
+						    <label for="inputPassword" class="col-sm-2 control-label">列表Sql</label>
+						    <div class="col-lg-4">
+						      <input type="text" class="form-control" id="列表Sql" name="列表Sql" >
+						    </div>
+						    
+					    </div>
+            		
+            		
+            	</form>
+            	
+				<div style="border-radius:5px;width:70%; height:580px;margin-left:13px;">
+					<table id="tb_departments" data-table="菜单模型"></table>
+				</div>
+            </div>
+        </div>
+    <script type="text/javascript" src="form_md_list.js"></script>        
+  </body>
+  
+</html>
