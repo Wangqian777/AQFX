@@ -44,7 +44,7 @@ $(document).ready(function(){
                 ulHtml += '</dl>';
         		
         	}else{
-        		ulHtml += '<a href="javascript:;" ' + data[i].路径 + '>';
+        		ulHtml += '<a href="javascript:;" data-title="'+data[i].text+'" data-url="' + data[i].路径 + '?id='+data[i].ID+'" kit-target  data-id="'+data[i].ID+'">';
         		if (data[i].图标名 !== undefined && data[i].图标名 !== '') {
                     if (data[i].图标名.indexOf('fa-') !== -1) {
                         ulHtml += '<i class="fa ' + data[i].图标名 + '" aria-hidden="true" data-icon="' + data[i].图标名 + '"></i>';
