@@ -35,6 +35,7 @@ public class GenerateSql {
 		updateSql+=String.format(" where id='%s'", map.get("id"))+"";
 		tempList.add(updateSql);
 		updateSql="";
+		
 		sqlMap.put("updateSql", tempList);
 		Map<String,List> map2=listMap.get(1);
 		if(map2.size()>0){
