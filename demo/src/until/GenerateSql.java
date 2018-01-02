@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import com.sun.script.javascript.JSAdapter;
+//import com.sun.script.javascript.JSAdapter;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
