@@ -1,6 +1,8 @@
 package until;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -13,6 +15,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 public class GenerateSql {
+	private SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
 	public Map<String,List> menuUpdateSql(String v_json){
 		List<Map> listMap=new ArrayList<Map>();
 		Map<String,List> sqlMap=new HashMap<String, List>();
@@ -29,48 +32,14 @@ public class GenerateSql {
 				updateSql+=String.format("%s='%s',",key,map.get(key));
 			}
 		}
+		updateSql+=String.format("最后修改时间='%s'", df.format(new Date()));
 		if(updateSql.substring(updateSql.length()-1).equals(",")){
 			updateSql=updateSql.substring(0,updateSql.length()-1);
 		}
 		updateSql+=String.format(" where id='%s'", map.get("id"))+"";
 		tempList.add(updateSql);
 		updateSql="";
-		
 		sqlMap.put("updateSql", tempList);
-		Map<String,List> map2=listMap.get(1);
-		if(map2.size()>0){
-			List<Map> list=map2.get("dtables");
-			tempList=new ArrayList<String>();
-			for(Map<String,String> m:list){
-				insertSql+=String.format("Insert into %s( ", m.get("table"));
-				
-				for(String key:m.keySet()){
-					if(!key.equals("id") && !key.equals("table")){
-						insertSql+=String.format("%s,",key);
-					}
-				}
-				insertSql+="id) values(";
-				for(String key:m.keySet()){
-					if(!key.equals("id") && !key.equals("table")){
-						insertSql+=String.format("'%s',",m.get(key));
-					}
-				}
-				UUID uuid=UUID.randomUUID();
-				insertSql+=String.format("'%s')\n", uuid);
-				tempList.add(insertSql);
-				insertSql="";
-				for(String key:m.keySet()){
-					List<String> deleteList=new ArrayList<String>();
-					delSql=String.format("delete from %s where FID='%s'" , m.get("table"),m.get("FID"));
-					deleteList.add(delSql);
-					sqlMap.put("deleteSql", deleteList);
-					break;
-				}
-			}
-			
-			sqlMap.put("insertSql", tempList);
-			
-		}
 		return sqlMap;
 	}
 	public Map<String,List> generateInsertSql(String v_json){

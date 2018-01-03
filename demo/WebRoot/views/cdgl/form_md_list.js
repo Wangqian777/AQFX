@@ -61,14 +61,6 @@
          var data = $("#frmdata").serializeObject(); 
          json.table = $("#frmdata").data("table");
          json.tabledata = data;
-         json.dtables = [];
-         var allTableData = $("#tb_departments").bootstrapTable('getData');
-         for(var i=0;i<allTableData.length;i++){
-        	 allTableData[i].FID=$("#id").val();
-        	 allTableData[i].table=$("#tb_departments").data("table"),
-        	 json.dtables.push({tabledata: allTableData[i] });
-         }
-         console.log(json);
          FormAction(json,"M");
 	 });
 	 $("#btntable-addtj").click(function(){

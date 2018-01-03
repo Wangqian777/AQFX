@@ -91,15 +91,7 @@ public class DataController {
 				for(String s:sql){
 					dataService.updateData(s);
 				}
-				sql=sqlMap.get("deleteSql");
-				for(String s:sql){
-					dataService.deleteData(s);
-				}
-				sql=sqlMap.get("insertSql");
-				for(String s:sql){
-					s=s.replace("'null'","null");
-					dataService.insertData(s);
-				}
+				
 			}else if(action.equals("C")){
 				Map<String,List> sqlMap=generateSql.generateInsertSql(v_json);
 				sql=sqlMap.get("zhuInsertSql");
