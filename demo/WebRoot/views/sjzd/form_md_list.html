@@ -1,70 +1,74 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>form_md_list.html</title>
+    <title>form_md_list.html</title>
 
-<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-<meta http-equiv="description" content="this is my page">
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
-<!-- Icons -->
+    <!-- Icons -->
 
-<link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap.css" type="text/css"/>
-<link rel="stylesheet" href="../../plugins/fancytree/skin-bootstrap/ui.fancytree.css" type="text/css"></link>
-<link rel="stylesheet" href="../../plugins/font-awesome/css/font-awesome.css" type="text/css"></link>
-<link rel="stylesheet" href="../../plugins/layui/css/layui.css" type="text/css"></link>
-<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="../../plugins/bootstrap/js/bootstrap.js"></script>
-<script type="text/javascript" src="../../plugins/bootstrap/js/bootstrap-treeview.js"></script>
-<script type="text/javascript" src="../../plugins/bootstraptable/dist/bootstrap-table.js"></script>
-<script type="text/javascript" src="../../plugins/layer/layer.js"></script>
-<script type="text/javascript" src="../../js/jquery.formFill.js"></script>
-<style type="text/css">
-#list:hover {
-	cursor: pointer;
-}
-i:hover
-{
-	cursor: pointer;
-}
+    <link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../../plugins/fancytree/skin-bootstrap/ui.fancytree.css" type="text/css"></link>
+    <link rel="stylesheet" href="../../plugins/font-awesome/css/font-awesome.css" type="text/css"></link>
+    <link rel="stylesheet" href="../../plugins/layui/css/layui.css" type="text/css"></link>
+    <script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../../plugins/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../plugins/bootstrap/js/bootstrap-treeview.js"></script>
+    <script type="text/javascript" src="../../plugins/bootstraptable/dist/bootstrap-table.js"></script>
+    <script type="text/javascript" src="../../plugins/layer/layer.js"></script>
+    <script type="text/javascript" src="../../js/jquery.formFill.js"></script>
+    <style type="text/css">
+        #list:hover {
+            cursor: pointer;
+        }
 
-</style>
+        i:hover {
+            cursor: pointer;
+        }
+    </style>
 </head>
+
 <body>
-     <div class="row" id="treeSection" style="width: 100%;">
-                <div class="col-xs-4" style="width:30%;float:left;">
-                    <div class="box  box-solid box-default">
-                        <div class="box-header" style="background-color:#F3F3F3;height:40px;padding:10px 0px;border:1px solid #D2D6DE;border-radius:5px;">
-                             &nbsp;&nbsp;&nbsp;&nbsp;数据字典
-                             <span class="pull-right" style="padding-right:20px;padding-left:20px">
-                                <i class="glyphicon glyphicon-plus" id="add"></i>
-                                <i class="fa fa-pencil-square-o"></i>
-                                <i class="glyphicon glyphicon-trash"></i>
-                                
-                            </span>
-                        </div      >
-                        <div class="box-body" style="border:1px solid #D2D6DE;height:620px;border-radius:5px;">
-                                <div id="list">
-                            	</div>
-                        </div>
+    <div class="row" id="main" style="width: 100%;">
+        <div class="col-xs-4" style="width:30%;float:left;">
+            <div class="box box-solid box-default">
+                <div class="box-header" style="background-color:#F3F3F3;height:40px;padding:10px 0px;border:1px solid #D2D6DE;border-radius:5px;">
+                    &nbsp;&nbsp;&nbsp;&nbsp;数据字典
+                    <span class="pull-right" style="padding-right:20px;padding-left:20px">
+                        <i class="glyphicon glyphicon-plus" id="add"></i>
+                        <i class="fa fa-pencil-square-o"></i>
+                        <i class="glyphicon glyphicon-trash"></i>
+
+                    </span>
+                </div>
+                <div id="left" class="box-body" style="border:1px solid #D2D6DE;height:620px;border-radius:5px;">
+                    <div id="list">
                     </div>
                 </div>
-                <div style="background-color:#F3F3F3;padding:10px 5px 0px;border:1px solid #D2D6DE;border-radius:5px;width:70%; height:40px;float: left;">
-                	数据字典明细
-            	</div>
-            	<div class="toolbar ">
-		            <div class="btn-group " style="margin-top:5px;margin-bottom:5px;  padding-left:2px;">
-		                <button type="button" class="btn btn-default" id="btntable-addtj"><i class="fa fa-plus"></i>&nbsp;新增同级</button>
-		                <button type="button" class="btn btn-default" id="btntable-addxj"><i class="fa fa-plus"></i>&nbsp;新增下级</button>
-		                <button type="button" class="btn btn-default" id="btntable-delete"><i class="fa fa-trash-o"></i>&nbsp;删除</button>
-		            </div>
-        		</div>
-        		<div style="border:1px solid #D2D6DE;border-radius:5px;width:70%; height:575px;float: left;">
-	            	
-            	
-            	</div>
+            </div>
         </div>
-<script type="text/javascript" src="form_md_list.js"></script>
+        <div style="background-color:#F3F3F3;padding:10px 5px 0px;border:1px solid #D2D6DE;border-radius:5px;width:70%; height:40px;float: left;">
+            数据字典明细
+        </div>
+        <div class=" ">
+            <div id="btns" class="btn-group " style="margin-top:5px;margin-bottom:5px;  padding-left:2px;">
+                <button type="button" class="btn btn-default" id="btntable-addtj">
+                    <i class="fa fa-plus"></i>&nbsp;新增同级</button>
+                <button type="button" class="btn btn-default" id="btntable-addxj">
+                    <i class="fa fa-plus"></i>&nbsp;新增下级</button>
+                <button type="button" class="btn btn-default" id="btntable-delete">
+                    <i class="fa fa-trash-o"></i>&nbsp;删除</button>
+            </div>
+        </div>
+        <div id="right" style="border:1px solid #D2D6DE;border-radius:5px;width:70%;float: left;">
+
+
+        </div>
+    </div>
+    <script type="text/javascript" src="form_md_list.js"></script>
 </body>
 
 </html>

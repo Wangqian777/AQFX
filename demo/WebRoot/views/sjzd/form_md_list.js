@@ -1,4 +1,7 @@
 ﻿$(function(){
+	const height = $(this).outerHeight(true)-$('.box-header').outerHeight(true)-2
+	$('#left').height(height)
+	$('#right').height(height-$('#btns').outerHeight(true))
 	dbQueryParams = function (params) {
         var temp = {
             "tableName": localStorage.tableName,
