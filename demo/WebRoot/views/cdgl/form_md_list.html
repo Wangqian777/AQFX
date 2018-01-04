@@ -42,7 +42,7 @@
 						<i class="fa fa-save ifa_style fa-fw"></i>
 					</span>
 				</div>
-				<div class="box-body" style="border:1px solid #D2D6DE;border-radius:5px;overflow-y:scroll;">
+				<div id="left" class="box-body" style="border:1px solid #D2D6DE;border-radius:5px;overflow-y:scroll;">
 					<div id="treeview" class="fontstyle"></div>
 				</div>
 			</div>
@@ -50,7 +50,7 @@
 		<div style="background-color:#F3F3F3;padding:10px 5px 0px;border:1px solid #D2D6DE;border-radius:5px;width:70%; height:40px;float: left;">
 			明细数据
 		</div>
-		<div class="toolbar">
+		<div class="">
 			<div id="btns" class="btn-group " style="margin-top:5px;margin-bottom:5px;  padding-left:2px;">
 				<button type="button" class="btn btn-default" id="btntable-addtj">
 					<i class="fa fa-plus"></i>&nbsp;新增同级</button>
@@ -62,8 +62,8 @@
 					<i class="fa fa-trash-o"></i>&nbsp;删除</button>
 			</div>
 		</div>
-		<div style="border:1px solid #D2D6DE;border-radius:5px;width:70%; height: 100%;float: left;">
-			<form id="frmdata" data-table="菜单" class="form-horizontal">
+		<div id="right" style="border:1px solid #D2D6DE;border-radius:5px;width:70%;float: left;">
+			<form  data-table="菜单" class="form-horizontal">
 				<input type="hidden" id="id" name="id" />
 				<input type="hidden" id="pid" name="pid" />
 

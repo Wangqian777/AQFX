@@ -1,8 +1,7 @@
 ﻿$(function(){
 	const height = $(this).outerHeight(true)-$('.box-header').outerHeight(true)-2
-	$('#treeview').height(height)
-	$('#frmdata').height(height-$('#btns').outerHeight(true))
-	frmdata
+	$('#left').height(height)
+	$('#right').height(height-$('#btns').outerHeight(true))
 	initTree();
 	function initTree(){
 		$.ajax({
