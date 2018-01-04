@@ -152,14 +152,26 @@ public class DataController {
 	//单表json处理
 	@RequestMapping("SingleJson.do")
 	public void SingleJson(String v_json,String action,HttpServletResponse response){
-		String sql="";
+		List<String> sql=new ArrayList<String>();
 		Map<String,List> sqlMap=new HashMap<String,List>();
 		if(action.equals("C")){
-			
+			sqlMap=generateSql.generateInsertSql(v_json);
+			sql=sqlMap.get("zhuInsertSql");
+			for(String s:sql){
+				dataService.insertData(s);
+			}
 		}else if(action.equals("M")){
-			
+			//sqlMap=generateSql.generateUpdateSql(v_json);
+			sql=sqlMap.get("zhuInsertSql");
+			for(String s:sql){
+				dataService.updateData(s);
+			}
 		}else if(action.equals("D")){
-			
+			sqlMap=generateSql.generateDeleteSql(v_json);
+			sql=sqlMap.get("zhuInsertSql");
+			for(String s:sql){
+				dataService.deleteData(s);
+			}
 		}
 	}
 	

@@ -52,8 +52,8 @@
 			var ulHtml="<ul class='list-group'>";
 			for(var i=0;i<data.length;i++){
 				if(i==0)
-					localStorage.tableName=data[i].name;
-				ulHtml+="<li class='list-group-item'>"+data[i].name+"</li>";
+					localStorage.Name=data[i].名称;
+				ulHtml+="<li class='list-group-item'>"+data[i].名称+"</li>";
 			}
 			ulHtml+="</ul>";
 			$("#list").html(ulHtml);

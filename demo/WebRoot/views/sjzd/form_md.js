@@ -10,7 +10,7 @@
 		 var __str= JSON.stringify(data);
 		 $.ajax({
 				type:"POST",
-				url:"../../Datadictionary.do",
+				url:"../../SingleJson.do",
 				data:{"v_json":__str,"action":action},
 				dataType:"JSON",
 				async:false,
