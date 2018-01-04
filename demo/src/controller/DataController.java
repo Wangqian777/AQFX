@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +35,7 @@ public class DataController {
 			HttpServletResponse response) throws IOException {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		String sql = "select * from 菜单";
+		String sql = "select * from 菜单 order by 编码 ";
 		
 		mapList = dataService.getData(sql);
 		List<String> pidList = new ArrayList<String>();
@@ -151,9 +152,13 @@ public class DataController {
 	//单表json处理
 	@RequestMapping("SingleJson.do")
 	public void SingleJson(String v_json,String action,HttpServletResponse response){
+		String sql="";
+		Map<String,List> sqlMap=new HashMap<String,List>();
 		if(action.equals("C")){
 			
-		}else if(){
+		}else if(action.equals("M")){
+			
+		}else if(action.equals("D")){
 			
 		}
 	}
