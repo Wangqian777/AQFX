@@ -2,6 +2,7 @@
     <wb-module deploy-name="demo">
         <wb-resource deploy-path="/" source-path="/WebRoot" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/document"/>
         <property name="context-root" value="/demo"/>
         <property name="java-output-path" value="/demo/WebRoot/WEB-INF/classes"/>
         <property name="me-merge-utility-modules" value="true"/>
