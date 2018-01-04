@@ -4,7 +4,7 @@
 	$('#right').height(height-$('#btns').outerHeight(true))
 	dbQueryParams = function (params) {
         var temp = {
-            "tableName": localStorage.tableName,
+            "listId": localStorage.listId,
         };
         return temp;
     };
@@ -56,7 +56,7 @@
 			for(var i=0;i<data.length;i++){
 				if(i==0)
 					localStorage.Name=data[i].名称;
-				ulHtml+="<li class='list-group-item'>"+data[i].名称+"</li>";
+				ulHtml+="<li class='list-group-item' name='"+data[i].ID+"'>"+data[i].名称+"</li>";
 			}
 			ulHtml+="</ul>";
 			$("#list").html(ulHtml);
@@ -66,19 +66,27 @@
 	$(".list-group-item").click(function(){
 		$(this).css({"background-color":"#428BCA","color":"#FFFFFF"});
 		$(this).siblings().css({"background-color":"#FFFFFF","color":"#333333"});
-		localStorage.tableName=$(this).text();
+		localStorage.listID=$(this).attr("name");
 		$("#tb_departments").bootstrapTable('refresh'); 
 	});
 	$("#add").click(function(){
-		layer.open({
-			type:2,
-			title:"新增数据字典类别",
-			maxmin:true,
-			shadeClose:true,
-			offset:'auto',
-			area:['800px','500px'],
-			content:["form_md.html",'no']
-		});
+		localStorage.FormMode="Add";
+		openFormCard("新增数据字典类别");
 		
 	});
+	$("#edit").click(function(){
+		localStorage.FormMode="Edit";
+		openFormCard("修改数据字典类别");
+	});
+	function openFormCard(title) {
+		 layer.open({
+				type:2,
+				title:title,
+				maxmin:true,
+				shadeClose:true,
+				offset:'auto',
+				area:['800px','500px'],
+				content:["form_md.html",'no']
+			});
+	 }
 });

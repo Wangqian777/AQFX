@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -100,10 +101,19 @@ public class DataController {
 	}
 	//查询数据字典列表
 	@RequestMapping("getDatadictionaryList.do")
-	public void getDatadictionaryList(String v_json,String action,HttpServletResponse respone) throws IOException{
+	public void getDatadictionaryList(String v_json,HttpServletResponse respone) throws IOException{
 		respone.setContentType("text/html;charset=utf-8");
 		PrintWriter out=respone.getWriter();
-		String sql="select * from 数据字典";
+		String sql="select * from 数据字典 where 1=1 ";
+		if(v_json!=null){
+			JSONObject json=JSONObject.fromObject(v_json);
+			Iterator it = json.keys();
+			while(it.hasNext()){  
+				String key = (String) it.next();
+        		Object value = json.get(key);
+        		sql+=String.format(" and %s='%s'", key,value.toString());
+			}
+		}
 		mapList=dataService.getData(sql);
 		JSONArray js = JSONArray.fromObject(mapList);
 		out.print(js);
