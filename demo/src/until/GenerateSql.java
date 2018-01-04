@@ -58,7 +58,7 @@ public class GenerateSql {
 				zhuInsertSql+=String.format("%s,",key);
 			}
 		}
-		zhuInsertSql+="id) values(";
+		zhuInsertSql+="id,创建时间) values(";
 		for(String key:map.keySet()){
 			if(!key.equals("id") && !key.equals("table")){
 				zhuInsertSql+=String.format("'%s',",map.get(key));
@@ -66,7 +66,7 @@ public class GenerateSql {
 		}
 		UUID uuid=UUID.randomUUID();
 		FID=uuid.toString();
-		zhuInsertSql+=String.format("'%s')", uuid);
+		zhuInsertSql+=String.format("'%s','%s')", uuid,df.format(new Date()));
 		tempList.add(zhuInsertSql);
 		sqlMap.put("zhuInsertSql", tempList);
 		try{
@@ -111,7 +111,7 @@ public class GenerateSql {
 		listMap=currencyJson(v_json);
 		String zhuDeleteSql="";
 		String ziDeleteSql="";
-		String FID="";
+		String FID=listMap.get(0).get("id").toString();
 		zhuDeleteSql=String.format("delete from %s where ID='%s'", listMap.get(0).get("table"),listMap.get(0).get("id"));
 		tempList.add(zhuDeleteSql);
 		sqlMap.put("zhuDeleteSql",tempList );
@@ -121,7 +121,7 @@ public class GenerateSql {
 			if(map2.size()>0){
 				List<Map> list=map2.get("dtables");
 				for(Map<String,String> m:list){
-					ziDeleteSql=String.format("delete from %s where FID='%S'", m.get("table"),listMap.get(0).get("id"));
+					ziDeleteSql=String.format("delete from %s where FID='%S'", m.get("table"),FID);
 					tempList.add(ziDeleteSql);
 					sqlMap.put("ziDeleteSql", tempList);
 					break;
