@@ -27,7 +27,7 @@ public class DataController {
 	private DataService dataService;
 	private String json = "";
 	private GenerateSql generateSql = new GenerateSql();
-
+	private List<LinkedHashMap<String, Object>> mapList = new ArrayList<LinkedHashMap<String, Object>>();
 	// 获取树结构json
 	@RequestMapping("getTreeJson.do")
 	public void getTreeJson(HttpServletRequest request,
@@ -35,7 +35,7 @@ public class DataController {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		String sql = "select * from 菜单";
-		List<LinkedHashMap<String, Object>> mapList = new ArrayList<LinkedHashMap<String, Object>>();
+		
 		mapList = dataService.getData(sql);
 		List<String> pidList = new ArrayList<String>();
 		json = "[";
@@ -104,10 +104,7 @@ public class DataController {
 				for(String s:sql){
 					dataService.deleteData(s);
 				}
-				sql=sqlMap.get("ziDeleteSql");
-				for(String s:sql){
-					dataService.deleteData(s);
-				}
+				
 			}
 			__ret.setState("1");
 		}catch (Exception e) {
@@ -115,12 +112,51 @@ public class DataController {
 		}
 		
 		String resultJson = __ret.GenerateResultJson();
-		out.println(resultJson);
+		out.print(resultJson);
 		out.flush();
 		out.close();
 	}
-
 	
+	@RequestMapping("getDataCounts.do")
+	public void getDataCounts(String id, String table,
+			HttpServletResponse response) throws IOException {
+		response.setContentType("terxt/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		ResultJson __ret = new ResultJson();
+		String sql = String.format("select count(1) from %s where pid='%s'",
+				table, id);
+		int counts = dataService.getDataCounts(sql);
+		if (counts > 0) {
+			__ret.setState("0");
+		} else {
+			__ret.setState("1");
+		}
+		String resultJson = __ret.GenerateResultJson();
+		out.print(resultJson);
+		out.flush();
+		out.close();
+	}
+	//查询数据字典列表
+	@RequestMapping("getDatadictionaryList.do")
+	public void getDatadictionaryList(String v_json,String action,HttpServletResponse respone) throws IOException{
+		respone.setContentType("text/html;charset=utf-8");
+		PrintWriter out=respone.getWriter();
+		String sql="select * from 数据字典";
+		mapList=dataService.getData(sql);
+		JSONArray js = JSONArray.fromObject(mapList);
+		out.print(js);
+		out.flush();
+		out.close();
+	}
+	//单表json处理
+	@RequestMapping("SingleJson.do")
+	public void SingleJson(String v_json,String action,HttpServletResponse response){
+		if(action.equals("C")){
+			
+		}else if(){
+			
+		}
+	}
 	
 
 	

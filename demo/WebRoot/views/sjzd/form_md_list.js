@@ -44,7 +44,7 @@
         });
 	};
 	$.ajax({
-		url:"../../getDBtable.do",
+		url:"../../getDatadictionaryList.do",
 		type:"POST",
 		dataType:"JSON",
 		async:false,
@@ -58,7 +58,6 @@
 			ulHtml+="</ul>";
 			$("#list").html(ulHtml);
 			$(".list-group-item").eq(0).css({"background-color":"#428BCA","color":"#FFFFFF"});
-			TableInit();
 		}
 	});
 	$(".list-group-item").click(function(){
@@ -67,5 +66,16 @@
 		localStorage.tableName=$(this).text();
 		$("#tb_departments").bootstrapTable('refresh'); 
 	});
-	
+	$("#add").click(function(){
+		layer.open({
+			type:2,
+			title:"新增数据字典类别",
+			maxmin:true,
+			shadeClose:true,
+			offset:'auto',
+			area:['800px','500px'],
+			content:["form_md.html",'no']
+		});
+		
+	});
 });

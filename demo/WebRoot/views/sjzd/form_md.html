@@ -28,7 +28,7 @@
           <div class="form_form"> 
             <div class="toolbar">
                 <div class="btn-group " id="btn-group-tz" style="margin-top:5px; padding-left:16px;">
-                   <button type="button" class="btn btn-default"  id="btntable-save1"><i class="fa fa-save"></i>&nbsp;保存</button>
+                   <button type="button" class="btn btn-default"  id="btntable-save"><i class="fa fa-save"></i>&nbsp;保存</button>
                    <button type="button" class="btn btn-default" id="btntable-chongzhi"><i class="fa fa-search"></i>&nbsp;重置</button>   
                  </div>
             </div>
@@ -36,56 +36,19 @@
                  <table id="tb_datamodel"></table>
             </div>
             <div style="padding:30px 10px; font-size:13px;margin-top:-20px;">
-                <input type="hidden" name="" id="mc_json_data" data-mc_json="" />
-                <form class="form-horizontal" role="form" id="frmdata" >
-                   	
-                    <!--主表区域-->
-                    <div class="form-group" id="form_year_month">
-                        <label class="col-sm-1 col-md-1 control-label" style="min-width:130px;">列名</label>
+                <form class="form-horizontal" role="form" id="frmdata" data-table="数据字典">
+                   	<!--数据类别 -->
+                    <div class="form-group">
+                        <label class="col-sm-1 col-md-1 control-label" style="min-width:130px;">类别名称</label>
                         <div class="col-sm-4 col-md-4">
-                            <input class="form-control" id="列名" name="列名"     data-type="字符串" type="text" placeholder="" value="" />
+                            <input class="form-control" id="名称" name="名称"     data-type="字符串" type="text" placeholder="" value="" />
                         </div>
-                        <label class="col-sm-1 col-md-1 control-label" style="min-width:130px;">数据类型</label>
-                        <div class="col-sm-2 col-md-2">
-                            <select name="数据类型" class="form-control" id="dataType">
-                                <option value="begint">begint</option>
-                                <option value="binary">binary</option>
-                                <option value="bit">bit</option>
-                                <option value="char">char</option>
-                                <option value="data">data</option>
-                                <option value="datatime">datatime</option>
-                                <option value="datetimeoffset">datetimeoffset</option>
-                                <option value="decimal">decimal</option>
-                                <option value="float">float</option>
-                                <option value="geography">geography</option>
-                                <option value="geometry">geometry</option>
-                                <option value="hierarchyid">hierarchyid</option>
-                                <option value="image">image</option>
-                                <option value="int">int</option>
-                                <option value="money">money</option>
-                                <option value="nchar">nchar</option>
-                                <option value="ntext">ntext</option>
-                                <option value="numeric">numeric</option>
-                                <option value="nvarchar">nvarchar</option>
-                                <option value="real">real</option>
-                            </select>
+                        <label class="col-sm-1 col-md-1 control-label" style="min-width:130px;">是否禁用</label>
+                        <div class="col-sm-4 col-md-4">
+                            <input id="是否禁用" name="是否禁用" data-type="字符串" type="checkbox" placeholder="" />
                         </div>
                     </div>
-                    <div class="form-group" id="form_year_month">
-                        <label class="col-sm-1 col-md-1 control-label" style="min-width:130px;">数据长度</label>
-                        <div class="col-sm-4 col-md-4">
-                            <input class="form-control" id="数据长度" name="数据长度"     data-type="字符串" type="text" placeholder="" value="" />
-                        </div>
-                        <label class="col-sm-1 col-md-1 control-label" style="min-width:130px;">允许null值</label>
-                        <div class="col-sm-4 col-md-4">
-                             <input class="form-control" id="路径" name="路径"     data-type="字符串" type="text" placeholder="" value="" />
-                        </div>
-                    </div>
-                    <!--</div>-->
-                    <div style="display:none;">
-                        <input name="id" id="id" data-type="字符串" type="text" value="" />
-                        <input name="pid" id="pid" data-type="字符串" type="text" />
-                    </div>
+                    
                 </form>
      	</div>        
 		</div>
