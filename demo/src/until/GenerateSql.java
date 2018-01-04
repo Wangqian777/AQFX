@@ -22,6 +22,8 @@ public class GenerateSql {
 		List<String> tempList=new ArrayList<String>();
 		listMap=currencyJson(v_json);
 		String updateSql="";
+		String insertSql="";
+		String delSql="";
 		updateSql=String.format("update %s set ", listMap.get(0).get("table"));
 		Map<String,String> map=listMap.get(0);
 		//主表
@@ -45,125 +47,83 @@ public class GenerateSql {
 		Map<String,List> sqlMap=new HashMap<String, List>();
 		List<String> tempList=new ArrayList<String>();
 		listMap=currencyJson(v_json);
-		String zhuSql="";
-		String ziSql="";
+		String zhuInsertSql="";
+		String ziInsertSql="";
 		String FID="";
-		zhuSql=String.format("Insert into %s(", listMap.get(0).get("table"));
+		zhuInsertSql=String.format("Insert into %s(", listMap.get(0).get("table"));
 		Map<String,String> map=listMap.get(0);
 		//主表
 		for(String key:map.keySet()){
 			if(!key.equals("id") && !key.equals("table")){
-				zhuSql+=String.format("%s,",key);
+				zhuInsertSql+=String.format("%s,",key);
 			}
 		}
-		zhuSql+="id,创建时间) values(";
+		zhuInsertSql+="id,创建时间) values(";
 		for(String key:map.keySet()){
 			if(!key.equals("id") && !key.equals("table")){
-				zhuSql+=String.format("'%s',",map.get(key));
+				zhuInsertSql+=String.format("'%s',",map.get(key));
 			}
 		}
 		UUID uuid=UUID.randomUUID();
 		FID=uuid.toString();
-		zhuSql+=String.format("'%s','%s')", uuid,df.format(new Date()));
-		tempList.add(zhuSql);
-		sqlMap.put("zhuSql", tempList);
+		zhuInsertSql+=String.format("'%s','%s')", uuid,df.format(new Date()));
+		tempList.add(zhuInsertSql);
+		sqlMap.put("zhuInsertSql", tempList);
 		try{
 			Map<String,List> map2=listMap.get(1);
 			if(map2.size()>0){
 				List<Map> list=map2.get("dtables");
 				tempList=new ArrayList<String>();
 				for(Map<String,String> m:list){
-					ziSql+=String.format("Insert into %s( ", m.get("table"));
+					ziInsertSql+=String.format("Insert into %s( ", m.get("table"));
 					
 					for(String key:m.keySet()){
 						if(!key.equals("id") && !key.equals("table")){
-							ziSql+=String.format("%s,",key);
+							ziInsertSql+=String.format("%s,",key);
 						}
 					}
-					ziSql+="id,fid) values(";
+					ziInsertSql+="id,fid) values(";
 					for(String key:m.keySet()){
 						if(!key.equals("id") && !key.equals("table")){
-							ziSql+=String.format("'%s','%s'",m.get(key),FID);
+							ziInsertSql+=String.format("'%s','%s'",m.get(key),FID);
 						}
 					}
 					uuid=UUID.randomUUID();
-					ziSql+=String.format("'%s')\n", uuid);
-					tempList.add(ziSql);
-					ziSql="";
+					ziInsertSql+=String.format("'%s')\n", uuid);
+					tempList.add(ziInsertSql);
+					ziInsertSql="";
 				}
-				sqlMap.put("ziSql", tempList);
+				sqlMap.put("ziInsertSql", tempList);
 			}
 			return sqlMap;
 		}catch (Exception e) {
 			return sqlMap;
 		}
-	}
-	public Map<String,List> generateUpdateSql(String v_json){
-		List<Map> listMap=new ArrayList<Map>();
-		Map<String,List> sqlMap=new HashMap<String, List>();
-		List<String> tempList=new ArrayList<String>();
-		listMap=currencyJson(v_json);
-		String zhuSql="";
-		String ziSql="";
-		zhuSql=String.format("update %s set ", listMap.get(0).get("table"));
-		Map<String,String> map=listMap.get(0);
-		//主表
-		for(String key:map.keySet()){
-			if(!key.equals("id") && !key.equals("table")){
-				zhuSql+=String.format("%s='%s',",key,map.get(key));
-			}
-		}
-		zhuSql+=String.format("最后修改时间='%s'", df.format(new Date()));
-		if(zhuSql.substring(zhuSql.length()-1).equals(",")){
-			zhuSql=zhuSql.substring(0,zhuSql.length()-1);
-		}
-		zhuSql+=String.format(" where id='%s'", map.get("id"));
-		tempList.add(zhuSql);
-		zhuSql="";
-		sqlMap.put("zhuSql", tempList);
-		try{
-			Map<String,List> map2=listMap.get(1);
-			if(map2.size()>0){
-				List<Map> list=map2.get("dtables");
-				tempList=new ArrayList<String>();
-				for(Map<String,String> m:list){
-					ziSql+=String.format("update %s set ", m.get("table"));
-					for(String key:m.keySet()){
-						if(!key.equals("id") && !key.equals("table")){
-							ziSql+=String.format("%s='%s',",key,m.get(key));
-						}
-						ziSql+=String.format(" where id='%s')\n",m.get("id"));
-					}
-					tempList.add(ziSql);
-					ziSql="";
-				}
-				sqlMap.put("ziSql", tempList);
-			}
-			return sqlMap;
-		}catch (Exception e) {
-			return sqlMap;
-		}
+		
+		
+		
+		
 	}
 	public Map<String,List> generateDeleteSql(String v_json){
 		List<Map> listMap=new ArrayList<Map>();
 		Map<String,List> sqlMap=new HashMap<String, List>();
 		List<String> tempList=new ArrayList<String>();
 		listMap=currencyJson(v_json);
-		String zhuSql="";
-		String ziSql="";
+		String zhuDeleteSql="";
+		String ziDeleteSql="";
 		String FID=listMap.get(0).get("id").toString();
-		zhuSql=String.format("delete from %s where ID='%s'", listMap.get(0).get("table"),listMap.get(0).get("id"));
-		tempList.add(zhuSql);
-		sqlMap.put("zhuSql",tempList );
+		zhuDeleteSql=String.format("delete from %s where ID='%s'", listMap.get(0).get("table"),listMap.get(0).get("id"));
+		tempList.add(zhuDeleteSql);
+		sqlMap.put("zhuDeleteSql",tempList );
 		tempList=new ArrayList<String>();
 		try{
 			Map<String,List> map2=listMap.get(1);
 			if(map2.size()>0){
 				List<Map> list=map2.get("dtables");
 				for(Map<String,String> m:list){
-					ziSql=String.format("delete from %s where FID='%S'", m.get("table"),FID);
-					tempList.add(ziSql);
-					sqlMap.put("ziSql", tempList);
+					ziDeleteSql=String.format("delete from %s where FID='%S'", m.get("table"),FID);
+					tempList.add(ziDeleteSql);
+					sqlMap.put("ziDeleteSql", tempList);
 					break;
 				}
 			}

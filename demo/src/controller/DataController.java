@@ -77,7 +77,47 @@ public class DataController {
 		}
 	}
 
-	
+	// 菜单增删改事件
+	@RequestMapping("menuManage.do")
+	public void menuManage(String v_json, String action,
+			HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		ResultJson __ret = new ResultJson();
+		List<String> sql=new ArrayList<String>();
+		try{
+			if (action.equals("M")) {
+				Map<String,List> sqlMap=generateSql.menuUpdateSql(v_json);
+				sql=sqlMap.get("updateSql");
+				for(String s:sql){
+					dataService.updateData(s);
+				}
+				
+			}else if(action.equals("C")){
+				Map<String,List> sqlMap=generateSql.generateInsertSql(v_json);
+				sql=sqlMap.get("zhuInsertSql");
+				for(String s:sql){
+					dataService.insertData(s);
+				}
+			}else if(action.equals("D")){
+				Map<String,List> sqlMap=generateSql.generateDeleteSql(v_json);
+				sql=sqlMap.get("zhuDeleteSql");
+				for(String s:sql){
+					dataService.deleteData(s);
+				}
+				
+			}
+			__ret.setState("1");
+		}catch (Exception e) {
+			__ret.setState("0");
+		}
+		
+		String resultJson = __ret.GenerateResultJson();
+		out.print(resultJson);
+		out.flush();
+		out.close();
+	}
 	
 	@RequestMapping("getDataCounts.do")
 	public void getDataCounts(String id, String table,
@@ -120,19 +160,19 @@ public class DataController {
 		try{
 			if(action.equals("C")){
 				sqlMap=generateSql.generateInsertSql(v_json);
-				sql=sqlMap.get("zhuSql");
+				sql=sqlMap.get("zhuInsertSql");
 				for(String s:sql){
 					dataService.insertData(s);
 				}
 			}else if(action.equals("M")){
-				sqlMap=generateSql.generateUpdateSql(v_json);
-				sql=sqlMap.get("zhuSql");
+				//sqlMap=generateSql.generateUpdateSql(v_json);
+				sql=sqlMap.get("zhuInsertSql");
 				for(String s:sql){
 					dataService.updateData(s);
 				}
 			}else if(action.equals("D")){
 				sqlMap=generateSql.generateDeleteSql(v_json);
-				sql=sqlMap.get("zhuSql");
+				sql=sqlMap.get("zhuInsertSql");
 				for(String s:sql){
 					dataService.deleteData(s);
 				}

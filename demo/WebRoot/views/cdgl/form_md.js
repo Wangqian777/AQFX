@@ -14,7 +14,7 @@
 		 var __str= JSON.stringify(data);
 		 $.ajax({
 				type:"POST",
-				url:"../../SingleJson.do",
+				url:"../../menuManage.do",
 				data:{"v_json":__str,"action":action},
 				dataType:"JSON",
 				async:false,

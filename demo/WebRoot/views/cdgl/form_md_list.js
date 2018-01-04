@@ -63,7 +63,6 @@
          var data = $("#frmdata").serializeObject(); 
          json.table = $("#frmdata").data("table");
          json.tabledata = data;
-         console.log(json);
          FormAction(json,"M");
 	 });
 	 $("#btntable-addtj").click(function(){
@@ -126,7 +125,7 @@
 		 var __str= JSON.stringify(data);
 		 $.ajax({
 				type:"POST",
-				url:"../../SingleJson.do",
+				url:"../../menuManage.do",
 				data:{"v_json":__str,"action":action},
 				dataType:"JSON",
 				async:false,
