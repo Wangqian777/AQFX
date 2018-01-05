@@ -8,6 +8,7 @@
 			type:"POST",
 			url:"../../getTreeJson.do",
 			dataType:"JSON",
+			data:{"table":"菜单","orderBy":"编码"},
 			async:false,
 			success:function(data){
 				$('#treeview').treeview({

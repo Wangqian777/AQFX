@@ -3,6 +3,7 @@ $(document).ready(function(){
 		type:"POST",
 		url:"getTreeJson.do",
 		dataType:"JSON",
+		data:{"table":"菜单","orderBy":"编码"},
 		async:false,
 		success:function(data){
 			$("#动态html").html("<div  class=\"kit-side-fold\"><i class=\"fa fa-navicon\" aria-hidden=\"true\"></i></div>"+getHtml(data));

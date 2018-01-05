@@ -19,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.sun.javafx.binding.StringFormatter;
+
 import service.DataService;
 import until.GenerateSql;
 import until.ResultJson;
@@ -33,11 +35,11 @@ public class DataController {
 	private ResultJson __ret = new ResultJson();
 	// 获取树结构json
 	@RequestMapping("getTreeJson.do")
-	public void getTreeJson(HttpServletRequest request,
+	public void getTreeJson( String table,String orderBy,HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		String sql = "select * from 菜单 order by 编码 ";
+		String sql =String.format("select * from %s order by %s ", table,orderBy);
 		
 		mapList = dataService.getData(sql);
 		List<String> pidList = new ArrayList<String>();
@@ -47,7 +49,7 @@ public class DataController {
 				pidList.add(linkedHashMap.get("ID").toString());
 				JSONArray js = JSONArray.fromObject(linkedHashMap);
 				json += "{"+ js.toString().substring(2, js.toString().length() - 2);
-				searchSubNotActiveMenu((String) linkedHashMap.get("ID"));
+				searchSubNotActiveMenu(table,(String) linkedHashMap.get("ID"));
 				json += "},";
 			}
 
@@ -61,8 +63,8 @@ public class DataController {
 	}
 	
 	// 冒泡
-	public void searchSubNotActiveMenu(String parentId) {
-		String sql = "select * from 菜单 where pid='" + parentId + "'";
+	public void searchSubNotActiveMenu(String table,String parentId) {
+		String sql = String.format("select * from %s where pid='%s'", table,parentId);
 		List<LinkedHashMap<String, Object>> mapList = new ArrayList<LinkedHashMap<String, Object>>();
 		mapList = dataService.getData(sql);
 		if (mapList != null && mapList.size() > 0) {
@@ -70,7 +72,7 @@ public class DataController {
 			for (LinkedHashMap<String, Object> linkedHashMap : mapList) {
 				JSONArray js = JSONArray.fromObject(linkedHashMap);
 				json += "{"+ js.toString().substring(2, js.toString().length() - 2);
-				searchSubNotActiveMenu((String) linkedHashMap.get("ID"));
+				searchSubNotActiveMenu(table,(String) linkedHashMap.get("ID"));
 				json += "},";
 			}
 			json = json.substring(0, json.length() - 1);
