@@ -15,7 +15,7 @@
 			success:function(data){
 				console.log(data);
 				$("#frmdata2").fill(data[0], { styleElementName: 'none' });
-				$("input[name=是否禁用]").attr("checked",data[0].是否禁用);
+				$("input[name=是否禁用]").attr("checked",data[0].是否禁用); 
 			}
 		});
 		
