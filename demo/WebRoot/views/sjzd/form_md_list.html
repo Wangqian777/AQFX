@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="../../plugins/fancytree/skin-bootstrap/ui.fancytree.css" type="text/css"></link>
+    <link rel="stylesheet" href="../../plugins/bootstraptable/dist/bootstrap-table.css" type="text/css"></link>
     <link rel="stylesheet" href="../../plugins/font-awesome/css/font-awesome.css" type="text/css"></link>
     <link rel="stylesheet" href="../../plugins/layui/css/layui.css" type="text/css"></link>
     <script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
@@ -20,6 +21,7 @@
     <script type="text/javascript" src="../../plugins/bootstraptable/dist/bootstrap-table.js"></script>
     <script type="text/javascript" src="../../plugins/layer/layer.js"></script>
     <script type="text/javascript" src="../../js/jquery.formFill.js"></script>
+    <script type="text/javascript" src="../../plugins/bootstraptable/dist/locale/bootstrap-table-zh-CN.js"></script>
     <style type="text/css">
         #list:hover {
             cursor: pointer;
@@ -45,8 +47,7 @@
                     </span>
                 </div>
                 <div id="left" class="box-body" style="border:1px solid #D2D6DE;height:620px;border-radius:5px;">
-                    <div id="list">
-                    </div>
+                    <div id="list"></div>
                 </div>
             </div>
         </div>
@@ -55,18 +56,19 @@
         </div>
         <div class=" ">
             <div id="btns" class="btn-group " style="margin-top:5px;margin-bottom:5px;  padding-left:2px;">
-                <button type="button" class="btn btn-default" id="btntable-addtj">
-                    <i class="fa fa-plus"></i>&nbsp;新增同级</button>
-                <button type="button" class="btn btn-default" id="btntable-addxj">
-                    <i class="fa fa-plus"></i>&nbsp;新增下级</button>
-                <button type="button" class="btn btn-default" id="btntable-delete">
+                <button type="button" class="btn btn-default" id="新增">
+                    <i class="fa fa-plus"></i>&nbsp;新增</button>
+                     <button type="button" class="btn btn-default" id="编辑">
+                    <i class="fa fa-pencil-square-o"></i>&nbsp;编辑</button>
+                <button type="button" class="btn btn-default" id="删除">
                     <i class="fa fa-trash-o"></i>&nbsp;删除</button>
             </div>
         </div>
         <div id="right" style="border:1px solid #D2D6DE;border-radius:5px;width:70%;float: left;">
-
+				<table id="tb_departments" data-table="数据字典_明细"></table>
 
         </div>
+        
     </div>
     <script type="text/javascript" src="form_md_list.js"></script>
 </body>

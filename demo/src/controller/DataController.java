@@ -122,6 +122,27 @@ public class DataController {
 		out.flush();
 		out.close();
 	}
+	//查询数据字典明细数据
+	@RequestMapping("getDatadictionary_mx.do")
+	public void getDatadictionary_mx(String v_json,HttpServletResponse response) throws IOException{
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out=response.getWriter();
+		String sql=String.format("select * from 数据字典_明细  where 1=1");
+		if(v_json!=null){
+			JSONObject json=JSONObject.fromObject(v_json);
+			Iterator it = json.keys();
+			while(it.hasNext()){  
+				String key = (String) it.next();
+        		Object value = json.get(key);
+        		sql+=String.format(" and %s='%s'", key,value.toString());
+			}
+		}
+		mapList=dataService.getData(sql);
+		JSONArray js = JSONArray.fromObject(mapList);
+		out.print(js);
+		out.flush();
+		out.close();
+	}
 	//单表json处理
 	@RequestMapping("SingleJson.do")
 	public void SingleJson(String v_json,String action,HttpServletResponse response) throws IOException{
