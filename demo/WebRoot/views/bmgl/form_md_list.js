@@ -8,7 +8,7 @@
 			type:"POST",
 			url:"../../getTreeJson.do",
 			dataType:"JSON",
-			data:{"table":"菜单","orderBy":"编码"},
+			data:{"table":"部门","orderBy":"编码"},
 			async:false,
 			success:function(data){
 				$('#treeview').treeview({
@@ -44,7 +44,7 @@
 	            shadeClose: true, //单击遮罩能否关闭
 	            maxmin: true, //开启最大化最小化按钮
 	            area: ['860px', '500px'],
-	            content: 'views/cdgl/form_md.html',
+	            content: 'views/bmgl/form_md.html',
 	            cancel: function (index, layero) {
 	               
 	            },
@@ -95,7 +95,7 @@
 		 $.ajax({
 			 url:"../../getDataCounts.do",
 			 type:"POST",
-			 data:{"id":$("#id").val(),"table":"菜单"},
+			 data:{"id":$("#id").val(),"table":"部门"},
 			 dataType:"JSON",
 			 asnyc:false,
 			 success:function(data){
@@ -103,8 +103,17 @@
 					 flag=false;
 				 }
 				 if(flag){
-					 var json = {"zhubiao":"菜单","zhubiaoID":$("#id").val()};
-			         
+					 var json = {};
+			         var data = $("#frmdata").serializeObject(); 
+			         json.table = $("#frmdata").data("table");
+			         json.tabledata = data;
+			         json.dtables = [];
+			         var allTableData = $("#tb_departments").bootstrapTable('getData');
+			         for(var i=0;i<allTableData.length;i++){
+			        	 allTableData[i].FID=$("#id").val();
+			        	 allTableData[i].table=$("#tb_departments").data("table"),
+			        	 json.dtables.push({tabledata: allTableData[i] });
+			         } 
 			         FormAction(json,"D");
 				 }else{
 					 layer.msg("存在子节点，无法删除");
