@@ -37,9 +37,9 @@
             </div>
             <div style="padding:30px 10px; font-size:13px;margin-top:-20px;">
                 <form class="form-horizontal" role="form" id="frmdata" data-table="数据字典">
-                   	<!--数据类别 -->
+                	<input type="hidden" id='id' name="id"/>
                     <div class="form-group">
-                        <label class="col-sm-1 col-md-1 control-label" style="min-width:130px;">添加类别名称</label>
+                        <label class="col-sm-1 col-md-1 control-label" style="min-width:130px;">类别名称</label>
                         <div class="col-sm-4 col-md-4">
                             <input class="form-control" id="名称" name="名称"     data-type="字符串" type="text" placeholder="" value="" />
                         </div>
@@ -50,20 +50,7 @@
                     </div>
                     
                 </form>
-                <form class="form-horizontal" role="form" id="frmdata2" data-table="数据字典">
-                   	<!--数据类别 -->
-                    <div class="form-group">
-                        <label class="col-sm-1 col-md-1 control-label" style="min-width:130px;">修改类别名称</label>
-                        <div class="col-sm-4 col-md-4">
-                            <input class="form-control" id="名称" name="名称"     data-type="字符串" type="text" placeholder="" value="" />
-                        </div>
-                        <label class="col-sm-1 col-md-1 control-label" style="min-width:130px;">是否禁用</label>
-                        <div class="col-sm-4 col-md-4">
-                            <input id="是否禁用" name="是否禁用" data-type="字符串" type="checkbox" placeholder="" />
-                        </div>
-                    </div>
-                    
-                </form>
+                
      	</div>        
 		</div>
       </div>

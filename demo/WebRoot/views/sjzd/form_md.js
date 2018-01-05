@@ -1,9 +1,6 @@
 ﻿$(function(){
 	console.log(localStorage.FormMode);
-	if(localStorage.FormMode=="Add"){
-		$("#frmdata2").hide();
-	}else{
-		$("#frmdata").hide();
+	if(localStorage.FormMode=="Edit"){
 		var json = { "ID": localStorage.listID };
         var __str = JSON.stringify(json);
 		$.ajax({
@@ -14,26 +11,23 @@
 			async:false,
 			success:function(data){
 				console.log(data);
-				$("#frmdata2").fill(data[0], { styleElementName: 'none' });
+				$("#frmdata").fill(data[0], { styleElementName: 'none' });
 				$("input[name=是否禁用]").attr("checked",data[0].是否禁用); 
+				$("#id").val(data[0].ID);
 			}
 		});
-		
-		
 	}
 	$("#btntable-save").click(function(){
 		var json = {};
 		var action="";
 		var data;
 		if(localStorage.FormMode=="Add"){
-			data = $("#frmdata").serializeObject();
-			json.table = $("#frmdata").data("table");
 			action="C";
 		}else{
-			data = $("#frmdata2").serializeObject(); 
-	        json.table = $("#frmdata2").data("table");
 	        action="M";
 		}
+		data = $("#frmdata").serializeObject();
+		json.table = $("#frmdata").data("table");
         json.tabledata = data;
         FormAction(json,action);
 	});
