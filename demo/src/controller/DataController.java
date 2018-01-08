@@ -81,7 +81,9 @@ public class DataController {
 			json += "]";
 		}
 	}
-
+     
+	
+	
 	@RequestMapping("getDataCounts.do")
 	public void getDataCounts(String id, String table, HttpServletResponse response) throws IOException {
 		response.setContentType("terxt/html;charset=utf-8");
@@ -121,7 +123,29 @@ public class DataController {
 		out.flush();
 		out.close();
 	}
-
+	//查询数据字典明细表
+	@RequestMapping("getDatadictionary_mx.do")
+	public void getDatadictionary_mx(String v_json, HttpServletResponse respone) throws IOException{
+		respone.setContentType("text/html;charset=utf-8");
+		PrintWriter out = respone.getWriter();
+		String sql = "select * from 数据字典_明细  where 1=1 ";
+		if (v_json != null) {
+			JSONObject json = JSONObject.fromObject(v_json);
+			Iterator it = json.keys();
+			while (it.hasNext()) {
+				String key = (String) it.next();
+				Object value = json.get(key);
+				sql += String.format(" and %s='%s'", key, value.toString());
+			}
+		}
+		
+		mapList = dataService.getData(sql);
+		JSONArray js = JSONArray.fromObject(mapList);
+		out.print(js);
+		out.flush();
+		out.close();
+		
+	}
 	// 单表json处理
 	@RequestMapping("SingleJson.do")
 	public void SingleJson(String v_json, String action, HttpServletResponse response) throws IOException {

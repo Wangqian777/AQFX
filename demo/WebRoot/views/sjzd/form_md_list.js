@@ -33,18 +33,37 @@
             showToggle:false,                    //是否显示详细视图和列表视图的切换按钮
             cardView: false,                    //是否显示详细视图
             detailView: false,                   //是否显示父子表
-            singleSelect : true,				//单选
+            singleSelect : true,				//单选 
             columns: [{
                 checkbox: true
             },{
             	field:'ID',
-            	title:'ID'
+            	title:'ID',
+            	visible:false
             }, {
                 field: '名称',
                 title: '明细名称'
             }, {
                 field: '创建时间',
-                title: '创建时间'
+                title: '创建时间',
+                formatter:function(value,row,index){
+                	var date = new Date();
+                    date.setTime(value.time);
+                    var y = date.getFullYear();
+                    var m = date.getMonth()+1;
+                    m = m<10?'0'+m:m;
+                    var s = date.getSeconds();
+                    var d = date.getDate();
+                    d = d<10?("0"+d):d;
+                    var h = date.getHours();
+                    h = h<10?("0"+h):h;
+                    var M = date.getMinutes();
+                    M = M<10?("0"+M):M;
+                    var S = date.getSeconds();
+                    S = S<10?("0"+S):s;
+                    var str = y+"-"+m+"-"+d+" "+h+":"+M+":"+S;
+                    return str;
+                }
             } ,{
             	field:'是否禁用',
             	title:'是否禁用',
@@ -68,11 +87,12 @@
 	});
 	$("#add").on('click',function(){
 		localStorage.FormMode="Add";
-		openFormCard("新增数据字典类别");
+		openFormCard("form_md.html","新增数据字典类别");
 		
-	});
+	});                                                                                                                                                                                          
 	$("#edit").click(function(){
 		localStorage.FormMode="Edit";
+		localStorage.sjzdID=localStorage.listID;
 		openFormCard("form_md.html","修改数据字典类别");
 	});
 	function openFormCard(url,title) {
@@ -117,12 +137,20 @@
 	});
 	$("#编辑").click(function(){
 		var dataArray= $("#tb_departments").bootstrapTable('getSelections');
+		if(dataArray.length==0){
+			layer.msg("请选择数据行！");
+			return;
+		}
 		localStorage.sjzdmxID=dataArray[0].ID;
 		localStorage.FormMode="Edit";
 		openFormCard("form_add.html","新增数据字典明细");
 	});
 	$("#删除").click(function(){
 		var dataArray= $("#tb_departments").bootstrapTable('getSelections');
+		if(dataArray.length==0){
+			layer.msg("请选择数据行！");
+			return;
+		}
 		localStorage.sjzdmxID=dataArray[0].ID;
 		var json={"zhubiao":"数据字典_明细","zhubiaoID":localStorage.sjzdmxID,};
         var __str= JSON.stringify(json);
