@@ -138,6 +138,7 @@ public class DataController {
 				sql += String.format(" and %s='%s'", key, value.toString());
 			}
 		}
+		
 		mapList = dataService.getData(sql);
 		JSONArray js = JSONArray.fromObject(mapList);
 		out.print(js);

@@ -38,13 +38,32 @@
                 checkbox: true
             },{
             	field:'ID',
-            	title:'ID'
+            	title:'ID',
+            	visible:false
             }, {
                 field: '名称',
                 title: '明细名称'
             }, {
                 field: '创建时间',
-                title: '创建时间'
+                title: '创建时间',
+                formatter:function(value,row,index){
+                	var date = new Date();
+                    date.setTime(value.time);
+                    var y = date.getFullYear();
+                    var m = date.getMonth()+1;
+                    m = m<10?'0'+m:m;
+                    var s = date.getSeconds();
+                    var d = date.getDate();
+                    d = d<10?("0"+d):d;
+                    var h = date.getHours();
+                    h = h<10?("0"+h):h;
+                    var M = date.getMinutes();
+                    M = M<10?("0"+M):M;
+                    var S = date.getSeconds();
+                    S = S<10?("0"+S):s;
+                    var str = y+"-"+m+"-"+d+" "+h+":"+M+":"+S;
+                    return str;
+                }
             } ,{
             	field:'是否禁用',
             	title:'是否禁用',
