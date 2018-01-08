@@ -4,6 +4,9 @@
 	<select id="getData" parameterType="String" resultType="java.util.LinkedHashMap">
 		${value}
 	</select>
+	<select id="getPageData" parameterType="String" resultType="java.util.LinkedHashMap">
+		${value}
+	</select>
 	<update id="updateData" parameterType="String">
 		${value}
 	</update>
@@ -12,6 +15,9 @@
 	</insert>
 	<select id="getDataCounts" parameterType="String" resultType="Integer">
 		${value}
+	</select>
+	<select id="getDataTotal" parameterType="String" resultType="Integer">
+		select count(*) from ${value}
 	</select>
 	<delete id="deleteData" parameterType="String">
 		${value}

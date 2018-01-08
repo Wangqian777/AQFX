@@ -23,8 +23,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sun.javafx.binding.StringFormatter;
 
 import service.DataService;
-import until.GenerateSql;
-import until.ResultJson;
+import util.GenerateSql;
+import util.ResultJson;
 
 @Controller
 public class DataController {
@@ -185,50 +185,21 @@ public class DataController {
 	}
 
 	// 查询列表数据
-	@ResponseBody
 	@RequestMapping("getDataList.do")
 	public List<String> getDataList(String table, String params, HttpServletResponse respone) throws IOException {
 		respone.setContentType("text/html;charset=utf-8");
 		if (table != null) {
-			//PrintWriter out = respone.getWriter();
-			String sql = String.format("select * from %s where 1=1", table);
-			if (params != null) {
-				JSONObject json = JSONObject.fromObject(params);
-				Iterator it = json.keys();
-				while (it.hasNext()) {
-					String key = (String) it.next();
-					Object value = json.get(key);
-					sql += String.format(" and %s='%s'", key, value.toString());
-				}
-			}
-			mapList = dataService.getData(sql);
-//			JSONArray js = JSONArray.fromObject(mapList);
-//			out.print(js);
-//			out.flush();
-//			out.close();
-			List<String> list = new ArrayList<String>();
-			for (int i = 0; i < 10; i++) {
-				list.add("no:"+i);
-			}
-			return list;
+			PrintWriter out = respone.getWriter();
+			
+			ResultJson pageData = dataService.getPageData(table,params);
+			JSONArray js = JSONArray.fromObject(pageData);
+			out.print(js);
+			out.flush();
+			out.close();
 		}
 		return null;
 	}
 	@ResponseBody
-	@RequestMapping("ttt.do")
-	public List<String> ttt() throws IOException {
-//			String sql = String.format("select * from %s where 1=1", "部门");
-//			mapList = dataService.getData(sql);
-//			JSONArray js = JSONArray.fromObject(mapList);
-//			out.print(js);
-//			out.flush();
-//			out.close();
-			List<String> list = new ArrayList<String>();
-			for (int i = 0; i < 10; i++) {
-				list.add("no:"+i);
-			}
-			return list;
-	}
 	public void setDataService(DataService dataService) {
 		this.dataService = dataService;
 	}
