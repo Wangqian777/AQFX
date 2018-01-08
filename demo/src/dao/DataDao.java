@@ -3,6 +3,8 @@ package dao;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import util.ResultJson;
+
 
 public interface DataDao {
 	public List<LinkedHashMap<String, Object>> getData(String sql);
@@ -11,4 +13,5 @@ public interface DataDao {
 	public int getDataCounts(String sql);
 	public int deleteData(String sql);
 	public int dropTable(String tableName);
+	public Integer getDataTotal(String table);
 }

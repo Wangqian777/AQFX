@@ -1,14 +1,15 @@
-package until;
+package util;
 
+import java.util.List;
 
 public class ResultJson {
 	private String State;
-	private String rows;
+	private List rows;
 	private Integer total;
 	public ResultJson() {
 	}
 	
-	public ResultJson( String state, String data, Integer total) {
+	public ResultJson( String state, List data, Integer total) {
 		super();
 		State = state;
 		rows = data;
@@ -23,11 +24,11 @@ public class ResultJson {
 		State = state;
 	}
 
-	public String getRows() {
+	public List getRows() {
 		return rows;
 	}
 
-	public void setRows(String rows) {
+	public void setRows(List rows) {
 		this.rows = rows;
 	}
 
