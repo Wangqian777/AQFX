@@ -81,7 +81,9 @@ public class DataController {
 			json += "]";
 		}
 	}
-
+     
+	
+	
 	@RequestMapping("getDataCounts.do")
 	public void getDataCounts(String id, String table, HttpServletResponse response) throws IOException {
 		response.setContentType("terxt/html;charset=utf-8");
