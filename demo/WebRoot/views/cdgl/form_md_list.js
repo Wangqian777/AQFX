@@ -103,10 +103,8 @@
 					 flag=false;
 				 }
 				 if(flag){
-					 var json = {};
-			         var data = $("#frmdata").serializeObject(); 
-			         json.table = $("#frmdata").data("table");
-			         json.tabledata = data;
+					 var json = {"zhubiao":"菜单","zhubiaoID":$("#id").val()};
+			         
 			         FormAction(json,"D");
 				 }else{
 					 layer.msg("存在子节点，无法删除");
