@@ -1,0 +1,813 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>孔智云</title>
+    <link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.min.css" />
+    <link href="/images/mainlogo.png" rel="shortcut icon" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+    <link rel="stylesheet" href="/cdn/font-awesome.min.css" />
+    <link rel="stylesheet" href="/cdn/ionicons.min.css" />
+    <link href="/module/dist/form.css" rel="stylesheet" />
+    <!--<link rel="stylesheet" href="/bootstraptable/dist/bootstrap-table.min.css" />-->
+    <link rel="stylesheet" href="/module/dist/SlickGrid/slick.grid.css" type="text/css" />
+    <link rel="stylesheet" href="/module/dist/SlickGrid/css/smoothness/jquery-ui-1.11.3.custom.css" type="text/css" />
+    <!--<link rel="stylesheet" href="/module/dist/SlickGrid/slick-default-theme.css" type="text/css" />-->
+    <link rel="stylesheet" href="/module/dist/SlickGrid/examples/examples.css" type="text/css" />
+    <style>
+        .mc-cell
+        {
+            text-align: center;
+        }
+
+        .control-label
+        {
+            font-weight: normal !important;
+        }
+
+        .nav-tabs li a
+        {
+            border: solid 1px #bdc3c7 !important;
+            color: #000 !important;
+        }
+
+        .nav-tabs li.active a
+        {
+            background-color: #3498db !important;
+            color: #fff !important;
+        }
+
+        .tab-content
+        {
+            border: solid 1px #bdc3c7 !important;
+        }
+
+        .cell-title
+        {
+            text-align: center;
+        }
+
+        .slick-cell-checkboxsel
+        {
+            text-align: center;
+            background: #f0f0f0;
+            border-right-color: silver;
+            border-right-style: solid;
+        }
+
+        .slick-row.selected .cell-selection
+        {
+            background-color: #016a9f;
+        }
+
+        #searchresult
+        {
+            /*width: 200px;*/
+            position: absolute;
+            z-index: 1;
+            overflow: hidden;
+            left: 5px;
+            top: 35px;
+            background: #fff;
+            border-top: none;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+        }
+
+        .line
+        {
+            /*font-size: 18px;*/
+            background: #fff;
+            /*width: 140px;*/
+            padding: 0px;
+        }
+
+        .hover
+        {
+            background: #007ab8;
+            width: 214px;
+            color: #fff;
+        }
+
+        .std
+        {
+            font-size: 16px;
+            width: 220px;
+        }
+
+        #searchresult1
+        {
+            /*width: 200px;*/
+            position: absolute;
+            z-index: 1;
+            overflow: hidden;
+            left: 140px;
+            top: 71px;
+            background: #fff;
+            border-top: none;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="container">
+        <div class="mdatafield" style="overflow: hidden; height: 800px;">
+            <div class="toolbar">
+                <div class="btn-group " style="margin-top: 5px; padding-left: 16px;">
+                    <button type="button" class="btn btn-default" id="btntable-init"><i class="fa fa-close"></i>&nbsp;初始化数据</button>
+                    <button type="button" class="btn btn-default" id="btntable-save"><i class="fa fa-save"></i>&nbsp;保存</button>
+                    <button type="button" class="btn btn-default" id="btntable-import"><i class="fa fa-pencil-square-o"></i>&nbsp;导入并保存</button>
+                    <button type="button" class="btn btn-default" id="btntable-edit"><i class="fa fa-save"></i>&nbsp;编辑</button>
+                    <button type="button" class="btn btn-default" id="btntable-reset"><i class="fa fa-save"></i>&nbsp;重置</button>
+                    <button type="button" class="btn btn-default" id="btntable-delete"><i class="fa fa-trash-o"></i>&nbsp;删除</button>
+                    <button type="button" class="btn btn-default" id="btntable-go" style="display: none;"><i class="fa fa-check-circle-o"></i>&nbsp;提交</button>
+                    <button type="button" class="btn btn-default" id="btntable-back" style="display: none;"><i class="fa fa-close"></i>&nbsp;退回</button>
+                    <button type="button" class="btn btn-default" id="btntable_search_list" style="display: none;"><i class="fa fa-check-circle-o"></i>&nbsp;查询</button>
+                    <div class="btn-group">
+                        <!--<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-sliders"></i>&nbsp;更多<span class="caret"></span>
+                        </button>-->
+                        <ul class="dropdown-menu">
+                            <li id="btntable-dev"><a href="#"><i class="fa fa-code"></i>&nbsp;开发模式</a></li>
+                            <li id="btntable-config"><a href="#"><i class="fa fa-cogs"></i>&nbsp;配置</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <div style="padding: 30px 10px; font-size: 13px; margin-top: -20px;">
+                <input type="hidden" name="" id="mc_json_data" data-mc_json="" />
+                <form class="form-horizontal" role="form" id="frmdata" data-table="KHA考核_指标数据">
+                    <!--主表区域-->
+                    <div class="form-group">
+
+                        <label class="col-sm-1 col-md-1 control-label" style="min-width: 130px;">年</label>
+                        <div class="col-sm-4 col-md-4">
+                            <select name="单据年" class="form-control" id="year">
+                            </select>
+                        </div>
+                        <label class="col-sm-1 col-md-1 control-label" style="min-width: 130px;">月</label>
+                        <div class="col-sm-4 col-md-4">
+                            <select name="单据月" class="form-control" id="month">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="importblock" class="form-group">
+                        <label class="col-sm-1 col-md-1 control-label" id="namme" style="min-width: 130px;">单位名称</label>
+                        <div class="col-sm-4 col-md-4">
+                            <!--自定义下拉控件-->
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="部门名称" id="txtModuleType" data-id="" />
+                                <div id="searchresult" style="display: none;"></div>
+                                <div class="input-group-btn" id="txtModuleType_btn">
+                                    <button id="button-control" class="btn btn-default btn-info dropdown-toggle cm-dropdown-toggle" id="txtModuleType_btn_btn" data-toggle="dropdown" type="button" style="height: 34px" data-target="txtModuleType" data><i class="fa fa-lightbulb-o"></i></button>
+                                    <div class="dropdown-menu pull-right cm-dropdown-menu" style="width: 250px; height: 296px; overflow: auto;" data-target="txtModuleType">
+                                        <!--可以是iframe-->
+
+                                        <!--可以是其他HTML控件-->
+                                        <div id="input_group_btn_bumen">
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!--自定义下拉控件-->
+                        </div>
+                        <label class="col-sm-1 col-md-1 control-label" style="min-width: 130px;">指标名称</label>
+                        <div class="col-sm-4 col-md-4">
+                            <!--自定义下拉控件-->
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="名称" id="txtModuleTypezhibiao" data-id="" />
+                                <div id="searchresult1" style="display: none;"></div>
+                                <div class="input-group-btn" id="Div1">
+                                    <button id="button-control1" class="btn btn-default btn-info dropdown-toggle cm-dropdown-toggle" id="btn_group_bumen" data-toggle="dropdown" type="button" style="height: 34px" data-target="txtModuleType" data><i class="fa fa-lightbulb-o"></i></button>
+                                    <div class="dropdown-menu pull-right cm-dropdown-menu" style="width: 250px; height: 296px; overflow: auto;" data-target="txtModuleType">
+                                        <!--可以是iframe-->
+
+                                        <!--可以是其他HTML控件-->
+                                        <div id="input_group_btn_zhibiao"></div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group" id="benyuejihua">
+                        <label class="col-sm-1 col-md-1 control-label" style="min-width: 130px;">状态</label>
+                        <div class="col-sm-4 col-md-4">
+                            <input type="text" class="form-control" name="审批状态名称" id="shenhezhuangtai" data-id="" />
+                        </div>
+                        <div id="monthre">
+                            <label class="col-sm-1 col-md-1 control-label" style="min-width: 130px;">本月计划</label>
+                            <div class="col-sm-4 col-md-4">
+                                <input type="text" class="form-control" name="值" id="planmonth" data-id="" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="benyuezibao">
+                        <div id="myre">
+                            <label class="col-sm-1 col-md-1 control-label" style="min-width: 130px;">本月自报</label>
+                            <div class="col-sm-4 col-md-4">
+                                <input type="text" class="form-control" name="本月自报" id="mymonths" data-id="" />
+                            </div>
+                        </div>
+                        <div id="Div2">
+                            <label class="col-sm-1 col-md-1 control-label" style="min-width: 130px;">备注</label>
+                            <div class="col-sm-4 col-md-4">
+                                <input type="text" class="form-control" name="备注" id="Text1" data-id="" />
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                    <div style="display: none;">
+                        id:<input name="ID" data-type="字符串" type="text" id="ID" />
+                        <input name="企业ID" data-type="字符串" type="text" />
+                        <input name="部门ID" data-type="字符串" type="text" id="部门ID" />
+                        <input name="指标ID" data-type="字符串" type="text" id="指标ID" />
+                        <input name="单据类型" data-type="字符串" type="text" value="月度填报" />
+                        <input name="是否查询部门下级" data-type="字符串" type="text" value="1" />
+                    </div>
+                    <!--主表区域-->
+                    <!--子表区域-->
+                    <!--子表tab-->
+                    <ul id="myTab" class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#tab_1" data-toggle="tab">月度计划填报  </a>
+                        </li>
+
+                    </ul>
+                    <!--子表tab-->
+                    <!--子表区域-->
+                    <div id="myTabContent" class="tab-content">
+
+                        <div class="tab-pane fade in active" id="tab_1">
+
+                            <div id="grid_1" class="detail-table" style="width: 100%; height: 500px;" data-table="KHA考核_指标数据"></div>
+                        </div>
+
+
+                    </div>
+
+                    <!--子表区域-->
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.write('<script src="/script/commonFile/ver.js?ver=' + Math.random() + '" type="text/javascript"> </s' + 'cript>');
+    </script>
+
+    <script>
+        document.write('<script src="/script/commonFile/common.js?ver=' + mc_WebVer + '" type="text/javascript"> </s' + 'cript>');
+    </script>
+
+
+    <script src="/module/dist/SlickGrid/lib/firebugx.js"></script>
+
+    <!--<script src="/module/dist/SlickGrid/lib/jquery-1.11.2.min.js"></script>-->
+    <script src="/module/dist/SlickGrid/lib/jquery-ui-1.11.3.min.js"></script>
+    <script src="/module/dist/SlickGrid/lib/jquery.event.drag-2.3.0.js"></script>
+
+    <script src="/module/dist/SlickGrid/slick.core.js"></script>
+    <script src="/module/dist/SlickGrid/slick.dataview.js"></script>
+
+    <!--<script src="/module/dist/SlickGrid/plugins/slick.checkboxselectcolumn.js"></script>-->
+    <script src="/module/dist/SlickGrid/plugins/slick.cellrangedecorator.js"></script>
+    <script src="/module/dist/SlickGrid/plugins/slick.cellrangeselector.js"></script>
+    <script src="/module/dist/SlickGrid/plugins/slick.cellselectionmodel.js"></script>
+    <script src="/module/dist/SlickGrid/plugins/slick.rowselectionmodel.js"></script>
+
+    <script src="/module/dist/SlickGrid/controls/slick.columnpicker.js"></script>
+    <script src="/module/dist/SlickGrid/slick.formatters.js"></script>
+
+
+    <script src="/module/dist/SlickGrid/slick.editors.js"></script>
+    <script src="/module/dist/SlickGrid/slick.grid.js"></script>
+
+    <script src="/module/dist/jquery.formFill.js"></script>
+
+    <!--script 顺序很重要  -->
+    <!--<script src="/module/dist/masterdetail/form_md.js"></script>-->
+    <script>
+
+        //http://blog.csdn.net/besley/article/details/9281053
+        ////////////////////////////////////////////
+        $.datepicker.regional['zh-CN'] = {
+            clearText: '清除',
+            clearStatus: '清除已选日期',
+            closeText: '关闭',
+            closeStatus: '不改变当前选择',
+            prevText: '< 上月',
+            prevStatus: '显示上月',
+            prevBigText: '<<',
+            prevBigStatus: '显示上一年',
+            nextText: '下月>',
+            nextStatus: '显示下月',
+            nextBigText: '>>',
+            nextBigStatus: '显示下一年',
+            currentText: '今天',
+            currentStatus: '显示本月',
+            monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+            monthNamesShort: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+            monthStatus: '选择月份',
+            yearStatus: '选择年份',
+            weekHeader: '周',
+            weekStatus: '年内周次',
+            dayNames: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+            dayNamesShort: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+            dayNamesMin: ['日', '一', '二', '三', '四', '五', '六'],
+            dayStatus: '设置 DD 为一周起始',
+            dateStatus: '选择 m月 d日, DD',
+            dateFormat: 'yy-mm-dd',
+            firstDay: 1,
+            initStatus: '请选择日期',
+            isRTL: false
+        };
+        $.datepicker.setDefaults($.datepicker.regional['zh-CN']);
+
+        /////////////////////////////////////////
+
+        //var checkboxSelector = new Slick.CheckboxSelectColumn({
+        //    cssClass: "slick-cell-checkboxsel"
+        //});
+
+        var mc_grid_dic = new Array();
+        $('#year').on('change', function () {
+            chongzhibiao();
+        });
+
+
+        var mc_grid_dic = new Array();
+
+        //--------------------监听重置
+        function chongzhibiao() {
+
+            $("#btntable-init").removeAttr("disabled");
+            var options = {
+                editable: true, //是否可以编辑
+                // enableAddRow: false,
+                enableCellNavigation: true,
+                // asyncEditorLoading: false,
+                //  autoEdit: false, //false 双击编辑，true 单击编辑，
+                createPreHeaderPanel: true,
+                showPreHeaderPanel: true,
+                preHeaderPanelHeight: 30,
+            };
+
+            // Create the DataView.
+            var dataview_1 = new Slick.Data.DataView();
+            var columns_1 = [
+                 // checkboxSelector.getColumnDefinition(),
+                 {
+                     id: "年",
+                     name: "年",
+                     field: "单据年",
+                     cssClass: "cell-title",
+                     //editor: Slick.Editors.Text
+                 }, {
+                     id: "月",
+                     name: "月",
+                     field: "单据月",
+                     cssClass: "cell-title",
+                     // editor: Slick.Editors.Text
+                 }, {
+                     id: "部门名称",
+                     name: "单位名称",
+                     field: "部门名称",
+                     width:180,
+                     cssClass: "cell-title",
+                     // editor: Slick.Editors.Text
+                 }, {
+                     id: "指标名称",
+                     name: "指标名称",
+                     width:180,
+                     field: "名称",
+                     cssClass: "cell-title",
+                     // editor: Slick.Editors.Text
+                 }, {
+                     id: "计量单位",
+                     name: "计量单位",
+                     field: "计量单位",
+                     cssClass: "cell-title",
+                     // editor: Slick.Editors.Text
+                 }, {
+                     id: "本月计划",
+                     name: "本月计划",
+                     field: "值",
+                     cssClass: "cell-title",
+                     editor: Slick.Editors.Text
+                 }, {
+                     id: "本月自报",
+                     name: "本月自报",
+                     field: "本月自报",
+                     cssClass: "cell-title",
+                     //editor: Slick.Editors.Text
+                 },
+                 {
+                     id: "备注",
+                     name: "备注",
+                     field: "备注",
+                     cssClass: "cell-title",
+                     editor: Slick.Editors.Text
+                 }
+            ];
+
+            //dataview_1.setItems(data_1);
+            // Pass it as a data provider to SlickGrid.
+            var grid_1 = new Slick.Grid("#grid_1", dataview_1, columns_1, options);
+
+            grid_1.setSelectionModel(new Slick.RowSelectionModel({
+                selectActiveRow: true
+            }));
+
+            grid_1.onValidationError.subscribe(function (e, args) {
+                alert(args.validationResults.msg);
+            });
+
+            // grid_1.registerPlugin(checkboxSelector);
+            // Make the grid respond to DataView change events.
+            dataview_1.onRowCountChanged.subscribe(function (e, args) {
+                grid_1.updateRowCount();
+                grid_1.render();
+            });
+
+            dataview_1.onRowsChanged.subscribe(function (e, args) {
+                console.log(args.rows)
+                grid_1.invalidateRows(args.rows);
+                grid_1.render();
+            });
+
+            mc_grid_dic["grid_1"] = grid_1;
+
+            //////////////////////////////////////////////////////////////
+            twolayerHeader(grid_1, columns_1);
+            ////调整列宽
+            grid_1.onColumnsResized.subscribe(function (e, args) {
+                //重绘表头
+                twolayerHeader(grid_1, columns_1);
+            });
+            // Create additional header row
+        }
+
+        //-------------------------------------------
+
+        $(function () {
+
+            var options = {
+                editable: true, //是否可以编辑
+                // enableAddRow: false,
+                enableCellNavigation: true,
+                // asyncEditorLoading: false,
+                //  autoEdit: false, //false 双击编辑，true 单击编辑，
+            };
+
+            var options2 = {
+                editable: true, //是否可以编辑
+                //  enableAddRow: false,
+                enableCellNavigation: true,
+                //  asyncEditorLoading: false,
+                //  autoEdit: true, //false 双击编辑，true 单击编辑，
+            };
+            // Create the DataView.
+            var dataview_1 = new Slick.Data.DataView();
+            //Create columns
+            var columns_1 = [
+                // checkboxSelector.getColumnDefinition(),
+                {
+                    id: "年",
+                    name: "年",
+                    field: "单据年",
+                    cssClass: "cell-title",
+                    //editor: Slick.Editors.Text
+                }, {
+                    id: "月",
+                    name: "月",
+                    field: "单据月",
+                    cssClass: "cell-title",
+                    // editor: Slick.Editors.Text
+                }, {
+                    id: "部门名称",
+                    name: "部门名称",
+                    field: "部门名称",
+                    cssClass: "cell-title",
+                    // editor: Slick.Editors.Text
+                }, {
+                    id: "指标名称",
+                    name: "指标名称",
+                    field: "名称",
+                    cssClass: "cell-title",
+                    // editor: Slick.Editors.Text
+                }, {
+                    id: "计量单位",
+                    name: "计量单位",
+                    field: "计量单位",
+                    cssClass: "cell-title",
+                    // editor: Slick.Editors.Text
+                }, {
+                    id: "本月计划",
+                    name: "本月计划",
+                    field: "值",
+                    cssClass: "cell-title",
+                    editor: Slick.Editors.Text
+                }, {
+                    id: "本月自报",
+                    name: "本月自报",
+                    field: "本月自报",
+                    cssClass: "cell-title",
+                    //editor: Slick.Editors.Text
+                },
+                {
+                    id: "备注",
+                    name: "备注",
+                    field: "备注",
+                    cssClass: "cell-title",
+                    editor: Slick.Editors.Text
+                }
+            ];
+
+
+            // Pass it as a data provider to SlickGrid.
+            var grid_1 = new Slick.Grid("#grid_1", dataview_1, columns_1, options);
+
+            grid_1.setSelectionModel(new Slick.RowSelectionModel({
+                selectActiveRow: true
+            }));
+
+            grid_1.onValidationError.subscribe(function (e, args) {
+                alert(args.validationResults.msg);
+            });
+
+            // grid_1.registerPlugin(checkboxSelector);
+            // Make the grid respond to DataView change events.
+            dataview_1.onRowCountChanged.subscribe(function (e, args) {
+                grid_1.updateRowCount();
+                grid_1.render();
+            });
+
+            dataview_1.onRowsChanged.subscribe(function (e, args) {
+                console.log(args.rows)
+                grid_1.invalidateRows(args.rows);
+                grid_1.render();
+            });
+
+            mc_grid_dic["grid_1"] = grid_1;
+
+
+
+            //console.log(mc_grid_dic);
+            //////////////////////////////
+            //子表-插入行
+            $(".btndetail-insert").off("click").on("click", function () {
+                var gridid = $(this).data("grid");
+                var grid = mc_grid_dic[gridid];
+                var dataview = grid.getData();
+                var d = {};
+                // console.log(dataview.getItems().length);
+                d["id"] = dataview.getItems().length + 1;
+                d["金额"] = dataview.getItems().length + 1;
+                //d["rowstate"] = "C";//赋值有，但是列上可以不配置，隐藏列的处理方法
+                dataview.insertItem(0, d);
+
+            });
+            //子表-delete行
+            $(".btndetail-delete").off("click").on("click", function () {
+                var gridid = $(this).data("grid");
+                var grid = mc_grid_dic[gridid];
+                var selected_rows = grid.getSelectedRows();
+                $.each(selected_rows, function (index, value) {
+                    var item = dataview.getItem(value); //RowNum is the number of the row
+                    if (item) {
+                        dataview.deleteItem(item.id); //RowID is the actual ID of the row and not the row number
+                    }
+                });
+                //grid.invalidate();
+                // grid.render();
+                grid.getSelectionModel().setSelectedRanges([]); //取消选择
+            });
+
+        });
+    </script>
+
+    <!--form_md.js 中用到上面的 mc_grid_dic 等信息,若放到上面则报错 -->
+    <!--权限及工作流集成，不允许修改 （平台模块）-->
+    <script src="form_md.js"></script>
+    <script>
+     <!--年份-->
+    $(document).ready(function () {
+        var oDate = new Date(); //实例一个时间对象；
+        var year = oDate.getFullYear();   //获取系统的年
+        var year1 = oDate.getFullYear();   //获取系统的年
+        var year2 = year + 5;
+        var year3 = year1 + 5;
+        var i = 0;
+        var html = "";
+        while (i++ < 5) {
+            html += "<option value='" + year2-- + "'>" + year3-- + "</option>";
+        }
+        html += "<option value='" + year + "'  selected>" + year1 + "</option>";
+        var ii = 0;
+        var year = year - 1;
+        var year1 = year1 - 1;
+
+        while (ii++ < 2) {
+            html += "<option value='" + year-- + "'>" + year1-- + "</option>";
+        }
+        $("#year").html(html);//年份id
+
+
+        //月份
+        var month = oDate.getMonth();
+        var select = document.getElementById('month');
+        var option = select.getElementsByTagName('option');
+        for (var i = 0; i < option.length; i++) {
+            if (parseInt("" + option[i].value + "", 10) === month + 1) {
+                option[i].setAttribute("selected", "selected");
+            };
+        };
+
+    });
+
+
+
+    //部门tree
+    var dept_treedata = [];
+    function BindDept() {
+        //R C M D
+        var json = { "json": [""] };
+        var __str = JSON.stringify(json);
+        $.ajax({
+            type: "POST",
+            url: "/BAPI/BAPI_ASHX.ashx",
+            data: { "api": "MC.YMJYGL.Server.YMJYGL.common.Select.BAPI_查询_部门数据", "type": "json", "ticket": pub.State.Ticket, "data": __str },
+            dataType: "Json",
+            error: function (xhr, status, error) {
+                alert(error);
+            },
+            success: function (data) {
+                console.log(data.json.Data);
+                if (data.json.State == "1") {
+                    dept_treedata = data.json.Data;
+                    //设置tree 的合并
+                    var i = 0;
+                    for (; i < dept_treedata.root.length; i++) {
+                        dept_treedata.root[i].state = {
+                            expanded: false,
+                        };
+                    }
+                    JSON.stringify(dept_treedata);
+                    $('#input_group_btn_bumen').treeview({
+                        data: dept_treedata.root,
+                        collapseIcon: "glyphicon glyphicon-chevron-right",
+                        expandIcon: "glyphicon glyphicon-chevron-down",
+                        showBorder: false,
+                        onNodeSelected: function (event, data) {
+                            bmflag = 1;
+                            var name = data.text;//获取文本
+                            var id = data.ID;
+                            //获取id
+                            $('input[name="部门ID"]').val(id);
+                            $("#txtModuleType").val(name);
+
+
+                            if (data.state.expanded == false) {
+                                var arrnode = $('#input_group_btn_bumen').treeview('getSiblings', data.nodeId);
+                                $('#input_group_btn_bumen').treeview('expandNode', [data.nodeId, { silent: true }]);
+                                for (var i = 0; i <= arrnode.length; i++) {
+                                    if (data.nodeId == arrnode[i]) {
+                                        $('#input_group_btn_bumen').treeview('collapseNode', [arrnode[i], { silent: true, ignoreChildren: false }]);
+                                    }
+                                }; //$("#tree1").val(data.nodeId);
+                            }
+                            else {
+                                var arrnode = $('#tree1').treeview('getSiblings', data.nodeId);
+                                $('#input_group_btn_bumen').treeview('collapseNode', [data.nodeId, { silent: true }]);
+                                for (var i = 0; i <= arrnode.length; i++) {
+                                    if (data.nodeId == arrnode[i]) {
+                                        $('#input_group_btn_bumen').treeview('expandNode', [arrnode[i], { silent: true, ignoreChildren: true }]);
+                                    }
+                                };// $("#tree1").val(data.nodeId);
+                            }
+                            chongzhibiao();
+                        }
+                    });
+
+                } else {
+                    if (data.json.Message != "") {
+                        //后台提示
+                        top.window.layer.msg(data.json.Message);
+                    } else {
+                        top.window.layer.msg("操作失败");
+                    }
+                }
+            }
+
+        });
+    }
+    BindDept();
+
+    //指标tree
+    var dept_treedata1 = [];
+    function BindDeptzb() {
+        //R C M D
+        var json = { "json": [""] };
+        var __str = JSON.stringify(json);
+        $.ajax({
+            type: "POST",
+            url: "/BAPI/BAPI_ASHX.ashx",
+            data: { "api": "MC.YMJYGL.Server.YMJYGL.common.Select.BAPI_查询_指标数据计划填报", "type": "json", "ticket": pub.State.Ticket, "data": __str },
+            dataType: "Json",
+            error: function (xhr, status, error) {
+                alert(error);
+            },
+            success: function (data) {
+                console.log(data.json.Data);
+                if (data.json.State == "1") {
+                    dept_treedata1 = data.json.Data;
+                    //设置tree 的合并
+                    var i = 0;
+                    for (; i < dept_treedata1.root.length; i++) {
+                        dept_treedata1.root[i].state = {
+                            expanded: false,
+                        };
+                    }
+                    JSON.stringify(dept_treedata1);
+                    $('#input_group_btn_zhibiao').treeview({
+                        data: dept_treedata1.root,
+                        collapseIcon: "glyphicon glyphicon-chevron-right",
+                        expandIcon: "glyphicon glyphicon-chevron-down",
+                        showBorder: false,
+                        onNodeSelected: function (event, data) {
+                            zbflag = 1;
+                            var name = data.text;//获取文本
+                            var id = data.ID;
+                            //获取id
+                            $('input[name="指标ID"]').val(id);
+                            $("#txtModuleTypezhibiao").val(name);
+
+
+                            if (data.state.expanded == false) {
+                                var arrnode = $('#input_group_btn_zhibiao').treeview('getSiblings', data.nodeId);
+                                $('#input_group_btn_zhibiao').treeview('expandNode', [data.nodeId, { silent: true }]);
+                                for (var i = 0; i <= arrnode.length; i++) {
+                                    if (data.nodeId == arrnode[i]) {
+                                        $('#input_group_btn_zhibiao').treeview('collapseNode', [arrnode[i], { silent: true, ignoreChildren: false }]);
+                                    }
+                                }; //$("#tree1").val(data.nodeId);
+                            }
+                            else {
+                                var arrnode = $('#tree1').treeview('getSiblings', data.nodeId);
+                                $('#input_group_btn_zhibiao').treeview('collapseNode', [data.nodeId, { silent: true }]);
+                                for (var i = 0; i <= arrnode.length; i++) {
+                                    if (data.nodeId == arrnode[i]) {
+                                        $('#input_group_btn_zhibiao').treeview('expandNode', [arrnode[i], { silent: true, ignoreChildren: true }]);
+                                    }
+                                };// $("#tree1").val(data.nodeId);
+                            }
+                            chongzhibiao();
+                        }
+                    });
+
+                } else {
+                    if (data.json.Message != "") {
+                        //后台提示
+                        top.window.layer.msg(data.json.Message);
+                    } else {
+                        top.window.layer.msg("操作失败");
+                    }
+                }
+            }
+
+        });
+    }
+    BindDeptzb();
+    </script>
+
+</body>
+
+</html>
