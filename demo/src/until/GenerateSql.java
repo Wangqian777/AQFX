@@ -16,30 +16,6 @@ import net.sf.json.JSONObject;
 
 public class GenerateSql {
 	private SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
-	public Map<String,List> menuUpdateSql(String v_json){
-		List<Map> listMap=new ArrayList<Map>();
-		Map<String,List> sqlMap=new HashMap<String, List>();
-		List<String> tempList=new ArrayList<String>();
-		listMap=currencyJson(v_json);
-		String updateSql="";
-		updateSql=String.format("update %s set ", listMap.get(0).get("table"));
-		Map<String,String> map=listMap.get(0);
-		//主表
-		for(String key:map.keySet()){
-			if(!key.equals("id") && !key.equals("table")){
-				updateSql+=String.format("%s='%s',",key,map.get(key));
-			}
-		}
-		updateSql+=String.format("最后修改时间='%s'", df.format(new Date()));
-		if(updateSql.substring(updateSql.length()-1).equals(",")){
-			updateSql=updateSql.substring(0,updateSql.length()-1);
-		}
-		updateSql+=String.format(" where id='%s'", map.get("id"))+"";
-		tempList.add(updateSql);
-		updateSql="";
-		sqlMap.put("updateSql", tempList);
-		return sqlMap;
-	}
 	public Map<String,List> generateInsertSql(String v_json){
 		List<Map> listMap=new ArrayList<Map>();
 		Map<String,List> sqlMap=new HashMap<String, List>();
@@ -148,29 +124,29 @@ public class GenerateSql {
 		List<Map> listMap=new ArrayList<Map>();
 		Map<String,List> sqlMap=new HashMap<String, List>();
 		List<String> tempList=new ArrayList<String>();
-		listMap=currencyJson(v_json);
 		String zhuSql="";
 		String ziSql="";
-		String FID=listMap.get(0).get("id").toString();
-		zhuSql=String.format("delete from %s where ID='%s'", listMap.get(0).get("table"),listMap.get(0).get("id"));
-		tempList.add(zhuSql);
-		sqlMap.put("zhuSql",tempList );
-		tempList=new ArrayList<String>();
-		try{
-			Map<String,List> map2=listMap.get(1);
-			if(map2.size()>0){
-				List<Map> list=map2.get("dtables");
-				for(Map<String,String> m:list){
-					ziSql=String.format("delete from %s where FID='%S'", m.get("table"),FID);
-					tempList.add(ziSql);
-					sqlMap.put("ziSql", tempList);
-					break;
-				}
-			}
-			return sqlMap;
-		}catch (Exception e) {
-			return sqlMap;
+		JSONObject json=JSONObject.fromObject(v_json);
+		Iterator it = json.keys();
+		String FID="";
+		while(it.hasNext()){  
+			String key = (String) it.next();
+    		
+    		if(key.equals("zhubiao")){
+    			zhuSql+=String.format("delete from %s",json.get(key));
+    		}
+    		if(key.equals("zhubiaoID")){
+    			zhuSql+=String.format(" where ID='%s'",json.get(key));
+    			tempList.add(zhuSql);
+    			sqlMap.put("zhuSql", tempList);
+    		}
+    		if(key.equals("zibiao")){
+    			ziSql=String.format("delete from %s where FID='%S'", json.get(key),FID);
+    			tempList.add(ziSql);
+    			sqlMap.put("ziSql", tempList);
+    		}
 		}
+		return sqlMap;
 	}
 	private List<Map> currencyJson(String v_json){
 		List<Map> listMap=new ArrayList<Map>();
