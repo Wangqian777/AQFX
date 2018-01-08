@@ -3,7 +3,7 @@ package until;
 
 public class ResultJson {
 	private String State;
-	private String Data;
+	private String rows;
 	private Integer total;
 	public ResultJson() {
 	}
@@ -11,7 +11,7 @@ public class ResultJson {
 	public ResultJson( String state, String data, Integer total) {
 		super();
 		State = state;
-		Data = data;
+		rows = data;
 		this.total = total;
 	}
 
@@ -23,12 +23,12 @@ public class ResultJson {
 		State = state;
 	}
 
-	public String getData() {
-		return Data;
+	public String getRows() {
+		return rows;
 	}
 
-	public void setData(String data) {
-		Data = data;
+	public void setRows(String rows) {
+		this.rows = rows;
 	}
 
 	public Integer getTotal() {
@@ -40,7 +40,7 @@ public class ResultJson {
 	}
 
 	public String  GenerateResultJson(){
-		String json="{\"json\":{\"State\":"+getState()+",\"Data\":{\"list\":"+getData()+"},\"total\":"+getTotal()+"}}";
+		String json="{\"json\":{\"State\":"+getState()+",\"Data\":{\"list\":"+getRows()+"},\"total\":"+getTotal()+"}}";
 		return json;
 	}
 }

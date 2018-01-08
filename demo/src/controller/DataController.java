@@ -163,7 +163,7 @@ public class DataController {
 	// 查询列表数据
 	@ResponseBody
 	@RequestMapping("getDataList.do")
-	public String getDataList(String table, String params, HttpServletResponse respone) throws IOException {
+	public List<String> getDataList(String table, String params, HttpServletResponse respone) throws IOException {
 		respone.setContentType("text/html;charset=utf-8");
 		if (table != null) {
 			//PrintWriter out = respone.getWriter();
@@ -182,11 +182,29 @@ public class DataController {
 //			out.print(js);
 //			out.flush();
 //			out.close();
-			return "1";
+			List<String> list = new ArrayList<String>();
+			for (int i = 0; i < 10; i++) {
+				list.add("no:"+i);
+			}
+			return list;
 		}
 		return null;
 	}
-
+	@ResponseBody
+	@RequestMapping("ttt.do")
+	public List<String> ttt() throws IOException {
+//			String sql = String.format("select * from %s where 1=1", "部门");
+//			mapList = dataService.getData(sql);
+//			JSONArray js = JSONArray.fromObject(mapList);
+//			out.print(js);
+//			out.flush();
+//			out.close();
+			List<String> list = new ArrayList<String>();
+			for (int i = 0; i < 10; i++) {
+				list.add("no:"+i);
+			}
+			return list;
+	}
 	public void setDataService(DataService dataService) {
 		this.dataService = dataService;
 	}

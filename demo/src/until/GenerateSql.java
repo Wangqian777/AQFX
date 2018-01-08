@@ -132,15 +132,15 @@ public class GenerateSql {
 		while(it.hasNext()){  
 			String key = (String) it.next();
     		
-    		if(key.equals("zhubiao")){
+    		if(key.equalsIgnoreCase("zhubiao")){
     			zhuSql+=String.format("delete from %s",json.get(key));
     		}
-    		if(key.equals("zhubiaoID")){
+    		if(key.equalsIgnoreCase("zhubiaoID")){
     			zhuSql+=String.format(" where ID='%s'",json.get(key));
     			tempList.add(zhuSql);
     			sqlMap.put("zhuSql", tempList);
     		}
-    		if(key.equals("zibiao")){
+    		if(key.equalsIgnoreCase("zibiao")){
     			ziSql=String.format("delete from %s where FID='%S'", json.get(key),FID);
     			tempList.add(ziSql);
     			sqlMap.put("ziSql", tempList);
