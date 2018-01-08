@@ -68,11 +68,12 @@
 	});
 	$("#add").on('click',function(){
 		localStorage.FormMode="Add";
-		openFormCard("新增数据字典类别");
+		openFormCard("form_md.html","新增数据字典类别");
 		
-	});
+	});                                                                                                                                                                                          
 	$("#edit").click(function(){
 		localStorage.FormMode="Edit";
+		localStorage.sjzdID=localStorage.listID;
 		openFormCard("form_md.html","修改数据字典类别");
 	});
 	function openFormCard(url,title) {
@@ -117,12 +118,20 @@
 	});
 	$("#编辑").click(function(){
 		var dataArray= $("#tb_departments").bootstrapTable('getSelections');
+		if(dataArray.length==0){
+			layer.msg("请选择数据行！");
+			return;
+		}
 		localStorage.sjzdmxID=dataArray[0].ID;
 		localStorage.FormMode="Edit";
 		openFormCard("form_add.html","新增数据字典明细");
 	});
 	$("#删除").click(function(){
 		var dataArray= $("#tb_departments").bootstrapTable('getSelections');
+		if(dataArray.length==0){
+			layer.msg("请选择数据行！");
+			return;
+		}
 		localStorage.sjzdmxID=dataArray[0].ID;
 		var json={"zhubiao":"数据字典_明细","zhubiaoID":localStorage.sjzdmxID,};
         var __str= JSON.stringify(json);

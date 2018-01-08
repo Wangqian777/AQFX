@@ -1,7 +1,8 @@
 ﻿$(function(){
 	console.log(localStorage.FormMode);
 	if(localStorage.FormMode=="Edit"){
-		var json = { "ID": localStorage.listID };
+		console.log(localStorage.sjzdID);
+		var json = { "ID": localStorage.sjzdID };
         var __str = JSON.stringify(json);
 		$.ajax({
 			url:"../../getDatadictionaryList.do",
@@ -10,7 +11,6 @@
 			dataType:"JSON",
 			async:false,
 			success:function(data){
-				console.log(data);
 				$("#frmdata").fill(data[0], { styleElementName: 'none' });
 				$("input[name=是否禁用]").attr("checked",data[0].是否禁用); 
 				$("#id").val(data[0].ID);
