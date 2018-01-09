@@ -3,7 +3,7 @@ package service;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import util.PageResult;
+import utils.PageResult;
 
 public interface DataService {
 	public List<LinkedHashMap<String, Object>> getData(String sql);

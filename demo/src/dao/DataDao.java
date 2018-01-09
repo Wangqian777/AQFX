@@ -3,7 +3,7 @@ package dao;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import util.ResultJson;
+import utils.ResultJson;
 
 
 public interface DataDao {

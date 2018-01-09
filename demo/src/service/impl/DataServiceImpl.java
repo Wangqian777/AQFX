@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import dao.DataDao;
 import net.sf.json.JSONObject;
 import service.DataService;
-import util.JsonResult;
-import util.PageResult;
+import utils.JsonResult;
+import utils.PageResult;
 
 @Service
 public class DataServiceImpl implements DataService {
