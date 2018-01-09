@@ -23,9 +23,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sun.javafx.binding.StringFormatter;
 
 import service.DataService;
-import util.GenerateSql;
-import util.JsonResult;
-import util.PageResult;
+import utils.GenerateSql;
+import utils.JsonResult;
+import utils.PageResult;
 
 @Controller
 public class DataController {
