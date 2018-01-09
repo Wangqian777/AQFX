@@ -28,7 +28,5 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jackson-core-asl-1.9.13.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jackson-mapper-asl-1.9.13.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/druid-1.1.6.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ojdbc6.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

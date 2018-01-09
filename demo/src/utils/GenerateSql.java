@@ -40,7 +40,9 @@ public class GenerateSql {
 		}
 		UUID uuid=UUID.randomUUID();
 		FID=uuid.toString();
-		zhuSql+=String.format("'%s','%s')", uuid,df.format(new Date()));
+		Date date=new Date();
+		String dateTime=df.format(date);
+		zhuSql+=String.format("'%s',%s)", uuid,"to_date('"+dateTime+"','yyyy-mm-dd hh24:mi:ss')");
 		tempList.add(zhuSql);
 		sqlMap.put("zhuSql", tempList);
 		try{
@@ -56,10 +58,12 @@ public class GenerateSql {
 							ziSql+=String.format("%s,",key);
 						}
 					}
-					ziSql+="id,fid) values(";
+					ziSql+="id,fid,创建时间) values(";
+					date=new Date();
+					dateTime=df.format(date);
 					for(String key:m.keySet()){
 						if(!key.equals("id") && !key.equals("table")){
-							ziSql+=String.format("'%s','%s'",m.get(key),FID);
+							ziSql+=String.format("'%s','%s',%s",m.get(key),FID,"to_date('"+dateTime+"','yyyy-mm-dd hh24:mi:ss')");
 						}
 					}
 					uuid=UUID.randomUUID();
@@ -89,7 +93,9 @@ public class GenerateSql {
 				zhuSql+=String.format("%s='%s',",key,map.get(key));
 			}
 		}
-		zhuSql+=String.format("最后修改时间='%s'", df.format(new Date()));
+		Date date=new Date();
+		String dateTime=df.format(date);
+		zhuSql+=String.format("最后修改时间=%s", "to_date('"+dateTime+"','yyyy-mm-dd hh24:mi:ss')");
 		if(zhuSql.substring(zhuSql.length()-1).equals(",")){
 			zhuSql=zhuSql.substring(0,zhuSql.length()-1);
 		}

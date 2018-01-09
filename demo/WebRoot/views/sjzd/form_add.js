@@ -13,7 +13,13 @@
 			success:function(data){
 				console.log(data);
 				$("#frmdata").fill(data[0], { styleElementName: 'none' });
-				$("input[name=是否禁用]").attr("checked",data[0].是否禁用); 
+				var flag;
+				if(data[0].是否禁用=="0"){
+					flag=false;
+				}else{
+					flag=true;
+				}
+				$("input[name=是否禁用]").attr("checked",flag); 
 				$("#id").val(data[0].ID);
 			}
 		});
