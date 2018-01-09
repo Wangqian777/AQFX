@@ -28,30 +28,33 @@ public class DataServiceImpl implements DataService {
 		Integer total = dataDao.getDataTotal(table);
 		if (params != null) {
 			JSONObject json = JSONObject.fromObject(params);
+			Integer pageSize = json.getInt("pageSize");
+			Integer pageNumber = json.getInt("pageNumber");
 			Iterator it = json.keys();
 			while (it.hasNext()) {
 				String key = (String) it.next();
 				String value = json.get(key).toString();
-				if (value.equals("pageSize"))
+				if ("pageSize|pageNumber|searchText|sortName|sortOrder".indexOf(value) > -1) {
 					where += String.format(" and %s='%s'", key, value.toString());
+				}
 			}
-			Integer pageSize = json.getInt("pageSize");
-			Integer pageNumber = json.getInt("pageNumber");
 
 			if (null == pageNumber || pageNumber < 1) {
 				pageNumber = 1;
-				if (pageNumber > total) {
-					pageNumber = total;
-				}
-				begin = (pageNumber - 1) * pageSize;
-				end = pageNumber * pageSize;
 			}
+			if (pageNumber > total) {
+				pageNumber = total;
+			}
+			begin = (pageNumber - 1) * pageSize;
+			end = pageNumber * pageSize;
 		}
-		sql = String.format("SELECT * FROM (SELECT ROWNUM AS rn, t.* FROM %s WHERE rn <= %d %s) tt WHERE tt.rn >= %d;",
-				table, end, where, begin);
+
+		sql = String.format(
+				"SELECT * FROM (SELECT ROWNUM RN,A.* FROM (SELECT * FROM %s where 1=1 %s) A WHERE ROWNUM <= %d)  WHERE RN >= %d",
+				table, where, end, begin);
 
 		List<LinkedHashMap<String, Object>> data = dataDao.getData(sql);
-		return PageResult.Success(data,total);
+		return PageResult.Success(data, total);
 	}
 
 	public boolean updateData(String sql) {
