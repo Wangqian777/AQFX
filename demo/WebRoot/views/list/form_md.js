@@ -379,7 +379,7 @@
                 alert(error);
             },
             success: function (data) {
-                _kfalg = data.json.State;
+                _kfalg = data.state;
                 message = data.json.Message;
             }
         }
@@ -440,7 +440,7 @@
                 alert(error);
             },
             success: function (data) {
-                _kfalg = data.json.State;
+                _kfalg = data.state;
                 message = data.json.Message;
             }
         }
@@ -560,7 +560,7 @@
                     alert(error);
                 },
                 success: function (data) {
-                    _kfalg = data.json.State;
+                    _kfalg = data.state;
                     message = data.json.Message;
                 }
             }
@@ -679,7 +679,7 @@
             },
             success: function (data) {
                 //   console.log(data.json.Data);
-                if (data.json.State == "1") {
+                if (data.state == "1") {
 
                     if (action == "R") {
                         console.log(data.json.Data.dt);
@@ -727,7 +727,7 @@
             },
             success: function (data) {
                 //   console.log(data.json.Data);
-                if (data.json.State == "1") {
+                if (data.state == "1") {
                     if (action == "R") {
                         console.log(data.json.Data.dt);
 
@@ -785,7 +785,7 @@
             },
             success: function (data) {
 
-                if (data.json.State == "1") {
+                if (data.state == "1") {
                     //console.log(data.json.Data.dt)
                     //填充列表
                     $.each(data.json.Data.dt, function (i, item) {
@@ -822,7 +822,7 @@
                     return;
                 };
                 //   console.log(data.json.Data);
-                if (data.json.State == "1") {
+                if (data.state == "1") {
                     if (action == "R") {
 
                        // localStorage.search_array = JSON.stringify(data.json.Data);
@@ -1147,7 +1147,7 @@
             },
             success: function (data) {
                 //console.log(data.json);
-                if (data.json.State == "1") {
+                if (data.state == "1") {
                     top.window.layer.msg("操作成功");
 
                 } else {
@@ -1178,7 +1178,7 @@
             },
             success: function (data) {
                 console.log(data.json);
-                if (data.json.State == "1") {
+                if (data.state == "1") {
                     top.window.layer.msg("操作成功");
 
                 } else {

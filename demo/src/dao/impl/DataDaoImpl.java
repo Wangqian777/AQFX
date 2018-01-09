@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import dao.DataDao;
-import util.ResultJson;
 @Repository
 public class DataDaoImpl extends SqlSessionDaoSupport implements DataDao {
 	@Autowired

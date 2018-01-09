@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 import dao.DataDao;
 import net.sf.json.JSONObject;
 import service.DataService;
-import util.ResultJson;
+import util.JsonResult;
+import util.PageResult;
 
 @Service
 public class DataServiceImpl implements DataService {
@@ -20,7 +21,7 @@ public class DataServiceImpl implements DataService {
 		return dataDao.getData(sql);
 	}
 
-	public ResultJson getPageData(String table, String params) {
+	public PageResult getPageData(String table, String params) {
 		String sql = "";
 		String where = "";
 		Integer begin = 0, end = 0;
@@ -50,8 +51,7 @@ public class DataServiceImpl implements DataService {
 				table, end, where, begin);
 
 		List<LinkedHashMap<String, Object>> data = dataDao.getData(sql);
-		ResultJson page = new ResultJson("1",data,total);
-		return page;
+		return PageResult.Success(data,total);
 	}
 
 	public boolean updateData(String sql) {

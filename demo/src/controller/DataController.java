@@ -24,7 +24,8 @@ import com.sun.javafx.binding.StringFormatter;
 
 import service.DataService;
 import util.GenerateSql;
-import util.ResultJson;
+import util.JsonResult;
+import util.PageResult;
 
 @Controller
 public class DataController {
@@ -33,7 +34,6 @@ public class DataController {
 	private String json = "";
 	private GenerateSql generateSql = new GenerateSql();
 	private List<LinkedHashMap<String, Object>> mapList = new ArrayList<LinkedHashMap<String, Object>>();
-	private ResultJson __ret = new ResultJson();
 
 	// 获取树结构json
 	@RequestMapping("getTreeJson.do")
@@ -88,16 +88,15 @@ public class DataController {
 	public void getDataCounts(String id, String table, HttpServletResponse response) throws IOException {
 		response.setContentType("terxt/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
-
+		JsonResult json;
 		String sql = String.format("select count(1) from %s where pid='%s'", table, id);
 		int counts = dataService.getDataCounts(sql);
 		if (counts > 0) {
-			__ret.setState("0");
+			json = JsonResult.Success();
 		} else {
-			__ret.setState("1");
+			json = JsonResult.Error();
 		}
-		String resultJson = __ret.GenerateResultJson();
-		out.print(resultJson);
+		out.print(json.toJson());
 		out.flush();
 		out.close();
 	}
@@ -153,6 +152,7 @@ public class DataController {
 		PrintWriter out = response.getWriter();
 		List<String> sql = new ArrayList<String>();
 		Map<String, List> sqlMap = new HashMap<String, List>();
+		JsonResult json;
 		try {
 			if (action.equals("C")) {
 				sqlMap = generateSql.generateInsertSql(v_json);
@@ -173,27 +173,24 @@ public class DataController {
 					dataService.deleteData(s);
 				}
 			}
-			__ret.setState("1");
+			json = JsonResult.Success();
 		} catch (Exception e) {
-			__ret.setState("0");
+			json = JsonResult.Error();
 			System.out.println(e);
 		}
-		String resultJson = __ret.GenerateResultJson();
-		out.print(resultJson);
+		out.print(json.toJson());
 		out.flush();
 		out.close();
 	}
 
 	// 查询列表数据
-	@RequestMapping("getDataList.do")
-	public List<String> getDataList(String table, String params, HttpServletResponse respone) throws IOException {
+	@RequestMapping("getPageData.do")
+	public List<String> getPageData(String table, String params, HttpServletResponse respone) throws IOException {
 		respone.setContentType("text/html;charset=utf-8");
 		if (table != null) {
 			PrintWriter out = respone.getWriter();
-			
-			ResultJson pageData = dataService.getPageData(table,params);
-			JSONArray js = JSONArray.fromObject(pageData);
-			out.print(js);
+			PageResult pageData = dataService.getPageData(table,params);
+			out.print(pageData.toJson());
 			out.flush();
 			out.close();
 		}

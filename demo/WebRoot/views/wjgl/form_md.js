@@ -177,7 +177,7 @@
                     alert(error);
                 },
                 success: function (data) {
-                    _kfalg = data.json.State;
+                    _kfalg = data.state;
                     message = data.json.Message;
                 }
             }
@@ -201,7 +201,7 @@
                     alert(error);
                 },
                 success: function (data) {
-                    _kfalg = data.json.State;
+                    _kfalg = data.state;
                     message = data.json.Message;
                 }
             }
@@ -228,7 +228,7 @@
                 },
                 success: function (data) {
 
-                    _kfalg = data.json.State;
+                    _kfalg = data.state;
                     message = data.json.Message;
                 }
             });
@@ -586,7 +586,7 @@
             },
             success: function (data) {
 
-                if (data.json.State == "1") {
+                if (data.state == "1") {
                     //console.log(data.json.Data.dt)
                     //填充列表
                     $.each(data.json.Data.dt, function (i, item) {
@@ -622,7 +622,7 @@
             },
             success: function (data) {
                 console.log(data.json.Data);
-                if (data.json.State == "1") {
+                if (data.state == "1") {
                     if (action == "R") {
                         console.log(data.json.Data.dt[0]);
                         $("#ID").val(data.json.Data.dt[0].ID);
@@ -669,7 +669,7 @@
             },
             success: function (data) {
                 console.log(data.json.Data);
-                if (data.json.State == "1") {
+                if (data.state == "1") {
                     //bind data
                     // grid = data.json.Data.dt;
                     var grid = mc_grid_dic["grid_1"];
@@ -746,7 +746,7 @@
                 alert(error);
             },
             success: function (data) {
-                _kfalg = data.json.State;
+                _kfalg = data.state;
                 message = data.json.Message;
             }
         }
@@ -771,7 +771,7 @@
             },
             success: function (data) {
 
-                _kfalg = data.json.State;
+                _kfalg = data.state;
                 message = data.json.Message;
             }
         });
@@ -810,7 +810,7 @@
     //            alert(error);
     //        },
     //        success: function (data) {
-    //            _kfalg = data.json.State;
+    //            _kfalg = data.state;
     //            message = data.json.Message;
     //        }
     //    }
@@ -1034,7 +1034,7 @@
             },
             success: function (data) {
                 //console.log(data.json);
-                if (data.json.State == "1") {
+                if (data.state == "1") {
                     top.window.layer.msg("操作成功");
 
                 } else {
@@ -1065,7 +1065,7 @@
             },
             success: function (data) {
                 console.log(data.json);
-                if (data.json.State == "1") {
+                if (data.state == "1") {
                     top.window.layer.msg("操作成功");
 
                 } else {

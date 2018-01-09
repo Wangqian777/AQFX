@@ -375,7 +375,7 @@
             },
             success: function (data) {
 
-                if (data.json.State == "1") {
+                if (data.state == "1") {
                     //console.log(data.json.Data.dt)
                     //填充列表
                     $.each(data.json.Data.dt, function (i, item) {

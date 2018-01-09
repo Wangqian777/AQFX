@@ -99,7 +99,7 @@
 			 dataType:"JSON",
 			 asnyc:false,
 			 success:function(data){
-				 if(data.json.State==0){
+				 if(data.state==0){
 					 flag=false;
 				 }
 				 if(flag){
@@ -123,7 +123,7 @@
 				dataType:"JSON",
 				async:false,
 				success:function(data){
-					if(data.json.State==1){
+					if(data.state==1){
 						layer.msg("操作成功");
 						initTree();
 					}else{

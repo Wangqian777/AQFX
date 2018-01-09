@@ -1,47 +1,72 @@
 package util;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ResultJson {
-	private String State;
-	private List rows;
-	private Integer total;
-	public ResultJson() {
+import net.sf.json.JSON;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
+public class JsonResult implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Object data;
+	private String message;
+	private Integer state;
+
+	
+	public Object getData() {
+		return data;
+	}
+
+	public void setData(Object data) {
+		this.data = data;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public Integer getState() {
+		return state;
+	}
+
+	public void setState(Integer state) {
+		this.state = state;
+	}
+
+	public JsonResult() {
+	}
+
+	
+	
+	public JsonResult(Object data, String message, Integer state) {
+		super();
+		this.data = data;
+		this.message = message;
+		this.state = state;
+	}
+	public static JsonResult Success() {
+		return new JsonResult(null, null, 1);
+	}
+	public static JsonResult Success(Object Data, String Message) {
+		return new JsonResult(Data, Message, 1);
+	}
+	public static JsonResult Error() {
+		return new JsonResult(null, null, 0);
+	}
+	public static JsonResult Error(Object Data, String Message) {
+		return new JsonResult(Data, Message, 0);
 	}
 	
-	public ResultJson( String state, List data, Integer total) {
-		super();
-		State = state;
-		rows = data;
-		this.total = total;
-	}
-
-	public String getState() {
-		return State;
-	}
-
-	public void setState(String state) {
-		State = state;
-	}
-
-	public List getRows() {
-		return rows;
-	}
-
-	public void setRows(List rows) {
-		this.rows = rows;
-	}
-
-	public Integer getTotal() {
-		return total;
-	}
-
-	public void setTotal(Integer total) {
-		this.total = total;
-	}
-
-	public String  GenerateResultJson(){
-		String json="{\"json\":{\"State\":"+getState()+",\"Data\":{\"list\":"+getRows()+"},\"total\":"+getTotal()+"}}";
+	public JSONObject toJson() {
+		JSONObject json = JSONObject.fromObject(this);
 		return json;
 	}
 }

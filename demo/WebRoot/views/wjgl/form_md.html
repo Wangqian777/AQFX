@@ -671,7 +671,7 @@
             },
             success: function (data) {
                 console.log(data.json.Data);
-                if (data.json.State == "1") {
+                if (data.state == "1") {
                     dept_treedata = data.json.Data;
                     //设置tree 的合并
                     var i = 0;
@@ -747,7 +747,7 @@
             },
             success: function (data) {
                 console.log(data.json.Data);
-                if (data.json.State == "1") {
+                if (data.state == "1") {
                     dept_treedata1 = data.json.Data;
                     //设置tree 的合并
                     var i = 0;
