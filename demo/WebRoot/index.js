@@ -1,8 +1,8 @@
 $(document).ready(function(){
 	$.ajax({
-		type:"POST",
+		type:"post",
 		url:"getTreeJson.do",
-		dataType:"JSON",
+		dataType:"json",
 		data:{"table":"菜单","orderBy":"编码"},
 		async:false,
 		success:function(data){

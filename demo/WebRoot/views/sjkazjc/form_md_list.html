@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>form_md_list.html</title>
+
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+<!-- Icons -->
+
+<link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap.css"
+	type="text/css" />
+<link rel="stylesheet"
+	href="../../plugins/fancytree/skin-bootstrap/ui.fancytree.css"
+	type="text/css"></link>
+<link rel="stylesheet"
+	href="../../plugins/bootstraptable/dist/bootstrap-table.css"
+	type="text/css"></link>
+<link rel="stylesheet"
+	href="../../plugins/font-awesome/css/font-awesome.css" type="text/css"></link>
+<link rel="stylesheet" href="../../plugins/layui/css/layui.css"
+	type="text/css"></link>
+<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript"
+	src="../../plugins/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript"
+	src="../../plugins/bootstrap/js/bootstrap-treeview.js"></script>
+<script type="text/javascript"
+	src="../../plugins/bootstraptable/dist/bootstrap-table.js"></script>
+<script type="text/javascript" src="../../plugins/layer/layer.js"></script>
+<script type="text/javascript" src="../../js/jquery.formFill.js"></script>
+<script type="text/javascript"
+	src="../../plugins/bootstraptable/dist/locale/bootstrap-table-zh-CN.js"></script>
+<style type="text/css">
+#list:hover {
+	cursor: pointer;
+}
+
+i:hover {
+	cursor: pointer;
+}
+
+p span{
+	font-size:20px;
+	color:red;
+}
+p strong{
+	font-size:25px;
+}
+#dian{
+  position: fixed;
+  right: 0px;
+  bottom:200px;
+}
+#dian a{
+	font-size:20px;
+	color:Blue;
+}
+</style>
+</head>
+
+<body>
+	<div class="row" id="main" style="width: 100%;">
+	
+		<div id="dian" border="1">
+				<a href="https://pan.baidu.com/s/1qZm5zM8">下载安装包</a>
+		</div>
+		<table  style="width: 100%;margin-top:10px;">
+			<tr>
+				<td style="padding-left:30px"><img alt=""
+					src="img/QQ图片20180108163404.png">
+					<p><strong>1.</strong><span>打开安装包，找到安装文件“setup.exe”，双击进行安装，如图所示</span></p></td>
+
+
+				<td style="padding-left:20px"><img alt=""
+					src="img/QQ图片20180108163411.png">
+					<p><strong>2.</strong><span>配置安全更新。电子邮件可写可不写，取消下面的“我希望通过My Oracle
+						Support接受安全更新(W)”，如图所示，单击下一步</span></p></td>
+			</tr>
+			<tr>
+				<td style="padding-left:30px;padding-top:10px;"><img alt=""
+					src="img/QQ图片20180108163416.png">
+					<p><strong>3.</strong><span>安装选项。直接选择默认的“创建和配置数据库”，如图所示，单击下一步</span></p></td>
+			<td style="padding-left:19px;padding-top:10px;"><img alt=""
+					src="img/QQ图片20180108163419.png">
+					<p><strong>4.</strong><span>系统类。由于咱们安装的是服务器，所以选择“服务器类”，如图所示，单击下一步</span></p></td>
+			</tr>
+			<tr>
+				<td style="padding-left:30px;padding-top:10px;"><img alt=""
+					src="img/QQ图片20180108163422.png">
+					<p><strong>5.</strong><span>网格安装选项。选择“单实例数据库安装”，如图所示，单击下一步</span></p></td>
+			<td style="padding-left:19px;padding-top:10px;"><img alt=""
+					src="img/QQ图片20180108163425.png">
+					<p><strong>6.</strong><span>安装类型。选择“高级安装”，如图所示，单击下一步</span></p></td>
+			</tr>
+			<tr>
+				<td style="padding-left:30px;padding-top:10px"><img alt=""
+					src="img/QQ图片20180108163503.png">
+					<p><strong>7.</strong><span>产品语言。直接默认即可（简体中文、英语），如图所示，单击下一步</span></p></td>
+			<td style="padding-left:19px;padding-top:10px;"><img alt=""
+					src="img/QQ图片20180108163508.png">
+					<p><strong>8.</strong><span>数据库版本。选择“企业版”，如图所示，单击下一步</span></p></td>
+			</tr>
+			<tr>
+				<td style="padding-left:30px;padding-top:10px;"><img alt=""
+					src="img/QQ图片20180108163511.png">
+					<p><strong>9.</strong><span>安装位置。填入安装路径（只需要填“Oracle基目录”即可，“软件位置”会自动生成），如图所示，单击下一步</span></p></td>
+			<td style="padding-left:19px;padding-top:10px"><img alt=""
+					src="img/QQ图片20180108163516.png">
+					<p><strong>10.</strong><span>配置类型。选择“一般用途/事务处理”，如图所示，单击下一步</span></p></td>
+			</tr>
+			<tr>
+				<td style="padding-left:30px;padding-top:10px;"><img alt=""
+					src="img/QQ图片20180108163519.png">
+					<p><strong>11.</strong><span>数据库标识符。填入全局数据库名和SID，如图所示，单击下一步</span></p></td>
+			<td style="padding-left:19px;padding-top:10px"><img alt=""
+					src="img/QQ图片20180108163522.png">
+					<p><strong>12.</strong><span>配置选项。切换到“字符集”选项卡，选择“使用Unicode（AL32UTF8）”，如图所示，单击下一步</span></p></td>
+			</tr>
+			<tr>
+				<td style="padding-left:30px;padding-top:10px;"><img alt=""
+					src="img/QQ图片20180108163525.png">
+					<p><strong>13.</strong><span>管理选项。直接单击下一步，如图所示</span></p></td>
+			<td style="padding-left:19px;padding-top:10px"><img alt=""
+					src="img/QQ图片20180108163528.png">
+					<p><strong>14.</strong><span>数据库存储。直接单击下一步，如图所示</span></p></td>
+			</tr>
+			<tr>
+				<td style="padding-left:30px;padding-top:10px;"><img alt=""
+					src="img/QQ图片20180108163530.png">
+					<p><strong>15.</strong><span>备份和恢复。如果需要对数据进行备份，就启用自动备份，这里选择“不启用自动备份”，如图所示，单击下一步</span></p></td>
+			<td style="padding-left:19px;padding-top:10px"><img alt=""
+					src="img/QQ图片20180108163533.png">
+					<p><strong>16.</strong><span>方案口令。为了便于测试，这里使用了相同的密码，实际部署时可根据实际情况自行决定</span></p></td>
+			</tr>
+			<tr>
+				<td style="padding-left:30px;padding-top:10px;"><img alt=""
+					src="img/QQ图片20180108163536.png">
+					<p><strong>17.</strong><span>概要。完成先决条件检查后，单击完成就可以正式开始安装了，如图所示，单击下一步进行安装</span></p></td>
+			<td style="padding-left:19px;padding-top:10px;"><img alt=""
+					src="img/QQ图片20180108163538.png">
+					<p><strong>18.</strong><span>完成。这时安装已完成，单击关闭即可</span></p></td>
+			</tr>
+			<tr>
+				<td style="padding-left:30px;padding-top:10px;"><img alt=""
+					src="img/QQ图片20180108163541.png">
+					<p><strong>19.</strong><span>测试一下。打开Oracle自带的SQL PLUS，如图所示</span></p></td>
+			<td style="padding-left:19px;padding-top:10px"><img alt=""
+					src="img/QQ图片20180108163544.png">
+					<p><strong>20.</strong><span>输入用户名、密码（就是第16步设置的密码），测试成功！可以直接输入SQL语句了！需要注意的是，这里Oracle输入的口令是不显示的</span></p></td>
+			</tr>
+		</table>
+	</div>
+	<script type="text/javascript" src="form_md_list.js"></script>
+</body>
+
+</html>
