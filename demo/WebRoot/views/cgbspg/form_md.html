@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>form_md.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <link rel="stylesheet" href="../../plugins/bootstraptable/dist/bootstrap-table.min.css"/>
+    <link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap.min.css" type="text/css"></link>
+    <link rel="stylesheet" href="../../plugins/fancytree/skin-bootstrap/ui.fancytree.css" type="text/css"></link>
+    <link rel="stylesheet" href="../../plugins/font-awesome/css/font-awesome.css" type="text/css"></link>
+    <link rel="stylesheet" href="../../plugins/layui/css/layui.css" type="text/css"></link>
+    <script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="form_md_list.js"></script>
+  	<script type="text/javascript" src="../../plugins/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../plugins/bootstrap/js/bootstrap-treeview.js"></script>
+	<script type="text/javascript" src="../../plugins/bootstraptable/dist/bootstrap-table.js"></script>
+	<script type="text/javascript" src="../../plugins/layer/layer.js"></script>
+	<script type="text/javascript" src="../../js/jquery.formFill.js"></script>
+	
+	  
+  </head>
+  
+  <body>
+  	<div class="mdatafield" style="overflow:hidden;">
+          <div class="form_form"> 
+            <div class="toolbar">
+                <div class="btn-group " id="btn-group-tz" style="margin-top:5px; padding-left:16px;">
+                   <button type="button" class="btn btn-default"  id="btntable-save"><i class="fa fa-save"></i>&nbsp;保存</button>
+                   <button type="button" class="btn btn-default" id="btntable-chongzhi"><i class="fa fa-search"></i>&nbsp;重置</button>   
+                 </div>
+            </div>
+            <div class="table_input">
+                 <table id="tb_datamodel"></table>
+            </div>
+            <div style="padding:30px 10px; font-size:13px;margin-top:-20px;">
+                <form class="form-horizontal" role="form" id="frmdata" data-table="辨识评估">
+                	<div class="form-group">
+						<label  class="col-sm-2 control-label">报告名称</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" id="名称" name="名称" placeholder="请输入报告名称">
+					    </div>
+					</div>
+                   	<div class="form-group"> 
+                   		<label  class="col-sm-2 control-label">辨识日期</label>
+					    <div class="col-sm-3">
+					      <input type="text" class="form-control" id="单据日期" name="单据日期"/>
+					    </div>
+					    <label  class="col-sm-2 control-label">辨识方法</label>
+					    <div class="col-sm-3">
+					      <input type="text" class="form-control" id="辨识方法" name="辨识方法"/>
+					    </div>
+					    <label  class="col-sm-2 control-label">负责人</label>
+					    <div class="col-sm-3">
+					      <input type="text" class="form-control" id="负责人" name="负责人"/>
+					    </div>
+                   	</div>
+                </form>
+                
+     	</div>        
+		</div>
+      </div>
+  </body>
+  <script type="text/javascript" src="form_add.js"></script>
+</html>
