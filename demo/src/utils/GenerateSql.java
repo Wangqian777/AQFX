@@ -142,11 +142,13 @@ public class GenerateSql {
     			zhuSql+=String.format("delete from %s",json.get(key));
     		}
     		if(key.equalsIgnoreCase("zhubiaoID")){
+    			FID=json.get(key).toString();
     			zhuSql+=String.format(" where ID='%s'",json.get(key));
     			tempList.add(zhuSql);
     			sqlMap.put("zhuSql", tempList);
     		}
     		if(key.equalsIgnoreCase("zibiao")){
+    			tempList=new ArrayList<String>();
     			ziSql=String.format("delete from %s where FID='%S'", json.get(key),FID);
     			tempList.add(ziSql);
     			sqlMap.put("ziSql", tempList);

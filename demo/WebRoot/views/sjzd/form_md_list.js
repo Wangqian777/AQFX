@@ -100,6 +100,14 @@
 		localStorage.sjzdID=localStorage.listID;
 		openFormCard("form_md.html","修改数据字典类别");
 	});
+	$("#delete").click(function(){
+		layer.confirm('确认删除吗？', {  
+	        btn: ['确定','取消'] //按钮  
+	    },function () {
+	    	var json={"zhubiao":"数据字典","zhubiaoID":localStorage.sjzdID,"zibiao":"数据字典_明细"};
+	    	FormAction(json,"D");
+	    });
+	});
 	function openFormCard(url,title) {
 		 layer.open({
 				type:2,
@@ -180,4 +188,21 @@
 	    });  
 		
 	});
+	function FormAction(data,action){
+		 var __str= JSON.stringify(data);
+		 $.ajax({
+				type:"POST",
+				url:"../../manyJson.do",
+				data:{"v_json":__str,"action":action},
+				dataType:"JSON",
+				async:false,
+				success:function(data){
+					if(data.state==1){
+						layer.msg("操作成功");
+					}else{
+						layer.msg("操作失败");
+					}
+				}
+			});
+	 }
 });
