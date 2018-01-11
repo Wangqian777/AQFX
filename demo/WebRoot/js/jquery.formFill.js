@@ -1,4 +1,4 @@
-/**
+<script type="text/javascript" src="../../plugins/bootstrap/js/bootstrap.js"></script>/**
  * jQuery Form Fill - http://makoto.blog.br/formFill
  * --------------------------------------------------------------------------
  *

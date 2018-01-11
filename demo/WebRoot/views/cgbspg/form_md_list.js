@@ -41,37 +41,14 @@
                 field: '辨识日期',
                 title: '辨识日期',
                 valign: 'middle',
-                visible: true,
-                formatter:function(value,row,index){
-                	var date = new Date();
-                	if(value!=null){
-                		date.setTime(value.time);
-                        var y = date.getFullYear();
-                        var m = date.getMonth()+1;
-                        m = m<10?'0'+m:m;
-                        var s = date.getSeconds();
-                        var d = date.getDate();
-                        d = d<10?("0"+d):d;
-                        var h = date.getHours();
-                        h = h<10?("0"+h):h;
-                        var M = date.getMinutes();
-                        M = M<10?("0"+M):M;
-                        var S = date.getSeconds();
-                        S = S<10?("0"+S):s;
-                        var str = y+"-"+m+"-"+d+" "+h+":"+M+":"+S;
-                        return str;
-                	}else{
-                		return "";
-                	}
-                    
-                }
+                visible: true
             } ,{
             	field:'名称',
             	title:'名称',
             	valign: 'middle',
                 visible: true
             },{
-            	field:"辨识类别",
+            	field:"单据类型",
             	title:"辨识类别",
             	valign: 'middle',
                 visible: true
@@ -86,7 +63,7 @@
             	valign: 'middle',
                 visible: true
             },{
-            	file:"辨识方法",
+            	field:"辨识方法",
             	title:"辨识方法",
             	valign: 'middle',
                 visible: true
@@ -105,11 +82,11 @@
 				maxmin:true,
 				shadeClose:true,
 				offset:'auto',
-				area:['800px','500px'],
-				content:[url,'no'],
+				area:['900px', '600px'],
+				content:[url],
 				end: function(){
-					initList();
 					$("#tb_departments").bootstrapTable('refresh'); 
+					
 				}
 			});
 	 }

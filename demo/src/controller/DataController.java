@@ -225,6 +225,7 @@ public class DataController {
 			json = JsonResult.Error();
 			System.out.println(e);
 		}
+		out.print(json.toJson());
 		out.flush();
 		out.close();
 	}

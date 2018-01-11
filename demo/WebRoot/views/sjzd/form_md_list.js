@@ -103,10 +103,11 @@
 	$("#delete").click(function(){
 		layer.confirm('确认删除吗？', {  
 	        btn: ['确定','取消'] //按钮  
-	    },function () {
-	    	var json={"zhubiao":"数据字典","zhubiaoID":localStorage.sjzdID,"zibiao":"数据字典_明细"};
+	    },function (index) {
+	    	layer.close(index);
+	    	var json={"zhubiao":"数据字典","zhubiaoID":localStorage.listID,"zibiao":"数据字典_明细"};
 	    	FormAction(json,"D");
-	    });
+	    });  
 	});
 	function openFormCard(url,title) {
 		 layer.open({
@@ -166,7 +167,8 @@
 		}
 		layer.confirm('确认删除吗？', {  
 	        btn: ['确定','取消'] //按钮  
-	    },function () {  
+	    },function (index) {
+	    	layer.close(index);
 	    	localStorage.sjzdmxID=dataArray[0].ID;
 			var json={"zhubiao":"数据字典_明细","zhubiaoID":localStorage.sjzdmxID,};
 	        var __str= JSON.stringify(json);
@@ -177,6 +179,7 @@
 					dataType:"JSON",
 					async:false,
 					success:function(data){
+						
 						if(data.state==1){
 							layer.msg("操作成功");
 							$("#tb_departments").bootstrapTable('refresh');
@@ -199,6 +202,8 @@
 				success:function(data){
 					if(data.state==1){
 						layer.msg("操作成功");
+						initList();
+						$("#tb_departments").bootstrapTable('refresh'); 
 					}else{
 						layer.msg("操作失败");
 					}
