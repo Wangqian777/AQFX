@@ -149,7 +149,7 @@ public class GenerateSql {
     		}
     		if(key.equalsIgnoreCase("zibiao")){
     			tempList=new ArrayList<String>();
-    			ziSql=String.format("delete from %s where FID='%S'", json.get(key),FID);
+    			ziSql=String.format("delete from %s where FID='%s'", json.get(key),FID);
     			tempList.add(ziSql);
     			sqlMap.put("ziSql", tempList);
     		}
