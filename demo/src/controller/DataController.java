@@ -231,19 +231,17 @@ public class DataController {
 	}
 	// 查询列表数据
 	@RequestMapping("getPageData.do")
-	public List<String> getPageData(String table, String params, HttpServletResponse respone) throws IOException {
+	public void getPageData(String table, String params, HttpServletResponse respone) throws IOException {
 		respone.setContentType("text/html;charset=utf-8");
+		PrintWriter out = respone.getWriter();
 		if (table != null) {
-			PrintWriter out = respone.getWriter();
 			PageResult pageData = dataService.getPageData(table,params);
 			out.print(pageData.toJson());
 			out.flush();
 			out.close();
 		}
-		return null;
-		
 	}
-	@ResponseBody
+	
 	public void setDataService(DataService dataService) {
 		this.dataService = dataService;
 	}

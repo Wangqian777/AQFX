@@ -3,7 +3,7 @@ $(function(){
         format: 'YYYY-MM-DD',  
         locale: moment.locale('zh-cn')  
     });
-	if(localStorage.FormMode=="Edit"){
+	if(localStorage.FormMode=="Edit" || localStorage.FormMode=="View"){
 		var json = { "ID": localStorage.cgbsId,"单据类型":"常规辨识评估"};
 		var __str= JSON.stringify(json);
 		$.ajax({
@@ -16,7 +16,9 @@ $(function(){
 				$("#id").val(data[0].ID);
 			}
 		});
-		
+		if(localStorage.FormMode=="View"){
+			$('input,select,textarea',$('#frmdata')).prop('readonly',true); 
+		}
 	}
 	
 	

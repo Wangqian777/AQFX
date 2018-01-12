@@ -9,7 +9,7 @@
         return temp;
     };
 	function TableInit() {
-		$('#tb_departments').bootstrapTable({
+		$('#table').bootstrapTable({
             url: '../../getDatadictionary_mx.do',         //请求后台的URL（*）
             method: 'get',                      //请求方式（*）
             striped: true,                      //是否显示行间隔色

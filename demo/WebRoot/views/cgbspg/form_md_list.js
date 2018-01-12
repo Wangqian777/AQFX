@@ -1,22 +1,25 @@
 $(function(){
 	dbQueryParams = function (params) {
+
+		params.单据类型="常规辨识评估";
         var temp = {
-            "v_json": "{\"单据类型\":\"常规辨识评估\"}",
-            'params' : JSON.stringify(params)
+            'params' : JSON.stringify(params),
+            'table':'辨识评估'
         };
         return temp;
     };
 	function TableInit() {
 		$('#tb_departments').bootstrapTable({
-            url: '../../getIdentificationList.do',         //请求后台的URL（*）
+            url: '../../getPageData.do',         //请求后台的URL（*）
             method: 'get',                      //请求方式（*）
             striped: true,                      //是否显示行间隔色
             cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
             pagination: true,                   //是否显示分页（*）
             sortable: false,                     //是否启用排序
             sortOrder: "asc",                   //排序方式
+            queryParamsType : "a",
             queryParams: dbQueryParams,			//传递参数（*）
-            sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
+            sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
             pageNumber:1,                       //初始化加载第一页，默认第一页
             pageSize: 10,                       //每页的记录行数（*）
             pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
@@ -100,6 +103,16 @@ $(function(){
 	    	var json={"zhubiao":"辨识评估","zhubiaoID":localStorage.cgbsId};
 	    	FormAction(json,"D");
 	    }); 
+	});
+	$("#btntable-search").click(function(){
+		var dataArray= $("#tb_departments").bootstrapTable('getSelections');
+		if(dataArray.length==0){
+			layer.msg("请选择数据行！");
+			return;
+		}
+		localStorage.cgbsId=dataArray[0].ID;
+		localStorage.FormMode="View";
+		openFormCard("form_md.html","查看常规辨识评估");
 	});
 	function openFormCard(url,title) {
 		 layer.open({
