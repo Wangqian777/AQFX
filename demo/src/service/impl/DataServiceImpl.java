@@ -25,7 +25,7 @@ public class DataServiceImpl implements DataService {
 		String sql = "";
 		String where = "";
 		Integer begin = 0, end = 0;
-		Integer total = dataDao.getDataTotal(table);
+		Integer total=0;
 		if (params != null) {
 			JSONObject json = JSONObject.fromObject(params);
 			Integer pageSize = json.getInt("pageSize");
@@ -38,7 +38,8 @@ public class DataServiceImpl implements DataService {
 					where += String.format(" and %s='%s'", key, value.toString());
 				}
 			}
-
+			sql=String.format("select count(1) from %s where 1=1 %s", table,where);
+			total = dataDao.getDataTotal(sql);
 			if (null == pageNumber || pageNumber < 1) {
 				pageNumber = 1;
 			}
@@ -48,7 +49,7 @@ public class DataServiceImpl implements DataService {
 			begin = (pageNumber - 1) * pageSize;
 			end = pageNumber * pageSize;
 		}
-
+		
 		sql = String.format(
 				"SELECT * FROM (SELECT ROWNUM RN,A.* FROM (SELECT * FROM %s where 1=1 %s) A WHERE ROWNUM <= %d)  WHERE RN >= %d",
 				table, where, end, begin);

@@ -1,12 +1,33 @@
-
-﻿$(function(){
+$(function(){
+	$('#date').datetimepicker({  
+        format: 'YYYY-MM-DD',  
+        locale: moment.locale('zh-cn')  
+    });
+	if(localStorage.FormMode=="Edit"){
+		var json = { "ID": localStorage.cgbsId,"单据类型":"常规辨识评估"};
+		var __str= JSON.stringify(json);
+		$.ajax({
+			url:"../../getIdentificationList.do",
+			type:"POST",
+			data:{"v_json":__str},
+			dataType:"JSON",
+			success:function(data){
+				$("#frmdata").fill(data[0], { styleElementName: 'none' });
+				$("#id").val(data[0].ID);
+			}
+		});
+		
+	}
+	
+	
+	
 	$("#btntable-save").click(function(){
 		var json = {};
 		var action="";
 		var data;
 		if(localStorage.FormMode=="Add"){
 			action="C";
-		}else{
+		}else if(localStorage.FormMode=="Edit"){
 	        action="M";
 		}
 		data = $("#frmdata").serializeObject();

@@ -30,8 +30,6 @@ public class IdentificationController {
 	public void getIdentificationList(String v_json,HttpServletResponse response) throws IOException{
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out=response.getWriter();
-		if(v_json!=null)
-			v_json=new String(v_json.getBytes("ISO8859-1"),"UTF-8");
 		String sql="select * from 辨识评估 where 1=1 ";
 		if (v_json != null) {
 			JSONObject json = JSONObject.fromObject(v_json);

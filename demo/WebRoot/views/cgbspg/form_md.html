@@ -13,15 +13,16 @@
     <link rel="stylesheet" href="../../plugins/fancytree/skin-bootstrap/ui.fancytree.css" type="text/css"></link>
     <link rel="stylesheet" href="../../plugins/font-awesome/css/font-awesome.css" type="text/css"></link>
     <link rel="stylesheet" href="../../plugins/layui/css/layui.css" type="text/css"></link>
+    <link rel="stylesheet" href="../../plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" type="text/css"></link>
     <script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
-	<script type="text/javascript" src="form_md_list.js"></script>
   	<script type="text/javascript" src="../../plugins/bootstrap/js/bootstrap.js"></script>
     <script type="text/javascript" src="../../plugins/bootstrap/js/bootstrap-treeview.js"></script>
 	<script type="text/javascript" src="../../plugins/bootstraptable/dist/bootstrap-table.js"></script>
 	<script type="text/javascript" src="../../plugins/layer/layer.js"></script>
 	<script type="text/javascript" src="../../js/jquery.formFill.js"></script>
 	<script type="text/javascript" src="../../plugins/bootstrap/js/bootstrap.js"></script>
-	<script type="text/javascript" src="../../plugins/bootstrap-datetimepicker/"></script>
+	<script type="text/javascript" src="../../plugins/bootstrap-datetimepicker/js/moment-with-locales.min.js"></script>
+	<script type="text/javascript" src="../../plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
   </head>
   
   <body>
@@ -50,15 +51,20 @@
 					      <input type="text" class="form-control" id="负责人" name="负责人"/>
 					    </div>
 					</div>
-                   	<div class="form-group"> 
-                   		<label  class="col-sm-2 col-md-2 control-label">辨识日期</label>
-					    <div class="col-sm-4 col-md-4">
-					      <input type="text" class="form-control" id="辨识日期" name="辨识日期"/>
-					    </div>
-					    <label  class="col-sm-2 col-md-2 control-label">辨识方法</label>
+                   	<div class="form-group">
+                   		<label  class="col-sm-2 col-md-2 control-label">辨识方法</label>
 					    <div class="col-sm-4 col-md-4">
 					      <input type="text" class="form-control" id="辨识方法" name="辨识方法"/>
+					      
 					    </div>
+                   		<label class="col-sm-2 col-md-2 control-label" style="margin-left:14px;">辨识日期</label>  
+			            <div class='col-sm-3 col-md-3 input-group date' id='date'>  
+			                <input type='text' class="form-control" id="辨识日期" name='辨识日期'/>  
+			                <span class="input-group-addon">  
+			                    <span class="glyphicon glyphicon-calendar"></span>  
+			                </span> 
+			            </div>  
+					    
 					</div>
 					
 					<div class="form-group">
