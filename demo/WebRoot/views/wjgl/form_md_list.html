@@ -2,49 +2,25 @@
 <html>
 
 <head>
-<title>form_md_list.html</title>
-
-<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-<meta http-equiv="description" content="this is my page">
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-
-<!-- Icons -->
-<link rel="stylesheet"
-	href="../../plugins/bootstraptable/dist/bootstrap-table.min.css" />
-<link rel="stylesheet"
-	href="../../plugins/bootstrap/css/bootstrap.min.css" type="text/css"></link>
-<link rel="stylesheet"
-	href="../../plugins/fancytree/skin-bootstrap/ui.fancytree.css"
-	type="text/css"></link>
-<link rel="stylesheet"
-	href="../../plugins/font-awesome/css/font-awesome.css" type="text/css"></link>
-<link rel="stylesheet" href="../../plugins/layui/css/layui.css"
-	type="text/css"></link>
-<link rel="stylesheet"
-	href="../../plugins/bootstrap3-editable/css/bootstrap-editable.css"
-	type="text/css"></link>
-<link rel="stylesheet"
-	href="../../plugins/bootstrap/css/bootstrap-treeview.min.css"
-	type="text/css"></link>
+<meta charset="utf-8" />
+<title>法规文件</title>
+<link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap.css" type="text/css" />
+<link rel="stylesheet" href="../../plugins/fancytree/skin-bootstrap/ui.fancytree.css" type="text/css"></link>
+<link rel="stylesheet" href="../../plugins/bootstraptable/dist/bootstrap-table.css" type="text/css"></link>
+<link rel="stylesheet" href="../../plugins/font-awesome/css/font-awesome.css" type="text/css"></link>
+<link rel="stylesheet" href="../../plugins/layui/css/layui.css" type="text/css"></link>
 <script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
-<script type="text/javascript"
-	src="../../plugins/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript"
-	src="../../plugins/bootstrap/js/bootstrap-treeview.min.js"></script>
-<script type="text/javascript"
-	src="../../plugins/bootstrap3-editable/js/bootstrap-editable.js"></script>
-<script type="text/javascript"
-	src="../../plugins/bootstraptable/dist/bootstrap-table.js"></script>
+<script type="text/javascript" src="../../plugins/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="../../plugins/bootstrap/js/bootstrap-treeview.js"></script>
+<script type="text/javascript" src="../../plugins/bootstraptable/dist/bootstrap-table.js"></script>
 <script type="text/javascript" src="../../plugins/layer/layer.js"></script>
 <script type="text/javascript" src="../../js/jquery.formFill.js"></script>
-<script type="text/javascript"
-	src="../../plugins/bootstraptable/dist/extensions/editable/bootstrap-table-editable.js"></script>
-<script type="text/javascript"
-	src="../../plugins/bootstraptable/dist/locale/bootstrap-table-zh-CN.js"></script>
+<script type="text/javascript" src="../../plugins/bootstraptable/dist/locale/bootstrap-table-zh-CN.js"></script>
+
 <style>
 </style>
 <body>
-	<div id="container" style="margin: 10px">
+	<div id="container" style="padding: 10px">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h4 class="panel-title">查询条件</h4>
@@ -60,46 +36,40 @@
 						</select>
 					</div>
 					<div class="form-group">
-						<input name="search" class="form-control" type="text"
-							placeholder="关键字">
+						<input name="search" class="form-control" type="text" placeholder="关键字">
 					</div>
-					<button id="btntable-search" class="btn btn-primary"><i class="fa fa-search"></i>&nbsp;查询</button>
+					<button id="btntable-search" class="btn btn-primary">
+						<i class="fa fa-search"></i>&nbsp;查询
+					</button>
 				</div>
 			</div>
 		</div>
 		<div id="toolbar">
-            <div class="btn-group">
-                <button type="button" class="btn btn-default" id="btntable-add"><i class="fa fa-plus"></i>&nbsp;新增</button>
-                <button type="button" class="btn btn-default" id="btntable-edit"><i class="fa fa-pencil-square-o"></i>&nbsp;编辑</button>
-                <button type="button" class="btn btn-default" id="btntable-import"><i class="fa fa-pencil-square-o"></i>&nbsp;导入</button>
-                <button type="button" class="btn btn-default" id="btntable-delete"><i class="fa fa-trash-o"></i>&nbsp;删除</button>
-                <button type="button" class="btn btn-default" id="btntable-refresh"><i class="fa fa-refresh"></i>&nbsp;刷新</button>
-                <button type="button" class="btn btn-default" id="btntable-go" style="display:none;"><i class="fa fa-check-circle-o"></i>&nbsp;提交</button>
-                <button type="button" class="btn btn-default" id="btntable-back" style="display:none;"><i class="fa fa-close"></i>&nbsp;退回</button>
-                <button type="button" class="btn btn-default" id="btntable-search"><i class="fa fa-search"></i>&nbsp;查询</button>
-            </div>
-        </div>
-		<div id="tablecontainer"
-			style="padding: 1px 1px; font-size: 13px; margin-top: -20px; overflow: auto;">
-			<table id="tb_datamodel" data-table="文件管理"></table>
+			<div class="btn-group">
+				<button type="button" class="btn btn-default" id="btntable-add">
+					<i class="fa fa-plus"></i>&nbsp;新增
+				</button>
+				<button type="button" class="btn btn-default" id="btntable-import">
+					<i class="fa fa-pencil-square-o"></i>&nbsp;导入
+				</button>
+				<button type="button" class="btn btn-default" id="btntable-view">
+					<i class="fa fa fa-table"></i>&nbsp;查看
+				</button>
+				<button type="button" class="btn btn-default" id="btntable-edit">
+					<i class="fa fa-pencil-square-o"></i>&nbsp;编辑
+				</button>
+				<button type="button" class="btn btn-default" id="btntable-delete">
+					<i class="fa fa-trash-o"></i>&nbsp;删除
+				</button>
+				<button type="button" class="btn btn-default" id="btntable-refresh">
+					<i class="fa fa-refresh"></i>&nbsp;刷新
+				</button>
+			</div>
+		</div>
+		<div id="tablecontainer" style="font-size: 13px; margin-top: -20px; overflow: auto;">
+			<table id="table" data-table="法规文件"></table>
 		</div>
 	</div>
-	<!-- <div class="btn-group " style="margin-top:5px; padding-left:2px;">
-                <button type="button" class="btn btn-default" id="btntable-add"><i class="fa fa-plus"></i>&nbsp;新增</button>
-                <button type="button" class="btn btn-default" id="btntable-edit"><i class="fa fa-pencil-square-o"></i>&nbsp;编辑</button>
-                <button type="button" class="btn btn-default" id="btntable-import"><i class="fa fa-pencil-square-o"></i>&nbsp;导入</button>
-                <button type="button" class="btn btn-default" id="btntable-delete"><i class="fa fa-trash-o"></i>&nbsp;删除</button>
-                <button type="button" class="btn btn-default" id="btntable-refresh"><i class="fa fa-refresh"></i>&nbsp;刷新</button>
-                <button type="button" class="btn btn-default" id="btntable-go" style="display:none;"><i class="fa fa-check-circle-o"></i>&nbsp;提交</button>
-                <button type="button" class="btn btn-default" id="btntable-back" style="display:none;"><i class="fa fa-close"></i>&nbsp;退回</button>
-                <button type="button" class="btn btn-default" id="btntable-search"><i class="fa fa-search"></i>&nbsp;查询</button>
-            </div> -->
-	<script>
-		$(document).ready(function() {
-			//加var btColumnsConfig 另一个文件访问不到
-
-		});
-	</script>
 	<script src="form_md_list.js"></script>
 </body>
 
