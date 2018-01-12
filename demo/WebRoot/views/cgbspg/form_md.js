@@ -1,3 +1,4 @@
+
 ﻿$(function(){
 	$("#btntable-save").click(function(){
 		var json = {};
@@ -32,4 +33,5 @@
 			}
 		});
 	}
+﻿
 });

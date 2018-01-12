@@ -1,4 +1,4 @@
-﻿$(function(){
+$(function(){
 	dbQueryParams = function (params) {
         var temp = {
             "v_json": "{\"单据类型\":\"常规辨识评估\"}",
@@ -91,3 +91,4 @@
 			});
 	 }
 });
+	
