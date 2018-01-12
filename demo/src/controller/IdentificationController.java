@@ -26,8 +26,8 @@ public class IdentificationController {
 	private GenerateSql generateSql = new GenerateSql();
 	private List<LinkedHashMap<String, Object>> mapList = new ArrayList<LinkedHashMap<String, Object>>();
 	//获取辨识单据列表
-	@RequestMapping("getIdentificationList.do")
-	public void getIdentificationList(String v_json,HttpServletResponse response) throws IOException{
+	@RequestMapping("getIdentification.do")
+	public void getIdentification(String v_json,HttpServletResponse response) throws IOException{
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out=response.getWriter();
 		String sql="select * from 辨识评估 where 1=1 ";

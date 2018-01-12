@@ -34,7 +34,7 @@ public class DataServiceImpl implements DataService {
 			while (it.hasNext()) {
 				String key = (String) it.next();
 				String value = json.get(key).toString();
-				if ("pageSize|pageNumber|searchText|sortName|sortOrder".indexOf(value) > -1) {
+				if ("pageSize|pageNumber|searchText|sortName|sortOrder".indexOf(key) == -1) {
 					where += String.format(" and %s='%s'", key, value.toString());
 				}
 			}
