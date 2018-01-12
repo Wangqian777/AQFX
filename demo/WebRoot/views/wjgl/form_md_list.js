@@ -1,55 +1,5 @@
 ﻿$(function() {
-	// 高度修复
-	/*
-	 * window.onresize = function() { var _height = $(window).height();
-	 * $('#container').height(_height - 10); $('#tablecontainer').height(_height -
-	 * 60); $('#tb_datamodel td:eq(0)').width('20px'); }
-	 */
-	// 打开卡片窗体
-	function openFormCard(billId, mode) {
-		// var apidata = "{\"json\":[\"" + billId + "\",\"" + "" + "\"]}";
-		var index = top.window.layer.open({
-			type : 2,
-			title : '<span style="font-size:14px;font-weight: bold;">月度计划填报 - '
-					+ mode + '<span>',
-			closeBtn : 1,
-			shadeClose : false, // 单击遮罩能否关闭
-			maxmin : true, // 开启最大化最小化按钮
-			area : [ '860px', '500px' ],
-			content : '/YMJYGL/views/ydjhtb/form_md.html',
-			// offset: [38, e.clientX - 245]
-			cancel : function(index, layero) {
-				top.window.layer.close(index);
-				// alert("cancel")
-				return false;
-			},
-			// close: function (index) {
-			// alert("close")
-			// },
-			end : function() {
-				// alert("end")
-				// http://layer.layui.com/1.8.5/api.html
-				$('#tb_datamodel').bootstrapTable('refresh'); // 不刷新
-				btTableInit();
-				top.window.layer.close(index);
-				return false;
-			}
-		});
-
-		localStorage.layerindex = index; // 用于关闭层
-	}
-	// ---------------------------------------
-	// 请求参数
-	dbQueryParams = function(params) {
-		let json = {
-			'table' : $("#tb_datamodel").data("table"),
-			'params' : JSON.stringify(params)
-		};
-		return json;
-	};
-
 	// 初始化Table
-
 	btTableInit = function() {
 		$('#tb_datamodel').bootstrapTable({
 			url : '../../getPageData.do', // 请求后台的URL（*）
@@ -60,23 +10,19 @@
 			pagination : true, // 是否显示分页（*）
 			sortable : true, // 是否启用排序
 			sortOrder : "asc", // 排序方式
+			//sortName:"",
 			queryParamsType : "a",
 			queryParams : dbQueryParams, // 传递参数（*）
 			sidePagination : "server", // 分页方式：client客户端分页，server服务端分页（*）
-			pageNumber : 1, // 初始化加载第一页，默认第一页
 			pageSize : 10, // 每页的记录行数（*）
-			pageList : [ 10, 25, 50, 100 ], // 可供选择的每页的行数（*）
 			clickToSelect : true, // 是否启用点击选中行
 			// height: 500, //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
 			uniqueId : "ID", // 每一行的唯一标识，一般为主键列
-			cardView : false, // 是否显示详细视图
-			detailView : false, // 是否显示父子表
 			responseHandler : function(data) {
 				return data;
 			},
 
 			onDblClickRow : function(item, $element) {
-
 				localStorage.FormMode = "View";
 				localStorage.BillId = item["ID"];
 
@@ -119,7 +65,51 @@
 			} ],
 		});
 	};
+	// 请求参数
+	dbQueryParams = function(params) {
+		let json = {
+			'table' : $("#tb_datamodel").data("table"),
+			'params' : JSON.stringify(params)
+		};
+		return json;
+	};
 	btTableInit();
+	
+	// 打开卡片窗体
+	function openFormCard(billId, mode) {
+		// var apidata = "{\"json\":[\"" + billId + "\",\"" + "" + "\"]}";
+		var index = top.window.layer.open({
+			type : 2,
+			title : '<span style="font-size:14px;font-weight: bold;">月度计划填报 - '
+					+ mode + '<span>',
+			closeBtn : 1,
+			shadeClose : false, // 单击遮罩能否关闭
+			maxmin : true, // 开启最大化最小化按钮
+			area : [ '860px', '500px' ],
+			content : '/YMJYGL/views/ydjhtb/form_md.html',
+			// offset: [38, e.clientX - 245]
+			cancel : function(index, layero) {
+				top.window.layer.close(index);
+				// alert("cancel")
+				return false;
+			},
+			// close: function (index) {
+			// alert("close")
+			// },
+			end : function() {
+				// alert("end")
+				// http://layer.layui.com/1.8.5/api.html
+				$('#tb_datamodel').bootstrapTable('refresh'); // 不刷新
+				btTableInit();
+				top.window.layer.close(index);
+				return false;
+			}
+		});
+
+		localStorage.layerindex = index; // 用于关闭层
+	}
+	// ---------------------------------------
+	
 	// bootstrap table
 	var mid = localStorage.mid;
 
