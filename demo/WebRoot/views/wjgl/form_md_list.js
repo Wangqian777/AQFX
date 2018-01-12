@@ -74,7 +74,41 @@
 		return json;
 	};
 	btTableInit();
+	
+	// 打开卡片窗体
+	function openFormCard(billId, mode) {
+		// var apidata = "{\"json\":[\"" + billId + "\",\"" + "" + "\"]}";
+		var index = top.window.layer.open({
+			type : 2,
+			title : '<span style="font-size:14px;font-weight: bold;">月度计划填报 - '
+					+ mode + '<span>',
+			closeBtn : 1,
+			shadeClose : false, // 单击遮罩能否关闭
+			maxmin : true, // 开启最大化最小化按钮
+			area : [ '860px', '500px' ],
+			content : '/YMJYGL/views/ydjhtb/form_md.html',
+			// offset: [38, e.clientX - 245]
+			cancel : function(index, layero) {
+				top.window.layer.close(index);
+				// alert("cancel")
+				return false;
+			},
+			// close: function (index) {
+			// alert("close")
+			// },
+			end : function() {
+				// alert("end")
+				// http://layer.layui.com/1.8.5/api.html
+				$('#tb_datamodel').bootstrapTable('refresh'); // 不刷新
+				btTableInit();
+				top.window.layer.close(index);
+				return false;
+			}
+		});
 
+		localStorage.layerindex = index; // 用于关闭层
+	}
+	
 	// 新增
 	$("#btntable-add").click(function() {
 		localStorage.FormMode = "Add";
