@@ -20,8 +20,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sun.javafx.binding.StringFormatter;
-
 import service.DataService;
 import utils.GenerateSql;
 import utils.JsonResult;
@@ -182,7 +180,55 @@ public class DataController {
 		out.flush();
 		out.close();
 	}
-
+	//主子表json处理
+	@RequestMapping("manyJson.do")
+	public void manyJson(String v_json,String action,HttpServletResponse response) throws IOException{
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out=response.getWriter();
+		List<String> sql = new ArrayList<String>();
+		Map<String, List> sqlMap = new HashMap<String, List>();
+		JsonResult json;
+		try {
+			if (action.equals("C")) {
+				sqlMap = generateSql.generateInsertSql(v_json);
+				sql = sqlMap.get("zhuSql");
+				for (String s : sql) {
+					dataService.insertData(s);
+				}
+				sql=sqlMap.get("ziSql");
+				for (String s : sql) {
+					dataService.insertData(s);
+				}
+			} else if (action.equals("M")) {
+				sqlMap = generateSql.generateUpdateSql(v_json);
+				sql = sqlMap.get("zhuSql");
+				for (String s : sql) {
+					dataService.updateData(s);
+				}
+				sql=sqlMap.get("ziSql");
+				for (String s : sql) {
+					dataService.updateData(s);
+				}
+			} else if (action.equals("D")) {
+				sqlMap = generateSql.generateDeleteSql(v_json);
+				sql = sqlMap.get("zhuSql");
+				for (String s : sql) {
+					dataService.deleteData(s);
+				}
+				sql=sqlMap.get("ziSql");
+				for (String s : sql) {
+					dataService.deleteData(s);
+				}
+			}
+			json = JsonResult.Success();
+		} catch (Exception e) {
+			json = JsonResult.Error();
+			System.out.println(e);
+		}
+		out.print(json.toJson());
+		out.flush();
+		out.close();
+	}
 	// 查询列表数据
 	@RequestMapping("getPageData.do")
 	public List<String> getPageData(String table, String params, HttpServletResponse respone) throws IOException {

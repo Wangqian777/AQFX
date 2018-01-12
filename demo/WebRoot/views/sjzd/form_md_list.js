@@ -48,21 +48,26 @@
                 title: '创建时间',
                 formatter:function(value,row,index){
                 	var date = new Date();
-                    date.setTime(value.time);
-                    var y = date.getFullYear();
-                    var m = date.getMonth()+1;
-                    m = m<10?'0'+m:m;
-                    var s = date.getSeconds();
-                    var d = date.getDate();
-                    d = d<10?("0"+d):d;
-                    var h = date.getHours();
-                    h = h<10?("0"+h):h;
-                    var M = date.getMinutes();
-                    M = M<10?("0"+M):M;
-                    var S = date.getSeconds();
-                    S = S<10?("0"+S):s;
-                    var str = y+"-"+m+"-"+d+" "+h+":"+M+":"+S;
-                    return str;
+                	if(value!=null){
+                		date.setTime(value.time);
+                        var y = date.getFullYear();
+                        var m = date.getMonth()+1;
+                        m = m<10?'0'+m:m;
+                        var s = date.getSeconds();
+                        var d = date.getDate();
+                        d = d<10?("0"+d):d;
+                        var h = date.getHours();
+                        h = h<10?("0"+h):h;
+                        var M = date.getMinutes();
+                        M = M<10?("0"+M):M;
+                        var S = date.getSeconds();
+                        S = S<10?("0"+S):s;
+                        var str = y+"-"+m+"-"+d+" "+h+":"+M+":"+S;
+                        return str;
+                	}else{
+                		return "";
+                	}
+                    
                 }
             } ,{
             	field:'是否禁用',
@@ -94,6 +99,15 @@
 		localStorage.FormMode="Edit";
 		localStorage.sjzdID=localStorage.listID;
 		openFormCard("form_md.html","修改数据字典类别");
+	});
+	$("#delete").click(function(){
+		layer.confirm('确认删除吗？', {  
+	        btn: ['确定','取消'] //按钮  
+	    },function (index) {
+	    	layer.close(index);
+	    	var json={"zhubiao":"数据字典","zhubiaoID":localStorage.listID,"zibiao":"数据字典_明细"};
+	    	FormAction(json,"D");
+	    });  
 	});
 	function openFormCard(url,title) {
 		 layer.open({
@@ -151,23 +165,49 @@
 			layer.msg("请选择数据行！");
 			return;
 		}
-		localStorage.sjzdmxID=dataArray[0].ID;
-		var json={"zhubiao":"数据字典_明细","zhubiaoID":localStorage.sjzdmxID,};
-        var __str= JSON.stringify(json);
+		layer.confirm('确认删除吗？', {  
+	        btn: ['确定','取消'] //按钮  
+	    },function (index) {
+	    	layer.close(index);
+	    	localStorage.sjzdmxID=dataArray[0].ID;
+			var json={"zhubiao":"数据字典_明细","zhubiaoID":localStorage.sjzdmxID,};
+	        var __str= JSON.stringify(json);
+			 $.ajax({
+					type:"POST",
+					url:"../../SingleJson.do",
+					data:{"v_json":__str,"action":"D"},
+					dataType:"JSON",
+					async:false,
+					success:function(data){
+						
+						if(data.state==1){
+							layer.msg("操作成功");
+							$("#tb_departments").bootstrapTable('refresh');
+						}else{
+							layer.msg("操作失败");
+						}
+					}
+			});
+	    });  
+		
+	});
+	function FormAction(data,action){
+		 var __str= JSON.stringify(data);
 		 $.ajax({
 				type:"POST",
-				url:"../../SingleJson.do",
-				data:{"v_json":__str,"action":"D"},
+				url:"../../manyJson.do",
+				data:{"v_json":__str,"action":action},
 				dataType:"JSON",
 				async:false,
 				success:function(data){
 					if(data.state==1){
 						layer.msg("操作成功");
-						$("#tb_departments").bootstrapTable('refresh');
+						initList();
+						$("#tb_departments").bootstrapTable('refresh'); 
 					}else{
 						layer.msg("操作失败");
 					}
 				}
-		});
-	});
+			});
+	 }
 });
