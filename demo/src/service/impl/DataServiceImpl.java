@@ -51,7 +51,7 @@ public class DataServiceImpl implements DataService {
 		}
 		
 		sql = String.format(
-				"SELECT * FROM (SELECT ROWNUM RN,A.* FROM (SELECT * FROM %s where 1=1 %s) A WHERE ROWNUM <= %d)  WHERE RN >= %d",
+				"SELECT * FROM (SELECT ROWNUM RN,A.* FROM (SELECT * FROM %s where 1=1 %s) A WHERE ROWNUM <= %d)  WHERE RN > %d",
 				table, where, end, begin);
 
 		List<LinkedHashMap<String, Object>> data = dataDao.getData(sql);

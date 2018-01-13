@@ -40,7 +40,7 @@
             <div style="padding:30px 10px; font-size:13px;margin-top:-20px;">
                 <form class="form-horizontal" role="form" id="frmdata" data-table="辨识评估">
                 	<input type="hidden" id="id" name="id"/>
-                	<input type="hidden" id="单据类型" name='单据类型' value="常规辨识评估">
+                	<input type="hidden" id="单据类型" name='单据类型' value="专项辨识评估">
                 	<div class="form-group">
 						<label  class="col-sm-2 col-md-2 control-label">报告名称</label>
 					    <div class="col-sm-4 col-md-4">
@@ -55,7 +55,6 @@
                    		<label  class="col-sm-2 col-md-2 control-label">辨识方法</label>
 					    <div class="col-sm-4 col-md-4">
 					      <input type="text" class="form-control" id="辨识方法" name="辨识方法"/>
-					      
 					    </div>
                    		<label class="col-sm-2 col-md-2 control-label" style="margin-left:14px;">辨识日期</label>  
 			            <div class='col-sm-3 col-md-3 input-group date' id='date'>  
@@ -64,9 +63,18 @@
 			                    <span class="glyphicon glyphicon-calendar"></span>  
 			                </span> 
 			            </div>  
-					    
 					</div>
-					
+					<div class="form-group">
+						<label  class="col-sm-2 col-md-2 control-label">辨识类别</label>
+						<div class="col-sm-4 col-md-4">
+					      <select class="form-control" id="详细类别" name="详细类别">
+							<option value="在采区采面设计前专项辨识">在采区采面设计前专项辨识</option>
+							<option value="在系统工艺等重大变化前专项辨识">在系统工艺等重大变化前专项辨识</option>
+							<option value="在启封火区等高危作业前专项辨识">在启封火区等高危作业前专项辨识</option>
+							<option value="在出现事故和重大隐患后专项辨识">在出现事故和重大隐患后专项辨识</option>
+							</select>
+					    </div>
+					</div>
 					<div class="form-group">
 					    <label class="col-sm-2 col-md-2 control-label">参加人</label>
 					    <div class="col-sm-10 col-md-10">

@@ -9,7 +9,7 @@
         return temp;
     };
 	function TableInit() {
-		$('#table').bootstrapTable({
+		$('#tabel').bootstrapTable({
             url: '../../getDatadictionary_mx.do',         //请求后台的URL（*）
             method: 'get',                      //请求方式（*）
             striped: true,                      //是否显示行间隔色
@@ -88,7 +88,7 @@
 		$(this).css({"background-color":"#428BCA","color":"#FFFFFF"});
 		$(this).siblings().css({"background-color":"#FFFFFF","color":"#333333"});
 		localStorage.listID=$(this).attr("name");
-		$("#tb_departments").bootstrapTable('refresh'); 
+		$("#tabel").bootstrapTable('refresh'); 
 	});
 	$("#add").on('click',function(){
 		localStorage.FormMode="Add";
@@ -120,7 +120,7 @@
 				content:[url,'no'],
 				end: function(){
 					initList();
-					$("#tb_departments").bootstrapTable('refresh'); 
+					$("#tabel").bootstrapTable('refresh'); 
 				}
 			});
 	 }
@@ -150,7 +150,7 @@
 		openFormCard("form_add.html","新增数据字典明细");
 	});
 	$("#编辑").click(function(){
-		var dataArray= $("#tb_departments").bootstrapTable('getSelections');
+		var dataArray= $("#tabel").bootstrapTable('getSelections');
 		if(dataArray.length==0){
 			layer.msg("请选择数据行！");
 			return;
@@ -160,7 +160,7 @@
 		openFormCard("form_add.html","新增数据字典明细");
 	});
 	$("#删除").click(function(){
-		var dataArray= $("#tb_departments").bootstrapTable('getSelections');
+		var dataArray= $("#tabel").bootstrapTable('getSelections');
 		if(dataArray.length==0){
 			layer.msg("请选择数据行！");
 			return;
@@ -182,7 +182,7 @@
 						
 						if(data.state==1){
 							layer.msg("操作成功");
-							$("#tb_departments").bootstrapTable('refresh');
+							$("#tabel").bootstrapTable('refresh');
 						}else{
 							layer.msg("操作失败");
 						}
@@ -203,7 +203,7 @@
 					if(data.state==1){
 						layer.msg("操作成功");
 						initList();
-						$("#tb_departments").bootstrapTable('refresh'); 
+						$("#tabel").bootstrapTable('refresh'); 
 					}else{
 						layer.msg("操作失败");
 					}

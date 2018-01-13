@@ -1,7 +1,7 @@
 $(function(){
 	dbQueryParams = function (params) {
 
-		params.单据类型="常规辨识评估";
+		params.单据类型="年度辨识评估";
         var temp = {
             'params' : JSON.stringify(params),
             'table':'辨识评估'
@@ -77,7 +77,7 @@ $(function(){
 	TableInit();
 	$("#btntable-add").click(function(){
 		localStorage.FormMode="Add";
-		openFormCard("form_md.html","新增常规辨识评估");
+		openFormCard("form_md.html","新增年度辨识评估");
 	});
 	$("#btntable-edit").click(function(){
 		var dataArray= $("#table").bootstrapTable('getSelections');
@@ -85,9 +85,9 @@ $(function(){
 			layer.msg("请选择数据行！");
 			return;
 		}
-		localStorage.cgbsId=dataArray[0].ID;
+		localStorage.ndbsId=dataArray[0].ID;
 		localStorage.FormMode="Edit";
-		openFormCard("form_md.html","编辑常规辨识评估");
+		openFormCard("form_md.html","编辑年度辨识评估");
 	});
 	$("#btntable-delete").click(function(){
 		var dataArray= $("#table").bootstrapTable('getSelections');
@@ -95,12 +95,12 @@ $(function(){
 			layer.msg("请选择数据行！");
 			return;
 		}
-		localStorage.cgbsId=dataArray[0].ID;
+		localStorage.ndbsId=dataArray[0].ID;
 		layer.confirm('确认删除吗？', {  
 	        btn: ['确定','取消'] //按钮  
 	    },function (index) {
 	    	layer.close(index);
-	    	var json={"zhubiao":"辨识评估","zhubiaoID":localStorage.cgbsId};
+	    	var json={"zhubiao":"辨识评估","zhubiaoID":localStorage.ndbsId};
 	    	FormAction(json,"D");
 	    }); 
 	});
@@ -110,9 +110,9 @@ $(function(){
 			layer.msg("请选择数据行！");
 			return;
 		}
-		localStorage.cgbsId=dataArray[0].ID;
+		localStorage.ndbsId=dataArray[0].ID;
 		localStorage.FormMode="View";
-		openFormCard("form_md.html","查看常规辨识评估");
+		openFormCard("form_md.html","查看年度辨识评估");
 	});
 	$("#btntable-refresh").click(function(){
 		$("#table").bootstrapTable('refresh');

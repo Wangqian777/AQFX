@@ -5,7 +5,7 @@ $(function(){
     });
 	if(localStorage.FormMode=="Edit" || localStorage.FormMode=="View"){
 		$("#btntable-reset").attr("disabled","true");
-		var json = { "ID": localStorage.cgbsId,"单据类型":"常规辨识评估"};
+		var json = { "ID": localStorage.ndbsId,"单据类型":"年度辨识评估"};
 		var __str= JSON.stringify(json);
 		$.ajax({
 			url:"../../getIdentification.do",
@@ -17,10 +17,10 @@ $(function(){
 				$("#id").val(data[0].ID);
 			}
 		});
-		
 		if(localStorage.FormMode=="View"){
 			$('input,select,textarea',$('#frmdata')).prop('readonly',true);
 			$("button[type=button]").attr("disabled","true");
+			
 		}
 	}
 	
@@ -43,8 +43,8 @@ $(function(){
 	});
 	$("#btntable-reset").click(function(){
 		$("#frmdata :input").not(":button, :submit, :reset,  :checkbox, :radio").val("");  
-        $("#frmdata :input").removeAttr("checked").remove("selected");
-        $("#单据类型").val("常规辨识评估");
+        $("#frmdata :input").removeAttr("checked").remove("selected"); 
+        $("#单据类型").val("年度辨识评估");
 	});
 	function FormAction(data,action){
 		var __str= JSON.stringify(data);
