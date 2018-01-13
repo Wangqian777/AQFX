@@ -11,11 +11,16 @@
 			data:{"table":"部门","orderBy":"编码"},
 			async:false,
 			success:function(data){
+				for(var i=0;i<data.length;i++){
+					data[i].state={"expanded":false};
+				}
 				$('#treeview').treeview({
 	                data: data,         // 数据源
 	                showCheckbox: false,   //是否显示复选框
 	                highlightSelected: true,    //是否高亮选中
 	                emptyIcon: '',    //没有子节点的节点图标
+	                collapseIcon: "glyphicon glyphicon-chevron-right",
+                    expandIcon: "glyphicon glyphicon-chevron-down",
 	                multiSelect: false,    //多选
 	                onNodeChecked: function (event,data) {
 	                	
@@ -27,7 +32,16 @@
 	                	$("#名称").val(data["text"]);
 	                	$("#图标名").val(data["图标名"]);
 	                	$("#路径").val(data["路径"]);
-	                	
+	                	if (data.state.expanded == false) {
+                            $('#treeview').treeview('expandNode', [data.nodeId, { silent: true }]);
+                            var arrnode = $('#treeview').treeview('getSiblings', data.nodeId);
+                            for (var i = 0; i <= arrnode.length; i++) {
+                                    $('#treeview').treeview('collapseNode', [arrnode[i], { silent: true, ignoreChildren: false }]);
+                             }
+                        }
+                        else {
+                            $('#treeview').treeview('collapseNode', [data.nodeId, { silent: true }]);
+                        }
 	                	
 	                }
 	            });

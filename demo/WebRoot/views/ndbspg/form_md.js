@@ -5,10 +5,10 @@ $(function(){
     });
 	if(localStorage.FormMode=="Edit" || localStorage.FormMode=="View"){
 		$("#btntable-reset").attr("disabled","true");
-		var json = { "ID": localStorage.ndbsId,"单据类型":"年度辨识评估"};
+		var json = { "ID": localStorage.ndbsId,"单据类型":"年度辨识评估","table":"辨识评估"};
 		var __str= JSON.stringify(json);
 		$.ajax({
-			url:"../../getIdentification.do",
+			url:"../../getListData.do",
 			type:"POST",
 			data:{"v_json":__str},
 			dataType:"JSON",

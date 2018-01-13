@@ -1,7 +1,6 @@
 ﻿$(function(){
 	console.log(localStorage.FormMode);
 	if(localStorage.FormMode=="Edit"){
-		console.log(localStorage.sjzdID);
 		var json = { "ID": localStorage.sjzdID };
         var __str = JSON.stringify(json);
 		$.ajax({

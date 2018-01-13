@@ -1,10 +1,10 @@
 $(function(){
 	dbQueryParams = function (params) {
 
-		params.单据类型="专项辨识评估";
+		params.单据类型="常规风险";
         var temp = {
             'params' : JSON.stringify(params),
-            'table':'辨识评估'
+            'table':'风险清单'
         };
         return temp;
     };
@@ -42,33 +42,38 @@ $(function(){
             	title:'ID',
             	visible:false
             }, {
-                field: '辨识日期',
-                title: '辨识日期',
+                field: '风险地点',
+                title: '风险地点',
                 valign: 'middle',
                 visible: true
             } ,{
-            	field:'名称',
-            	title:'名称',
+            	field:'风险描述',
+            	title:'风险描述',
             	valign: 'middle',
                 visible: true
             },{
-            	field:"详细类别",
-            	title:"辨识类别",
+            	field:"风险类型",
+            	title:"风险类型",
             	valign: 'middle',
                 visible: true
             },{
-            	field:"负责人",
-            	title:"负责人",
+            	field:"可能性",
+            	title:"可能性",
             	valign: 'middle',
                 visible: true
             },{
-            	field:"参加人",
-            	title:"参加人",
+            	field:"损失",
+            	title:"损失",
             	valign: 'middle',
                 visible: true
             },{
-            	field:"辨识方法",
-            	title:"辨识方法",
+            	field:"风险值",
+            	title:"风险值",
+            	valign: 'middle',
+                visible: true
+            },{
+            	field:"风险等级",
+            	title:"风险等级",
             	valign: 'middle',
                 visible: true
             }]
@@ -77,7 +82,7 @@ $(function(){
 	TableInit();
 	$("#btntable-add").click(function(){
 		localStorage.FormMode="Add";
-		openFormCard("form_md.html","新增专项辨识评估");
+		openFormCard("form_md.html","新增常规风险");
 	});
 	$("#btntable-edit").click(function(){
 		var dataArray= $("#table").bootstrapTable('getSelections');
@@ -85,9 +90,9 @@ $(function(){
 			layer.msg("请选择数据行！");
 			return;
 		}
-		localStorage.zxbsId=dataArray[0].ID;
+		localStorage.cgfxId=dataArray[0].ID;
 		localStorage.FormMode="Edit";
-		openFormCard("form_md.html","编辑专项辨识评估");
+		openFormCard("form_md.html","编辑常规风险");
 	});
 	$("#btntable-delete").click(function(){
 		var dataArray= $("#table").bootstrapTable('getSelections');
@@ -95,12 +100,12 @@ $(function(){
 			layer.msg("请选择数据行！");
 			return;
 		}
-		localStorage.zxbsId=dataArray[0].ID;
+		localStorage.cgfxId=dataArray[0].ID;
 		layer.confirm('确认删除吗？', {  
 	        btn: ['确定','取消'] //按钮  
 	    },function (index) {
 	    	layer.close(index);
-	    	var json={"zhubiao":"辨识评估","zhubiaoID":localStorage.zxbsId};
+	    	var json={"zhubiao":"风险清单","zhubiaoID":localStorage.cgfxId};
 	    	FormAction(json,"D");
 	    }); 
 	});
@@ -110,9 +115,9 @@ $(function(){
 			layer.msg("请选择数据行！");
 			return;
 		}
-		localStorage.zxbsId=dataArray[0].ID;
+		localStorage.cgfxId=dataArray[0].ID;
 		localStorage.FormMode="View";
-		openFormCard("form_md.html","查看专项辨识评估");
+		openFormCard("form_md.html","查看常规风险");
 	});
 	$("#btntable-refresh").click(function(){
 		$("#table").bootstrapTable('refresh');

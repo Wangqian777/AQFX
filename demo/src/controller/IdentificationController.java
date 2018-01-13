@@ -25,19 +25,20 @@ public class IdentificationController {
 	private String json = "";
 	private GenerateSql generateSql = new GenerateSql();
 	private List<LinkedHashMap<String, Object>> mapList = new ArrayList<LinkedHashMap<String, Object>>();
-	//获取辨识单据列表
-	@RequestMapping("getIdentification.do")
-	public void getIdentification(String v_json,HttpServletResponse response) throws IOException{
+	//获取列表数据
+	@RequestMapping("getListData.do")
+	public void getListData(String v_json,HttpServletResponse response) throws IOException{
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out=response.getWriter();
-		String sql="select * from 辨识评估 where 1=1 ";
+		String sql="";
 		if (v_json != null) {
 			JSONObject json = JSONObject.fromObject(v_json);
+			sql=String.format("select * from %s where 1=1", json.get("table"));
 			Iterator it = json.keys();
 			while (it.hasNext()) {
 				String key = (String) it.next();
 				Object value = json.get(key);
-				if(!value.toString().equals("")){
+				if(!value.toString().equals("") && !key.equals("table")){
 					sql += String.format(" and %s='%s'", key, value.toString());
 				}
 				

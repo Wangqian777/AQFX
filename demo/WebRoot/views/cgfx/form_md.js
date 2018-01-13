@@ -5,7 +5,7 @@ $(function(){
     });
 	if(localStorage.FormMode=="Edit" || localStorage.FormMode=="View"){
 		$("#btntable-reset").attr("disabled","true");
-		var json = { "ID": localStorage.cgbsId,"单据类型":"常规辨识评估","table":"辨识评估"};
+		var json = { "ID": localStorage.cgbsId,"单据类型":"常规风险","table":"风险清单"};
 		var __str= JSON.stringify(json);
 		$.ajax({
 			url:"../../getListData.do",
@@ -44,7 +44,7 @@ $(function(){
 	$("#btntable-reset").click(function(){
 		$("#frmdata :input").not(":button, :submit, :reset,  :checkbox, :radio").val("");  
         $("#frmdata :input").removeAttr("checked").remove("selected");
-        $("#单据类型").val("常规辨识评估");
+        $("#单据类型").val("常规风险");
 	});
 	function FormAction(data,action){
 		var __str= JSON.stringify(data);
