@@ -1,0 +1,119 @@
+﻿
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>form_md.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <link rel="stylesheet" href="../../plugins/bootstraptable/dist/bootstrap-table.min.css"/>
+    <link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap.min.css" type="text/css"></link>
+    <link rel="stylesheet" href="../../plugins/fancytree/skin-bootstrap/ui.fancytree.css" type="text/css"></link>
+    <link rel="stylesheet" href="../../plugins/font-awesome/css/font-awesome.css" type="text/css"></link>
+    <link rel="stylesheet" href="../../plugins/layui/css/layui.css" type="text/css"></link>
+    <link rel="stylesheet" href="../../plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" type="text/css"></link>
+    <script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+  	<script type="text/javascript" src="../../plugins/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../plugins/bootstrap/js/bootstrap-treeview.js"></script>
+	<script type="text/javascript" src="../../plugins/bootstraptable/dist/bootstrap-table.js"></script>
+	<script type="text/javascript" src="../../plugins/layer/layer.js"></script>
+	<script type="text/javascript" src="../../js/jquery.formFill.js"></script>
+	<script type="text/javascript" src="../../plugins/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../plugins/bootstrap-datetimepicker/js/moment-with-locales.min.js"></script>
+	<script type="text/javascript" src="../../plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+  </head>
+  
+  <body>
+  	<div class="mdatafield" style="overflow:auto;">
+          <div class="form_form"> 
+            <div class="toolbar" style="background:#DCDCDC">
+                <div class="btn-group " id="btn-group-tz" style="margin-top:5px; padding-left:16px;margin-bottom: 5px;">
+                   <button type="button" class="btn btn-default"  id="btntable-save"><i class="fa fa-save"></i>&nbsp;保存</button>
+                   <button type="button" class="btn btn-default" id="btntable-reset"><i class="fa fa-search"></i>&nbsp;重置</button>   
+                 </div>
+            </div>
+            <div class="table_input">
+                 <table id="tb_datamodel"></table>
+            </div>
+            <div style="padding:30px 10px; font-size:13px;margin-top:-20px;">
+                <form class="form-horizontal" role="form" id="frmdata" data-table="风险清单">
+                	<input type="hidden" id="id" name="id"/>
+                	<input type="hidden" id="单据类型" name='单据类型' value="专项风险">
+                	<div class="form-group">
+						<label  class="col-sm-2 col-md-2 control-label">风险地点</label>
+					    <div class="col-sm-4 col-md-4">
+					      <input type="text" class="form-control" id="风险地点" name="风险地点" >
+					    </div>
+					    <label  class="col-sm-2 col-md-2 control-label">风险类型</label>
+					    <div class="col-sm-4 col-md-4">
+					      <input type="text" class="form-control" id="风险类型" name="风险类型"/>
+					    </div>
+					</div>
+					<div class="form-group">
+					    <label class="col-sm-2 col-md-2 control-label">风险描述</label>
+					    <div class="col-sm-10 col-md-10">
+					      <textarea class="form-control" rows="3" id='风险描述' name='风险描述'></textarea>
+					    </div>
+					</div>
+                   	<div class="form-group">
+                   		 
+                   		 <label  class="col-sm-2 col-md-2 control-label">可能性</label>
+					    <div class="col-sm-4 col-md-4">
+					      <input type="text" class="form-control" id="可能性" name="可能性"/>
+					    </div>
+					</div>
+					<div class="form-group">
+                   		<label  class="col-sm-2 col-md-2 control-label">损失</label>
+					    <div class="col-sm-4 col-md-4">
+					      <input type="text" class="form-control" id="损失" name="损失"/>
+					    </div>
+                   		 <label  class="col-sm-2 col-md-2 control-label">风险值</label>
+					    <div class="col-sm-4 col-md-4">
+					      <input type="text" class="form-control" id="风险值" name="风险值"/>
+					    </div>
+					</div>
+					<div class="form-group">
+                   		<label  class="col-sm-2 col-md-2 control-label">风险等级</label>
+					    <div class="col-sm-4 col-md-4">
+					      <input type="text" class="form-control" id="风险等级" name="风险等级"/>
+					    </div>
+                   		 <label  class="col-sm-2 col-md-2 control-label">提醒周期</label>
+					    <div class="col-sm-4 col-md-4">
+					      <input type="text" class="form-control" id="提醒周期" name="提醒周期"/>
+					    </div>
+					</div>
+					<div class="form-group">
+					    <label class="col-sm-2 col-md-2 control-label">管控措施</label>
+					    <div class="col-sm-10 col-md-10">
+					      <textarea class="form-control" rows="5" id='管控措施' name='管控措施'></textarea>
+					    </div>
+					</div>
+					<div class="form-group">
+                   		<label  class="col-sm-2 col-md-2 control-label">管控领导</label>
+					    <div class="col-sm-4 col-md-4">
+					      <input type="text" class="form-control" id="管控领导" name="管控领导">
+					    </div>
+                   		 <label  class="col-sm-2 col-md-2 control-label">所属专业</label>
+					    <div class="col-sm-4 col-md-4">
+					      <input type="text" class="form-control" id="所属专业" name="所属专业"/>
+					    </div>
+					</div>
+					<div class="form-group">
+                   		<label  class="col-sm-2 col-md-2 control-label">责任单位</label>
+					    <div class="col-sm-4 col-md-4">
+					      <input type="text" class="form-control" id="责任单位" name="责任单位">
+					    </div>
+                   		 <label  class="col-sm-2 col-md-2 control-label">责任人</label>
+					    <div class="col-sm-4 col-md-4">
+					      <input type="text" class="form-control" id="责任人" name="责任人"/>
+					    </div>
+					</div>
+                </form>
+        	</div>        
+		</div>
+      </div>
+  </body>
+  <script type="text/javascript" src="form_md.js"></script>
+</html>

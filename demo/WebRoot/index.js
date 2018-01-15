@@ -1,4 +1,19 @@
 $(document).ready(function(){
+	if(localStorage.user==undefined){
+		alert("请先登录！");
+		function jump(count) {    
+            window.setTimeout(function(){    
+                count--;    
+                if(count > 0) {      
+                    jump(count);    
+                } else {    
+                    location.href="login.html";    
+                }    
+            }, 1000);    
+        }    
+        jump(1);
+	}
+	$("#用户姓名").html(JSON.parse(localStorage.user).用户姓名);
 	$.ajax({
 		type:"post",
 		url:"getTreeJson.do",
