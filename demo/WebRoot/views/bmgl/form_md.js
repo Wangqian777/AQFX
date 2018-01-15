@@ -20,11 +20,12 @@
 				async:false,
 				success:function(data){
 					if(data.state==1){
+											
 						layer.msg("操作成功");
 					}else{
 						layer.msg("操作失败");
 					}
 				}
-			});
+		});
 	 }
 });
