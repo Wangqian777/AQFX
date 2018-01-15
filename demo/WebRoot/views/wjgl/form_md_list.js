@@ -53,12 +53,12 @@
 				sortable : true,
 				valign : 'middle',
 			}, {
-				field : '单据时间',
+				field : '发布时间',
 				title : '发布时间',
 				sortable : true,
 				valign : 'middle',
 			}, {
-				field : '标题',
+				field : '名称',
 				title : '法规标题',
 				sortable : true,
 				valign : 'middle',
@@ -79,6 +79,7 @@
 	function openFormCard(billId, mode) {
 		// var apidata = "{\"json\":[\"" + billId + "\",\"" + "" + "\"]}";
 		var index = top.window.layer.open({
+			//btn: ['按钮一', '按钮二', '按钮三'],
 			type : 2,
 			title : '<span style="font-size:14px;font-weight: bold;">月度计划填报 - '
 					+ mode + '<span>',
@@ -89,18 +90,13 @@
 			content : '/YMJYGL/views/ydjhtb/form_md.html',
 			// offset: [38, e.clientX - 245]
 			cancel : function(index, layero) {
+				
 				top.window.layer.close(index);
-				// alert("cancel")
 				return false;
 			},
-			// close: function (index) {
-			// alert("close")
-			// },
 			end : function() {
-				// alert("end")
 				// http://layer.layui.com/1.8.5/api.html
-				$('#tb_datamodel').bootstrapTable('refresh'); // 不刷新
-				btTableInit();
+				$('#table').bootstrapTable('refresh'); // 不刷新
 				top.window.layer.close(index);
 				return false;
 			}
