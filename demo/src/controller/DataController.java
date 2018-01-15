@@ -242,6 +242,19 @@ public class DataController {
 		}
 	}
 	
+	//登录方法
+	@RequestMapping("login.do")
+	public void login(String user,String pwd,HttpServletResponse response) throws IOException{
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out=response.getWriter();
+		String sql=String.format("select * from 用户 where 登录名='%s' and 密码='%s' and NVL(禁用,0)=0",user,pwd);
+		mapList = dataService.getData(sql);
+		JSONArray js = JSONArray.fromObject(mapList);
+		out.print(js);
+		out.flush();
+		out.close();
+	}
+	
 	public void setDataService(DataService dataService) {
 		this.dataService = dataService;
 	}

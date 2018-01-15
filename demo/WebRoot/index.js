@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	$("#用户姓名").html(JSON.parse(localStorage.user).用户姓名);
 	$.ajax({
 		type:"post",
 		url:"getTreeJson.do",
