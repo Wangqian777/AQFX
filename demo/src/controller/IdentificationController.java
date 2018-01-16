@@ -25,7 +25,7 @@ public class IdentificationController {
 	private String json = "";
 	private GenerateSql generateSql = new GenerateSql();
 	private List<LinkedHashMap<String, Object>> mapList = new ArrayList<LinkedHashMap<String, Object>>();
-	//获取列表数据
+	//获取列表详细数据
 	@RequestMapping("getListData.do")
 	public void getListData(String v_json,HttpServletResponse response) throws IOException{
 		response.setContentType("text/html;charset=utf-8");

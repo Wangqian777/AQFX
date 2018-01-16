@@ -42,12 +42,13 @@
 				</div>
 			</div>
 			<div style="padding-top: 20px; padding-right: 20px; font-size: 13px;">
-				<form class="form-horizontal" role="form" id="frmdata" data-table="法规文件">
+				<form class="form-horizontal" role="form" id="frmdata" data-table="公告警示">
+					<input type="hidden" id="单据类型" name="单据类型" value="法规文件"/>
 					<input type="hidden" id="id" name="id" />
 					<div class="form-group">
 						<label class="col-sm-2 col-md-2 control-label">法规类型</label>
 						<div class="col-sm-4 col-md-4">
-						<select class="form-control" id="法规类型" name="类型">
+						<select class="form-control" id="详细类别" name="详细类别">
 							<option value="国家法规">国家法规</option>
 							<option value="地方法规">地方法规</option>
 							<option value="矿内法规">矿内法规</option>
@@ -55,21 +56,23 @@
 						</div>
 						<label class="col-sm-2 col-md-2 control-label" style="margin-left: 14px;">发布时间</label>
 						<div class='col-sm-3 col-md-3 input-group date' id='date'>
-							<input type='text' class="form-control" id="发布时间" name="发布时间" /> <span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span>
+							<input type='text' class="form-control" id="发布时间" name="发布时间" /> 
+							<span class="input-group-addon">
+								<span class="glyphicon glyphicon-calendar"></span>
 							</span>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 col-md-2 control-label">法规标题</label>
 						<div class="col-sm-4 col-md-4">
-							<input type="text" class="form-control" id="法规标题" name="名称" />
+							<input type="text" class="form-control" id="名称" name="名称" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 col-md-2 control-label">附件</label>
 						<div class="col-sm-9 col-md-9">
-							<input type="file" class="file-loading" id="file" name="file" />
-							<input type="hidden" id="地址" name='地址'>
+							<input type="file" name="file" id="file"  class="file-loading" />
+							<input type="hidden" id="文件地址" name='文件地址'>
 							<input type="hidden" id="文件名称" name='文件名称'>
 						</div>
 					</div>

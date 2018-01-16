@@ -1,5 +1,6 @@
 package utils;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,6 +9,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
+import controller.FileController;
 
 //import com.sun.script.javascript.JSAdapter;
 
@@ -152,6 +155,10 @@ public class GenerateSql {
     			ziSql=String.format("delete from %s where FID='%s'", json.get(key),FID);
     			tempList.add(ziSql);
     			sqlMap.put("ziSql", tempList);
+    		}
+    		if(key.equalsIgnoreCase("wenjian")){
+    			File file=new File(json.get(key).toString());
+    			file.delete();
     		}
 		}
 		return sqlMap;
