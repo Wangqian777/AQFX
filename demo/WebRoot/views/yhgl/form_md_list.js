@@ -11,7 +11,7 @@
 		}
 		if($('#username').val() ==''&&$('#logioname').val() ==''&&localStorage.userID!='undefined'){
 			params.业务科室 = localStorage.userID;
-		}
+		} 
 		params.用户类别 = '用户';
 		var temp = { 
 			'params' : JSON.stringify(params),
