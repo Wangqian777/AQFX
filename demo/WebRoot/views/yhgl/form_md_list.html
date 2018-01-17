@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>form_md_list.html</title>
+
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+<!-- Icons -->
+<link rel="stylesheet"
+	href="../../plugins/bootstraptable/dist/bootstrap-table.min.css" />
+<link rel="stylesheet"
+	href="../../plugins/bootstrap/css/bootstrap.min.css" type="text/css"></link>
+<link rel="stylesheet"
+	href="../../plugins/fancytree/skin-bootstrap/ui.fancytree.css"
+	type="text/css"></link>
+<link rel="stylesheet"
+	href="../../plugins/font-awesome/css/font-awesome.css" type="text/css"></link>
+<link rel="stylesheet" href="../../plugins/layui/css/layui.css"
+	type="text/css"></link>
+<link rel="stylesheet"
+	href="../../plugins/bootstrap3-editable/css/bootstrap-editable.css"
+	type="text/css"></link>
+<link rel="stylesheet"
+	href="../../plugins/bootstrap/css/bootstrap-treeview.min.css"
+	type="text/css"></link>
+<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript"
+	src="../../plugins/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="../../plugins/bootstrap/js/bootstrap-treeview.min.js"></script>
+<script type="text/javascript"
+	src="../../plugins/bootstrap3-editable/js/bootstrap-editable.js"></script>
+<script type="text/javascript"
+	src="../../plugins/bootstraptable/dist/bootstrap-table.js"></script>
+<script type="text/javascript" src="../../plugins/layer/layer.js"></script>
+<script type="text/javascript" src="../../js/jquery.formFill.js"></script>
+<script type="text/javascript"
+	src="../../plugins/bootstraptable/dist/extensions/editable/bootstrap-table-editable.js"></script>
+<script type="text/javascript"
+	src="../../plugins/bootstraptable/dist/locale/bootstrap-table-zh-CN.js"></script>
+<style>
+</style>
+</head>
+
+<body>
+	<!-- 工具栏-->
+	<div class="row" id="main" style="width: 100%;">
+		<div class="col-xs-4" style="width: 30%; float: left;">
+			<div class="box  box-solid box-default">
+				<div class="box-header"
+					style="background-color: #F3F3F3; height: 40px; padding: 10px 0px; border: 1px solid #D2D6DE; border-radius: 5px;">
+					&nbsp;&nbsp;&nbsp;&nbsp;用户管理 <span class="pull-right">
+					</span>
+				</div>
+				<div id="left" class="box-body"
+					style="border: 1px solid #D2D6DE; border-radius: 5px; overflow-y: scroll;">
+					<div id="treeview" class="fontstyle"></div>
+				</div>
+			</div>
+		</div>
+		<div
+			style="background-color: #F3F3F3; padding: 10px 5px 0px; border: 1px solid #D2D6DE; border-radius: 5px; width: 70%; height: 50px; float: left;">
+			<div class="form-inline" role="form">
+				<div class="form-group">
+					职工名称：<input name="username" class="form-control" type="text"
+						placeholder="">
+				</div>
+				<div class="form-group">
+					登录名称：<input name="logioname" class="form-control" type="text"
+						placeholder="">
+				</div>
+				<button id="btntable-search" class="btn btn-primary">
+					<i class="fa fa-search"></i>&nbsp;查询
+				</button>
+			</div>
+		</div>
+		<div class="">
+			<div id="btns" class="btn-group "
+				style="margin-top: 5px; margin-bottom: 5px; padding-left: 2px;">
+				<button type="button" class="btn btn-default" id="新增">
+					<i class="fa fa-plus"></i>&nbsp;新增
+				</button>
+				<button type="button" class="btn btn-default" id="编辑">
+					<i class="fa fa-pencil-square-o"></i>&nbsp;编辑
+				</button>
+				<button type="button" class="btn btn-default" id="删除">
+					<i class="fa fa-trash-o"></i>&nbsp;删除
+				</button>
+				<button type="button" class="btn btn-default" id="重置密码>
+					<i class="glyphicon glyphicon-refresh fa-fw"></i>&nbsp;重置密码
+				</button>
+			</div>
+		</div>
+		<div id="right"
+			style="border:1px solid #D2D6DE;border-radius:5px;width:70%;float: left;">
+			<table id="table" data-table="用户"></table>
+
+		</div>
+	</div>
+	<script type="text/javascript" src="form_md_list.js"></script>
+</body>
+
+</html>
