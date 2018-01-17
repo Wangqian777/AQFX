@@ -3,8 +3,15 @@
 	$('#left').height(height)
 	$('#right').height(height - $('#btns').outerHeight(true))
 	dbQueryParams = function(params) {
-
-		params.业务科室 = localStorage.userID;
+		if ($('#username').val() != null && $('#username').val() != '') {
+			params.用户姓名 = $('#username').val();
+		}
+		if ($('#logioname').val() != null && $('#logioname').val() != '') {
+			params.登录名 = $('#logioname').val();
+		}
+		if($('#username').val() ==''&&$('#logioname').val() ==''&&localStorage.userID!='undefined'){
+			params.业务科室 = localStorage.userID;
+		}
 		params.用户类别 = '用户';
 		var temp = {
 			'params' : JSON.stringify(params),
@@ -12,6 +19,11 @@
 		};
 		return temp;
 	};
+	$('#btntable-search').click(function() {
+		$("#table").bootstrapTable('refresh');
+		$('#logioname').val('')
+		$('#username').val('')
+	});
 	initTree();
 	function initTree() {
 		$.ajax({
@@ -40,7 +52,7 @@
 					onNodeChecked : function(event, data) {},
 					onNodeSelected : function(event, data) {
 						localStorage.userID = data["ID"];
-						localStorage.buname=data["text"]
+						localStorage.buname = data["text"]
 						$("#table").bootstrapTable('refresh');
 						if (data.state.expanded == false) {
 							$('#treeview').treeview('expandNode', [ data.nodeId, {
@@ -101,17 +113,17 @@
 				field : '用户姓名',
 				title : '用户姓名',
 				valign : 'middle',
-				width:100,
+				width : 100,
 				visible : true
 			}, {
 				field : "登录名",
 				title : "登录名",
 				valign : 'middle',
 				visible : true
-			},{
+			}, {
 				field : "禁用",
 				title : "是否禁用",
-				width:80,
+				width : 80,
 				formatter : function(value, row, index) {
 					if (value == 0) {
 						return "否";
@@ -127,7 +139,7 @@
 			}, {
 				field : "性别",
 				title : "性别",
-				width:80,
+				width : 80,
 				formatter : function(value, row, index) {
 					if (value == 0) {
 						return "男";
@@ -223,10 +235,10 @@
 		localStorage.FormMode = "Add";
 		localStorage.业务科室 = localStorage.userID;
 		localStorage.业务科室名称 = localStorage.buname;
-		 if(localStorage.业务科室=="undefined"){
-			 layer.msg("请选择左侧节点");
-			 return;
-		 }
+		if (localStorage.业务科室 == "undefined") {
+			layer.msg("请选择左侧节点");
+			return;
+		}
 		openFormCard("form_add.html", "新增用户");
 	});
 	$("#编辑").click(function() {
@@ -253,7 +265,7 @@
 			localStorage.yhID = dataArray[0].ID;
 			var json = {
 				"table" : "用户",
-				"tabledata":{
+				"tabledata" : {
 					"id" : localStorage.yhID,
 					"密码" : "123456"
 				}
