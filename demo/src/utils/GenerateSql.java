@@ -54,7 +54,7 @@ public class GenerateSql {
 				List<Map> list=map2.get("dtables");
 				tempList=new ArrayList<String>();
 				for(Map<String,String> m:list){
-					ziSql+=String.format("Insert into %s( ", m.get("table"));
+					ziSql+=String.format("Insert into %s(", m.get("table"));
 					
 					for(String key:m.keySet()){
 						if(!key.equals("id") && !key.equals("table")){
@@ -66,11 +66,11 @@ public class GenerateSql {
 					dateTime=df.format(date);
 					for(String key:m.keySet()){
 						if(!key.equals("id") && !key.equals("table")){
-							ziSql+=String.format("'%s','%s',%s",m.get(key),FID,"to_date('"+dateTime+"','yyyy-mm-dd hh24:mi:ss')");
+							ziSql+=String.format("'%s',",m.get(key));
 						}
 					}
 					uuid=UUID.randomUUID();
-					ziSql+=String.format("'%s')\n", uuid);
+					ziSql+=String.format("'%s','%s',%s)",uuid,FID,"to_date('"+dateTime+"','yyyy-mm-dd hh24:mi:ss')");
 					tempList.add(ziSql);
 					ziSql="";
 				}
@@ -119,6 +119,67 @@ public class GenerateSql {
 						}
 						ziSql+=String.format(" where id='%s')\n",m.get("id"));
 					}
+					tempList.add(ziSql);
+					ziSql="";
+				}
+				sqlMap.put("ziSql", tempList);
+			}
+			return sqlMap;
+		}catch (Exception e) {
+			return sqlMap;
+		}
+	}
+	//主表修改子表新增模式
+	public Map<String,List> generateUpdateSqlMC(String v_json){
+		List<Map> listMap=new ArrayList<Map>();
+		Map<String,List> sqlMap=new HashMap<String, List>();
+		List<String> tempList=new ArrayList<String>();
+		listMap=currencyJson(v_json);
+		String zhuSql="";
+		String ziSql="";
+		zhuSql=String.format("update %s set ", listMap.get(0).get("table"));
+		Map<String,String> map=listMap.get(0);
+		//主表
+		for(String key:map.keySet()){
+			if(!key.equals("id") && !key.equals("table")){
+				zhuSql+=String.format("%s='%s',",key,map.get(key));
+			}
+		}
+		Date date=new Date();
+		String dateTime=df.format(date);
+		zhuSql+=String.format("最后修改时间=%s", "to_date('"+dateTime+"','yyyy-mm-dd hh24:mi:ss')");
+		if(zhuSql.substring(zhuSql.length()-1).equals(",")){
+			zhuSql=zhuSql.substring(0,zhuSql.length()-1);
+		}
+		zhuSql+=String.format(" where id='%s'", map.get("id"));
+		tempList.add(zhuSql);
+		zhuSql="";
+		sqlMap.put("zhuSql", tempList);
+		String FID=map.get("id");
+		UUID uuid=UUID.randomUUID();
+		try{
+			Map<String,List> map2=listMap.get(1);
+			if(map2.size()>0){
+				List<Map> list=map2.get("dtables");
+				tempList=new ArrayList<String>();
+				for(Map<String,String> m:list){
+					ziSql+=String.format("Insert into %s(", m.get("table"));
+					
+					for(String key:m.keySet()){
+						if(!key.equals("id") && !key.equals("table")){
+							ziSql+=String.format("%s,",key);
+						}
+					}
+					ziSql+="id,fid,创建时间) values(";
+					date=new Date();
+					dateTime=df.format(date);
+					for(String key:m.keySet()){
+						if(!key.equals("id") && !key.equals("table")){
+							ziSql+=String.format("'%s',",m.get(key));
+						}
+					}
+					uuid=UUID.randomUUID();
+					ziSql+=String.format("'%s','%s',%s)",uuid,FID,"to_date('"+dateTime+"','yyyy-mm-dd hh24:mi:ss')");
 					tempList.add(ziSql);
 					ziSql="";
 				}
@@ -192,15 +253,16 @@ public class GenerateSql {
             		JSONObject job = jsonArray.getJSONObject(i);
             		JSONObject tempjson=JSONObject.fromObject(job.toString());
             		Iterator itTemp = tempjson.keys();
+            		Map<String,String> tempMap=new HashMap<String,String>();
             		while(itTemp.hasNext()){ 
             			String tempKey = (String) itTemp.next();
             			if(tempKey.equals("table")){
             				Object tempValue = tempjson.get(tempKey);
-            				System.out.println(tempValue);
+            				tempMap.put(tempKey,tempValue.toString());
             			}
             			if(tempKey.equals("tabledata")){
             				Object tempValue = tempjson.get(tempKey);
-            				Map<String,String> tempMap=new HashMap<String,String>();
+            				
             				JSONObject tempjson2=JSONObject.fromObject(tempValue.toString());
                         	Iterator tempit2 = tempjson2.keys();
                         	while(tempit2.hasNext()){ 

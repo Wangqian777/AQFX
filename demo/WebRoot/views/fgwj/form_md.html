@@ -26,6 +26,7 @@
 <script type="text/javascript" src="../../plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="../../plugins/bootstrap-fileinput/fileinput.min.js"></script>
 <script type="text/javascript" src="../../plugins/bootstrap-fileinput/zh.js"></script>
+<script type="text/javascript" src="../../plugins/bootstraptable/dist/locale/bootstrap-table-zh-CN.js"></script>
 </head>
 
 <body>
@@ -62,21 +63,43 @@
 							</span>
 						</div>
 					</div>
-					<div class="form-group">
+					<div>
+						<div class="form-group">
 						<label class="col-sm-2 col-md-2 control-label">法规标题</label>
 						<div class="col-sm-4 col-md-4">
 							<input type="text" class="form-control" id="名称" name="名称" />
 						</div>
 					</div>
-					<div class="form-group">
-						<label class="col-sm-2 col-md-2 control-label">附件</label>
-						<div class="col-sm-9 col-md-9">
-							<input type="file" name="file" id="file"  class="file-loading" />
-							<input type="hidden" id="文件地址" name='文件地址'>
-							<input type="hidden" id="文件名称" name='文件名称'>
+						<div class="form-group">
+							<label class="col-sm-2 col-md-2 control-label">附件</label>
+							<div class="col-sm-9 col-md-9">
+								<input type="file" name="file" id="file"  class="file-loading" />
+							</div>
 						</div>
 					</div>
+					
 				</form>
+				<table style="dispaly:none;" id="附件信息">
+				</table>
+				<div id="附件表"  style="margin-left: 70px;display:none;">
+					<div id="toolbar">
+						<div class="btn-group">
+							<button type="button" class="btn btn-default" id="btntable-view">
+								<i class="fa fa fa-table"></i>&nbsp;查看
+							</button>
+							<button type="button" class="btn btn-default" id="btntable-delete">
+								<i class="fa fa-trash-o"></i>&nbsp;删除
+							</button>
+							<button type="button" class="btn btn-default" id="btntable-refresh">
+								<i class="fa fa-refresh"></i>&nbsp;刷新
+							</button>
+						</div> 
+					</div>
+					<div  style="margin-top: 10px; overflow: auto;">
+						<table id="table" data-table="附件"></table>
+					</div>
+				</div>
+				
 			</div>
 		</div>
 	</div>

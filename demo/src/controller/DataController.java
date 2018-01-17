@@ -219,6 +219,16 @@ public class DataController {
 				for (String s : sql) {
 					dataService.deleteData(s);
 				}
+			}else if(action.equals("MC")){
+				sqlMap = generateSql.generateUpdateSqlMC(v_json);
+				sql = sqlMap.get("zhuSql");
+				for (String s : sql) {
+					dataService.updateData(s);
+				}
+				sql=sqlMap.get("ziSql");
+				for (String s : sql) {
+					dataService.updateData(s);
+				}
 			}
 			json = JsonResult.Success();
 		} catch (Exception e) {

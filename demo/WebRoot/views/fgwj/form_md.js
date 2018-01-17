@@ -1,4 +1,5 @@
 $(function() {
+	var List = new Array();//定义一个全局变量去接受文件名和id
 	var url1 = 'http://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/631px-FullMoon2010.jpg';
 	var url2 = 'http://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Earth_Eastern_Hemisphere.jpg/600px-Earth_Eastern_Hemisphere.jpg';
 	$('#file').fileinput({// 初始化上传文件框
@@ -14,35 +15,89 @@ $(function() {
 		enctype : 'multipart/form-data',
 		overwriteInitial : false,
 		maxFileCount : 1,
-		previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
-		previewFileIconSettings: {
-            'xlsx': '<i class="fa fa-file-excel-o text-success"></i>',
-            'xls': '<i class="fa fa-file-excel-o text-success"></i>',
-            'pptx': '<i class="fa fa-file-powerpoint-o text-danger"></i>',
-            'jpg': '<i class="fa fa-file-photo-o text-warning"></i>',
-            'pdf': '<i class="fa fa-file-archive-o text-muted"></i>',
-            'zip': '<i class="fa fa-file-archive-o text-muted"></i>',
-        },
+		layoutTemplates:{actionDelete:''},
 		// maxFileSize : 0,
 	});
 
 	// 上传文件成功，回调函数
 	$('#file').on("fileuploaded", function(event, data, previewId, index) {
-
 		if (data.response.state > 0) {
 			var url = data.response.data;
-			$('#文件地址').val(url);
-			$('#文件名称').val(data.filenames[0]);
+			var html="<tr ><td name='文件路径'>"+url+"</td><td name='文件名称'>"+data.filenames[0]+"</td></tr>";
+			$("#附件信息").append(html);
+			List.push({ FileName: data.filenames[0], KeyID: previewId });
 		}
-		// 如果是上传多张图，计数标记，用于确保全部图片都上传成功了，再提交表单信息
-		// var fileCount = $('#file-pic').fileinput('getFilesCount');
-		//save();
+	});
+	$('#file').on('filesuccessremove', function(event, data, previewId, index) {
+		 for (var i = 0; i < List.length; i++) { 
+		      if (List[i].KeyID== data) { 
+		        console.log( List[i]); 
+		      } 
+		   }
 	});
 	$('#date').datetimepicker({
 		format : 'YYYY-MM-DD',
 		locale : moment.locale('zh-cn')
 	});
+	dbQueryParams = function (params) {
+
+		params.FID=localStorage.fgwjId;
+        var temp = {
+            'params' : JSON.stringify(params),
+            'table':'附件'
+        };
+        return temp;
+    };
+	function TableInit() {
+		$('#table').bootstrapTable({
+            url: '../../getPageData.do',         //请求后台的URL（*）
+            method: 'get',                      //请求方式（*）
+            striped: true,                      //是否显示行间隔色
+            cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+            pagination: true,                   //是否显示分页（*）
+            sortable: false,                     //是否启用排序
+            sortOrder: "asc",                   //排序方式
+            queryParamsType : "a",
+            queryParams: dbQueryParams,			//传递参数（*）
+            sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+            pageNumber:1,                       //初始化加载第一页，默认第一页
+            pageSize: 10,                       //每页的记录行数（*）
+            pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+            search: false,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+            strictSearch: true,
+            showColumns: false,                  //是否显示所有的列
+            showRefresh: false,                  //是否显示刷新按钮
+            minimumCountColumns: 2,             //最少允许的列数
+            clickToSelect: true,                //是否启用点击选中行
+            height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+            uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
+            showToggle:false,                    //是否显示详细视图和列表视图的切换按钮
+            cardView: false,                    //是否显示详细视图
+            detailView: false,                   //是否显示父子表
+            singleSelect : true,				//单选 
+            columns: [{
+                checkbox: true
+            },{
+            	field:'ID',
+            	title:'ID',
+            	visible:false
+            }, {
+            	field: '文件名称',
+                title: '文件名称',
+                valign: 'middle',
+                visible: true
+                
+            } , {
+            	field: '文件路径',
+                title: '文件路径',
+                valign: 'middle',
+                visible: true
+            } ]
+        });
+	};
+	TableInit();
 	if (localStorage.FormMode == "Edit") {
+		$("#附件表").css("display","block");
 		var json = { "ID": localStorage.fgwjId,"单据类型":"法规文件","table":"公告警示"};
 		var __str = JSON.stringify(json);
 		$.ajax({
@@ -67,18 +122,26 @@ $(function() {
 		if (localStorage.FormMode == "Add") {
 			action = "C";
 		} else if (localStorage.FormMode == "Edit") {
-			action = "M";
+			action = "MC";
 		}
 		data = $("#frmdata").serializeObject();
 		json.table = $("#frmdata").data("table");
 		json.tabledata = data;
+		json.dtables = [];
+		$("#附件信息").find("tr").each(function () {
+			var tempjson={};
+			tempjson.文件路径=$(this).children('td:eq(0)').text();
+			tempjson.文件名称=$(this).children('td:eq(1)').text();
+			json.dtables.push({ table: '附件', tabledata: tempjson });
+		});
+		console.log(json);
 		FormAction(json, action);
 	});
 	function FormAction(data, action) {
 		var __str = JSON.stringify(data);
 		$.ajax({
 			type : "POST",
-			url : "../../SingleJson.do",
+			url : "../../manyJson.do",
 			data : {
 				"v_json" : __str,
 				"action" : action

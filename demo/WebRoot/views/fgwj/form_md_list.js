@@ -75,7 +75,6 @@
                 		 var path=row.文件地址+"";
                 		 path=path.replace(/\\/g,'%2F');
                 		 var fileName=value;
-                		 //html="<a href='javascript:video(0);'onclick='javascript:URLencode("+path+","+fileName+");'>"+value+"</a>";
                 		 html="<a href='../../download.do?path="+path+"&fileName="+fileName+"'>"+value+"</a>";
                          return html;
                 	 }else{
