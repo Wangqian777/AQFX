@@ -9,7 +9,7 @@
 		if ($('#logioname').val() != null && $('#logioname').val() != '') {
 			params.登录名 = $('#logioname').val();
 		}
-		if($('#username').val() ==''&&$('#logioname').val() ==''&&localStorage.userID!='undefined'){
+		if($('#username').val() ==''&&$('#logioname').val() ==''){
 			params.业务科室 = localStorage.userID;
 		} 
 		params.用户类别 = '用户';
@@ -21,8 +21,6 @@
 	};
 	$('#btntable-search').click(function() {
 		$("#table").bootstrapTable('refresh');
-		$('#logioname').val('')
-		$('#username').val('')
 	});
 	initTree();
 	function initTree() {
