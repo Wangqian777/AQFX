@@ -54,7 +54,8 @@
 				<form class="form-horizontal" role="form" id="frmdata"
 					data-table="用户">
 					<input type="hidden" id='id' name="id" value="" /> <input
-						type="hidden" id='业务科室' name="业务科室" value="" /> <input
+						class="form-control" id="业务科室" name="业务科室" data-type="字符串"
+						type="hidden" placeholder="" value="" /> <input
 						class="form-control" id="密码" name="密码" data-type="字符串"
 						type="hidden" placeholder="" value="123456" /> <input
 						class="form-control" id="用户类别" name="用户类别" data-type="字符串"
@@ -64,34 +65,40 @@
 						<input
 						class="form-control" id="隶属部门" name="隶属部门" data-type="字符串"
 						type="hidden" placeholder="" value="1" />
-					<div class="form-group">
-						<label class="col-sm-1 col-md-1 control-label"
+					<div class="form-group" >
+						<label class="col-sm-2 col-md-2 control-label"
 							style="min-width:130px;">登录名</label>
-						<div class="col-sm-4 col-md-4">
+						<div class="col-sm-4 col-md-4" style="margin-top:10px">
 							<input class="form-control" id="登录名" name="登录名" data-type="字符串"
 								type="text" placeholder="" value="" />
 						</div>
-						<label class="col-sm-1 col-md-1 control-label"
+						<label class="col-sm-2 col-md-2 control-label"
 							style="min-width:130px;">用户姓名</label>
-						<div class="col-sm-4 col-md-4">
+						<div class="col-sm-4 col-md-4" style="margin-top:10px">
 							<input class="form-control" id="用户姓名" name="用户姓名" data-type="字符串"
 								type="text" placeholder="" value="" />
 						</div>
-						<label class="col-sm-1 col-md-1 control-label"
+						<label class="col-sm-2 col-md-2 control-label"
 							style="min-width:130px;">电话</label>
-						<div class="col-sm-4 col-md-4">
+						<div class="col-sm-4 col-md-4" style="margin-top:10px">
 							<input class="form-control" id="电话" name="电话" data-type="字符串"
 								type="text" placeholder="" value="" />
 						</div>
-						<label class="col-sm-1 col-md-1 control-label"
+						<label class="col-sm-2 col-md-2 control-label"
+							style="min-width:130px;" >业务科室</label>
+						<div class="col-sm-4 col-md-4"style="margin-top:10px">
+							<input class="form-control" id="业务科室名称" readonly='readonly'  data-type="字符串"
+								type="text" placeholder="" value="" />
+						</div>
+						<label class="col-sm-2 col-md-2 control-label"
 							style="min-width:130px;">性别</label>
-						<div class="col-sm-4 col-md-4">
+						<div class="col-sm-4 col-md-4" style="margin-top:10px">
 							<input type="radio" id="性别" name="性别" value="0" data-type="字符串" checked> 男 
 							<input type="radio" id="性别" name="性别" value="1" data-type="字符串" > 女
 						</div>
-						<label class="col-sm-1 col-md-1 control-label"
-							style="min-width:130px;">是否禁用</label>
-						<div class="col-sm-4 col-md-4">
+						<label class="col-sm-2 col-md-2 control-label"
+							style="min-width:130px;" >是否禁用</label>
+						<div class="col-sm-4 col-md-4" style="margin-top:10px">
 							<input id="禁用" name="禁用" data-type="字符串" type="checkbox"
 								placeholder="" />
 						</div>

@@ -1,9 +1,10 @@
 ﻿$(function(){
 	$("#业务科室").val(localStorage.业务科室);
+	$("#业务科室名称").val(localStorage.业务科室名称);
 	$("#id").val(localStorage.yhID);
 	$("#创建人").val(JSON.parse(localStorage.user).用户姓名);
 	if(localStorage.FormMode=="Edit"){
-		var json = { "ID": localStorage.yhID,"业务科室":localStorage.业务科室,"table":"用户"};
+		var json = { "ID": localStorage.yhID,"table":"用户"};
 		var __str= JSON.stringify(json);
 		$.ajax({
 			url:"../../getListData.do",
