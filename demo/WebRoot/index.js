@@ -27,7 +27,23 @@ $(document).ready(function(){
 		}
 	});
 	
-	
+	$("#xiugaimima").click(function(){
+		openFormCard("updatepwd.html", "修改密码");
+	});
+	function openFormCard(url, title) {
+		layer.open({
+			type : 2,
+			title : '<span style="font-size:14px;font-weight: bold;">' + title + '<span>',
+			maxmin : true,
+			shadeClose : true,
+			offset : 'auto',
+			area : [ '800px', '400px' ],
+			content : [ url, 'no' ],
+			end : function() {
+				
+			}
+		});
+	}
 	function getHtml(data) {
         var ulHtml = '<ul class="layui-nav layui-nav-tree" lay-filter="kitNavbar" kit-navbar>';
         for(var i=0;i<data.length;i++){

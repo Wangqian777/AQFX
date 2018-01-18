@@ -18,16 +18,28 @@
 	href="../../plugins/font-awesome/css/font-awesome.css" type="text/css"></link>
 <link rel="stylesheet" href="../../plugins/layui/css/layui.css"
 	type="text/css"></link>
+<link rel="stylesheet"
+	href="../../plugins/bootstrap3-editable/css/bootstrap-editable.css"
+	type="text/css"></link>
+<link rel="stylesheet"
+	href="../../plugins/bootstrap/css/bootstrap-treeview.min.css"
+	type="text/css"></link>
 <script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="form_md_list.js"></script>
 <script type="text/javascript"
-	src="../../plugins/bootstrap/js/bootstrap.js"></script>
+	src="../../plugins/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript"
-	src="../../plugins/bootstrap/js/bootstrap-treeview.js"></script>
+	src="../../plugins/bootstrap/js/bootstrap-treeview.min.js"></script>
+<script type="text/javascript"
+	src="../../plugins/bootstrap3-editable/js/bootstrap-editable.js"></script>
 <script type="text/javascript"
 	src="../../plugins/bootstraptable/dist/bootstrap-table.js"></script>
 <script type="text/javascript" src="../../plugins/layer/layer.js"></script>
 <script type="text/javascript" src="../../js/jquery.formFill.js"></script>
+<script type="text/javascript"
+	src="../../plugins/bootstraptable/dist/extensions/editable/bootstrap-table-editable.js"></script>
+<script type="text/javascript"
+	src="../../plugins/bootstraptable/dist/locale/bootstrap-table-zh-CN.js"></script>
+
 
 
 </head>
@@ -50,55 +62,78 @@
 			<div class="table_input">
 				<table id="tb_datamodel"></table>
 			</div>
-			<div style="padding:30px 10px; font-size:13px;margin-top:-20px;">
+			<div style="padding:30px 10px; font-size:13px;margin-top:-20px; height:500px;">
 				<form class="form-horizontal" role="form" id="frmdata"
 					data-table="用户">
 					<input type="hidden" id='id' name="id" value="" /> <input
 						class="form-control" id="业务科室" name="业务科室" data-type="字符串"
-						type="hidden" placeholder="" value="" /> <input
+						type="hidden" placeholder="" /> <input
 						class="form-control" id="密码" name="密码" data-type="字符串"
 						type="hidden" placeholder="" value="123456" /> <input
 						class="form-control" id="用户类别" name="用户类别" data-type="字符串"
 						type="hidden" placeholder="" value="用户" /> <input
 						class="form-control" id="创建人" name="创建人" data-type="字符串"
-						type="hidden" placeholder="" />
-						<input
-						class="form-control" id="隶属部门" name="隶属部门" data-type="字符串"
-						type="hidden" placeholder="" value="1" />
-					<div class="form-group" >
-						<label class="col-sm-2 col-md-2 control-label"
+						type="hidden" placeholder="" /> <input class="form-control"
+						id="隶属部门" name="隶属部门" data-type="字符串" type="hidden" placeholder=""
+						value="1" />
+					<div class="form-group">
+						<label class="col-sm-1 col-md-1 control-label"
 							style="min-width:130px;">登录名</label>
-						<div class="col-sm-4 col-md-4" style="margin-top:10px">
+						<div class="col-sm-4 col-md-4">
 							<input class="form-control" id="登录名" name="登录名" data-type="字符串"
 								type="text" placeholder="" value="" />
 						</div>
 						<label class="col-sm-2 col-md-2 control-label"
 							style="min-width:130px;">用户姓名</label>
-						<div class="col-sm-4 col-md-4" style="margin-top:10px">
+						<div class="col-sm-4 col-md-4">
 							<input class="form-control" id="用户姓名" name="用户姓名" data-type="字符串"
 								type="text" placeholder="" value="" />
 						</div>
-						<label class="col-sm-2 col-md-2 control-label"
+					</div>
+					<div class="form-group">
+						<label class="col-sm-1 col-md-1 control-label"
+							style="min-width:130px;">单位名称</label>
+						<div class="col-sm-4 col-md-4">
+							<!--自定义下拉控件-->
+							<!--自定义下拉控件-->
+							<div class="input-group">
+								<input type="text" class="form-control" 
+									id="txtModuleType" data-id="" value="" readonly="readonly" />
+								<div class="input-group-btn" id="txtModuleType_btn">
+									<button id="section-name"
+										class="btn btn-default btn-info dropdown-toggle cm-dropdown-toggle"
+										type="button" style="height:34px"
+										data>
+										<i class="fa fa-lightbulb-o"></i>
+									</button>
+									<div id="tree" class="dropdown-menu pull-right cm-dropdown-menu"
+										style="width:250px;height:300px; overflow:auto;"
+										>
+										<!--可以是iframe-->
+										<div id="treeview" class="fontstyle"></div>
+									</div>
+								</div>
+							</div>
+							<!--自定义下拉控件-->
+						</div>
+						<label class="col-sm-1 col-md-1 control-label"
 							style="min-width:130px;">电话</label>
-						<div class="col-sm-4 col-md-4" style="margin-top:10px">
+						<div class="col-sm-4 col-md-4">
 							<input class="form-control" id="电话" name="电话" data-type="字符串"
-								type="text" placeholder="" value="" />
+								type="text" placeholder=""  />
 						</div>
-						<label class="col-sm-2 col-md-2 control-label"
-							style="min-width:130px;" >业务科室</label>
-						<div class="col-sm-4 col-md-4"style="margin-top:10px">
-							<input class="form-control" id="业务科室名称" readonly='readonly'  data-type="字符串"
-								type="text" placeholder="" value="" />
-						</div>
-						<label class="col-sm-2 col-md-2 control-label"
+					</div>
+					<div class="form-group">
+						<label class="col-sm-1 col-md-1 control-label"
 							style="min-width:130px;">性别</label>
-						<div class="col-sm-4 col-md-4" style="margin-top:10px">
-							<input type="radio" id="性别" name="性别" value="0" data-type="字符串" checked> 男 
-							<input type="radio" id="性别" name="性别" value="1" data-type="字符串" > 女
+						<div class="col-sm-4 col-md-4">
+							<input type="radio" id="性别" name="性别" value="0" data-type="字符串"
+								checked='checked'> 男 <input type="radio" id="性别" name="性别"
+								value="1" data-type="字符串"> 女
 						</div>
-						<label class="col-sm-2 col-md-2 control-label"
-							style="min-width:130px;" >是否禁用</label>
-						<div class="col-sm-4 col-md-4" style="margin-top:10px">
+						<label class="col-sm-1 col-md-1 control-label"
+							style="min-width:130px;">是否禁用</label>
+						<div class="col-sm-4 col-md-4">
 							<input id="禁用" name="禁用" data-type="字符串" type="checkbox"
 								placeholder="" />
 						</div>
@@ -109,4 +144,14 @@
 	</div>
 </body>
 <script type="text/javascript" src="form_add.js"></script>
+<script>
+	$(function(){
+		$("#tree").hide();
+		$("#section-name").click(function(){
+			$("#tree").toggle();
+		});
+	})
+		
+	
+</script>
 </html>
