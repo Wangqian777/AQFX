@@ -31,6 +31,7 @@ $(function() {
 			var html="<tr ><td name='文件路径'>"+url+"</td><td name='文件名称'>"+filename+"</td></tr>";
 			$("#附件信息").append(html);
 			counts++;
+			
 			if(fileCounts==counts){
 				fileCounts=0;
 				counts=0;
