@@ -131,7 +131,7 @@
 		$("#table").bootstrapTable('refresh');
 	});
 	function openFormCard(url,title) {
-		 layer.open({
+		 var index=layer.open({
 				type:2,
 				title:'<span style="font-size:14px;font-weight: bold;">'+title+'<span>',
 				maxmin:true,
@@ -143,6 +143,7 @@
 					$("#table").bootstrapTable('refresh'); 
 				}
 			});
+		 localStorage.layerindex = index;
 	 }
 	function FormAction(data,action){
 		var __str= JSON.stringify(data);

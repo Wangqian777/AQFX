@@ -1,0 +1,63 @@
+ <!DOCTYPE html>
+<html>
+  <head>
+    <title>form_md.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <link rel="stylesheet" href="plugins/bootstraptable/dist/bootstrap-table.min.css"/>
+    <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css" type="text/css"></link>
+    <link rel="stylesheet" href="plugins/fancytree/skin-bootstrap/ui.fancytree.css" type="text/css"></link>
+    <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.css" type="text/css"></link>
+    <link rel="stylesheet" href="plugins/layui/css/layui.css" type="text/css"></link>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+  	<script type="text/javascript" src="plugins/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="plugins/bootstrap/js/bootstrap-treeview.js"></script>
+	<script type="text/javascript" src="plugins/bootstraptable/dist/bootstrap-table.js"></script>
+	<script type="text/javascript" src="plugins/layer/layer.js"></script>
+	<script type="text/javascript" src="js/jquery.formFill.js"></script>
+	
+	  
+  </head>
+  
+  <body>
+  	<div class="mdatafield" style="overflow:hidden;">
+          <div class="form_form"> 
+            <div class="toolbar">
+                <div class="btn-group " id="btn-group-tz" style="margin-top:5px; padding-left:16px;">
+                   <button type="button" class="btn btn-default"  id="btntable-save"><i class="fa fa-save"></i>&nbsp;保存</button>
+                   <button type="button" class="btn btn-default" id="btntable-chongzhi"><i class="fa fa-search"></i>&nbsp;重置</button>   
+                 </div>
+            </div>
+            <div class="table_input">
+                 <table id="tb_datamodel"></table>
+            </div>
+            <div style="padding:30px 10px; font-size:13px;margin-top:-20px;">
+                <form class="form-horizontal" role="form" id="frmdata" data-table="用户">
+                	<input type="hidden" id='id' name="id"/>
+                    <div class="form-group">
+                        <label class="col-sm-1 col-md-1 control-label" style="min-width:130px;">原密码</label>
+                        <div class="col-sm-4 col-md-4">
+                            <input class="form-control" id="原密码"    data-type="字符串" type="password" placeholder="" value="" />
+                        </div>
+                        <label class="col-sm-1 col-md-1 control-label" style="min-width:130px;">新密码</label>
+                        <div class="col-sm-4 col-md-4">
+                            <input class="form-control" id="新密码" name="密码"     data-type="字符串" type="password" placeholder="" value="" />
+                        </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1 col-md-1 control-label" style="min-width:130px;">确认密码</label>
+                        <div class="col-sm-4 col-md-4">
+                            <input class="form-control" id="密码"     data-type="字符串" type="password" placeholder="" value="" />
+                        </div>
+                    </div>
+                </form>
+                
+     	</div>        
+		</div>
+      </div>
+  </body>
+  <script type="text/javascript" src="updatepwd.js"></script>
+</html>

@@ -231,12 +231,6 @@
 	}
 	$("#新增").click(function() {
 		localStorage.FormMode = "Add";
-		localStorage.业务科室 = localStorage.userID;
-		localStorage.业务科室名称 = localStorage.buname;
-		if (localStorage.业务科室 == "undefined") {
-			layer.msg("请选择左侧节点");
-			return;
-		}
 		openFormCard("form_add.html", "新增用户");
 	});
 	$("#编辑").click(function() {

@@ -37,8 +37,9 @@ public class FileController {
 			}
             String targetSrc = request.getServletContext().getRealPath("/file");
             String fileName =file.getOriginalFilename();
+            String oldName=fileName.substring(0,fileName.lastIndexOf("."));
             fileName=fileName.substring(fileName.lastIndexOf("."),fileName.length());
-            fileName=getRandomFileName()+fileName;
+            fileName=oldName+getRandomFileName()+fileName;
             File targetFile = FileUtil.Upload(file, targetSrc, fileName);
             
 			path += targetFile.getPath();

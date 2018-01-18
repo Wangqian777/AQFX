@@ -1,39 +1,49 @@
 $(function() {
-	var List = new Array();//定义一个全局变量去接受文件名和id
+	var fileCounts=0;
+	var counts=0;
 	var url1 = 'http://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/631px-FullMoon2010.jpg';
 	var url2 = 'http://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Earth_Eastern_Hemisphere.jpg/600px-Earth_Eastern_Hemisphere.jpg';
 	$('#file').fileinput({// 初始化上传文件框
-		uploadUrl : "../../uploadFile.do",
-		// allowedFileExtensions : ["jpg", "png","gif"],/*上传文件格式*/
-		deleteUrl : "../../deleteFile.do",
-		language : "zh",// 配置语言
-		dropZoneEnabled : false,
-		showUpload : false,
-		showRemove : false,
-		showCaption : false,// 是否显示标题
-		uploadAsync : true,
-		enctype : 'multipart/form-data',
-		overwriteInitial : false,
-		maxFileCount : 1,
-		layoutTemplates:{actionDelete:''},
-		// maxFileSize : 0,
+		language: 'zh', //设置语言
+        uploadUrl: "../../uploadFile.do", //上传的地址
+        showUpload: false, //是否显示上传按钮
+        showCaption: false,//是否显示标题
+        showRemove:false,
+        browseClass: "btn btn-primary", //按钮样式     
+        dropZoneEnabled: false,//是否显示拖拽区域
+        maxFileCount: 10, //表示允许同时上传的最大文件个数
+        enctype: 'multipart/form-data',
+        validateInitialCount:true,
+        uploadAsync:true,
+        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+        layoutTemplates:{actionUpload:'',actionDelete:''},
+        //
 	});
 
 	// 上传文件成功，回调函数
+	var urlArry=new Array(fileCounts);
 	$('#file').on("fileuploaded", function(event, data, previewId, index) {
 		if (data.response.state > 0) {
 			var url = data.response.data;
-			var html="<tr ><td name='文件路径'>"+url+"</td><td name='文件名称'>"+data.filenames[0]+"</td></tr>";
+			var filename=url.substring(url.lastIndexOf("\\")+1,url.lastIndexOf("."));
+			filename=filename.substring(0,filename.length-13);
+			filename+=url.substring(url.lastIndexOf("."),url.length);
+			var html="<tr ><td name='文件路径'>"+url+"</td><td name='文件名称'>"+filename+"</td></tr>";
 			$("#附件信息").append(html);
-			List.push({ FileName: data.filenames[0], KeyID: previewId });
+			counts++;
+			if(fileCounts==counts){
+				fileCounts=0;
+				counts=0;
+				formSave();
+			}
 		}
 	});
-	$('#file').on('filesuccessremove', function(event, data, previewId, index) {
-		 for (var i = 0; i < List.length; i++) { 
-		      if (List[i].KeyID== data) { 
-		        console.log( List[i]); 
-		      } 
-		   }
+	$('#file').on('filedeleted', function(event, id) {
+	    console.log("1111");
+	});
+	//清空事件
+	$("#file").on("filecleared",function(event, data, msg){
+		localStorage.fileCounts=0;
 	});
 	$('#date').datetimepicker({
 		format : 'YYYY-MM-DD',
@@ -115,7 +125,18 @@ $(function() {
 			}
 		});
 	}
+	$("#file").change(function(){
+		fileCounts+=1;
+	});
 	$("#btntable-save").click(function(){
+		if($("#file").val()!=""){
+			$("#file").fileinput("upload");
+		}else{
+			formSave();
+		}
+		
+	});
+	function formSave(){
 		var json = {};
 		var action = "";
 		var data;
@@ -127,16 +148,20 @@ $(function() {
 		data = $("#frmdata").serializeObject();
 		json.table = $("#frmdata").data("table");
 		json.tabledata = data;
-		json.dtables = [];
-		$("#附件信息").find("tr").each(function () {
-			var tempjson={};
-			tempjson.文件路径=$(this).children('td:eq(0)').text();
-			tempjson.文件名称=$(this).children('td:eq(1)').text();
-			json.dtables.push({ table: '附件', tabledata: tempjson });
-		});
-		console.log(json);
-		FormAction(json, action);
-	});
+		var tab = document.getElementById("附件信息") ;
+	    //表格行数
+	    var rows = tab.rows.length;
+	    if(rows>0){
+	    	json.dtables = [];
+			$("#附件信息").find("tr").each(function () {
+				var tempjson={};
+				tempjson.文件路径=$(this).children('td:eq(0)').text();
+				tempjson.文件名称=$(this).children('td:eq(1)').text();
+				json.dtables.push({ table: '附件', tabledata: tempjson });
+			});
+	    }
+	    FormAction(json, action);
+	}
 	function FormAction(data, action) {
 		var __str = JSON.stringify(data);
 		$.ajax({
@@ -151,7 +176,9 @@ $(function() {
 			success : function(data) {
 				if (data.state == 1) {
 					layer.msg("操作成功");
-					top.window.layer.close(localStorage.layerindex);
+					console.log(layer.open());
+					console.log(localStorage.layerindex);
+					layer.close(localStorage.layerindex);
 				} else {
 					layer.msg("操作失败");
 				}
