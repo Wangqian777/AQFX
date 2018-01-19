@@ -196,9 +196,12 @@ public class DataController {
 					dataService.insertData(s);
 				}
 				sql=sqlMap.get("ziSql");
-				for (String s : sql) {
-					dataService.insertData(s);
+				if(sql!=null && sql.size()>0){
+					for (String s : sql) {
+						dataService.insertData(s);
+					}
 				}
+				
 			} else if (action.equals("M")) {
 				sqlMap = generateSql.generateUpdateSql(v_json);
 				sql = sqlMap.get("zhuSql");
@@ -206,8 +209,10 @@ public class DataController {
 					dataService.updateData(s);
 				}
 				sql=sqlMap.get("ziSql");
-				for (String s : sql) {
-					dataService.updateData(s);
+				if(sql!=null && sql.size()>0){
+					for (String s : sql) {
+						dataService.updateData(s);
+					}
 				}
 			} else if (action.equals("D")) {
 				sqlMap = generateSql.generateDeleteSql(v_json);
@@ -226,8 +231,10 @@ public class DataController {
 					dataService.updateData(s);
 				}
 				sql=sqlMap.get("ziSql");
-				for (String s : sql) {
-					dataService.updateData(s);
+				if(sql!=null && sql.size()>0){
+					for (String s : sql) {
+						dataService.updateData(s);
+					}
 				}
 			}
 			json = JsonResult.Success();
@@ -241,11 +248,11 @@ public class DataController {
 	}
 	// 查询列表数据
 	@RequestMapping("getPageData.do")
-	public void getPageData(String table, String params, HttpServletResponse respone) throws IOException {
+	public void getPageData(String listSql, String params, HttpServletResponse respone) throws IOException {
 		respone.setContentType("text/html;charset=utf-8");
 		PrintWriter out = respone.getWriter();
-		if (table != null) {
-			PageResult pageData = dataService.getPageData(table,params);
+		if (listSql != null) {
+			PageResult pageData = dataService.getPageData(listSql,params);
 			out.print(pageData.toJson());
 			out.flush();
 			out.close();

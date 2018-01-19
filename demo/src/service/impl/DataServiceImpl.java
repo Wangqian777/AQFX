@@ -21,7 +21,7 @@ public class DataServiceImpl implements DataService {
 		return dataDao.getData(sql);
 	}
 
-	public PageResult getPageData(String table, String params) {
+	public PageResult getPageData(String listSql, String params) {
 		String sql = "";
 		String where = "";
 		Integer begin = 0, end = 0;
@@ -30,16 +30,16 @@ public class DataServiceImpl implements DataService {
 			JSONObject json = JSONObject.fromObject(params);
 			Integer pageSize = json.getInt("pageSize");
 			Integer pageNumber = json.getInt("pageNumber");
-			Iterator it = json.keys();
-			while (it.hasNext()) {
-				String key = (String) it.next();
-				String value = json.get(key).toString();
-				if ("pageSize|pageNumber|searchText|sortName|sortOrder".indexOf(key) == -1) {
-					where += String.format(" and %s='%s'", key, value.toString());
-				}
-			}
-			sql=String.format("select count(1) from %s where 1=1 %s", table,where);
-			total = dataDao.getDataTotal(sql);
+//			Iterator it = json.keys();
+//			while (it.hasNext()) {
+//				String key = (String) it.next();
+//				String value = json.get(key).toString();
+//				if ("pageSize|pageNumber|searchText|sortName|sortOrder".indexOf(key) == -1) {
+//					where += String.format(" and %s='%s'", key, value.toString());
+//				}
+//			}
+//			sql=String.format("select count(1) from %s where 1=1 %s", table,where);
+			total = dataDao.getDataTotal("select count(1) from ("+listSql+")");
 			if (null == pageNumber || pageNumber < 1) {
 				pageNumber = 1;
 			}
@@ -50,10 +50,7 @@ public class DataServiceImpl implements DataService {
 			end = pageNumber * pageSize;
 		}
 		
-		sql = String.format(
-				"SELECT * FROM (SELECT ROWNUM RN,A.* FROM (SELECT * FROM %s where 1=1 %s) A WHERE ROWNUM <= %d)  WHERE RN > %d",
-				table, where, end, begin);
-
+		sql = String.format("SELECT * FROM (SELECT ROWNUM RN,A.* FROM (%s) A WHERE ROWNUM <= %d)  WHERE RN > %d",listSql, end, begin);
 		List<LinkedHashMap<String, Object>> data = dataDao.getData(sql);
 		return PageResult.Success(data, total);
 	}

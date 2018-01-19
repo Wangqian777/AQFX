@@ -31,7 +31,6 @@ $(function() {
 			var html="<tr ><td name='文件路径'>"+url+"</td><td name='文件名称'>"+filename+"</td></tr>";
 			$("#附件信息").append(html);
 			counts++;
-			
 			if(fileCounts==counts){
 				fileCounts=0;
 				counts=0;
@@ -44,7 +43,7 @@ $(function() {
 	});
 	//清空事件
 	$("#file").on("filecleared",function(event, data, msg){
-		localStorage.fileCounts=0;
+		fileCounts=0;
 	});
 	$('#date').datetimepicker({
 		format : 'YYYY-MM-DD',
@@ -130,7 +129,8 @@ $(function() {
 		fileCounts+=1;
 	});
 	$("#btntable-save").click(function(){
-		if($("#file").val()!=""){
+		
+		if(fileCounts!=0){
 			$("#file").fileinput("upload");
 		}else{
 			formSave();
@@ -177,13 +177,24 @@ $(function() {
 			success : function(data) {
 				if (data.state == 1) {
 					layer.msg("操作成功");
-					console.log(layer.open());
-					console.log(localStorage.layerindex);
-					layer.close(localStorage.layerindex);
+					function jump(count) {    
+			            window.setTimeout(function(){    
+			                count--;    
+			                if(count > 0) {      
+			                    jump(count);    
+			                } else {    
+			                	parent.layer.closeAll();   
+			                }    
+			            }, 1000);    
+			        }    
+			        jump(1);
+					
 				} else {
 					layer.msg("操作失败");
 				}
+				
 			}
+			  
 		});
 	}
 })

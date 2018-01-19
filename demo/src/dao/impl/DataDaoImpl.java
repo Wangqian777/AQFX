@@ -29,8 +29,8 @@ public class DataDaoImpl extends SqlSessionDaoSupport implements DataDao {
 	public int getDataCounts(String sql) {
 		return getSqlSession().selectOne("nsDataDao.getDataCounts",sql);
 	}
-	public Integer getDataTotal(String tableName) {
-		return getSqlSession().selectOne("nsDataDao.getDataTotal",tableName);
+	public Integer getDataTotal(String sql) {
+		return getSqlSession().selectOne("nsDataDao.getDataTotal",sql);
 	}
 	public int deleteData(String sql) {
 		return getSqlSession().delete("nsDataDao.deleteData",sql);
