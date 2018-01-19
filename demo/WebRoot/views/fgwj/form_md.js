@@ -3,6 +3,30 @@ $(function() {
 	var counts=0;
 	var url1 = 'http://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/631px-FullMoon2010.jpg';
 	var url2 = 'http://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Earth_Eastern_Hemisphere.jpg/600px-Earth_Eastern_Hemisphere.jpg';
+	if (localStorage.FormMode == "Edit" || localStorage.FormMode == "View") {
+		$("#附件表").css("display","block");
+		var json = { "ID": localStorage.fgwjId,"单据类型":"法规文件","table":"公告警示"};
+		var __str = JSON.stringify(json);
+		$.ajax({
+			url : "../../getListData.do",
+			type : "POST",
+			data : {
+				"v_json" : __str
+			},
+			dataType : "JSON",
+			success : function(data) {
+				$("#frmdata").fill(data[0], {
+					styleElementName : 'none'
+				});
+				$("#id").val(data[0].ID);
+			}
+		});
+		if(localStorage.FormMode == "View"){
+			$('input,select,textarea',$('#frmdata')).prop('readonly',true);
+			$("button[type=button]").attr("disabled","true");
+			$("#详细类别").attr("disabled","disabled");
+		}
+	}
 	$('#file').fileinput({// 初始化上传文件框
 		language: 'zh', //设置语言
         uploadUrl: "../../uploadFile.do", //上传的地址
@@ -50,17 +74,16 @@ $(function() {
 		locale : moment.locale('zh-cn')
 	});
 	dbQueryParams = function (params) {
-
-		params.FID=localStorage.fgwjId;
+		var listSql="select * from 附件 where FID='"+localStorage.fgwjId+"'";
         var temp = {
             'params' : JSON.stringify(params),
-            'table':'附件'
+            'listSql':listSql
         };
         return temp;
     };
 	function TableInit() {
 		$('#table').bootstrapTable({
-            url: '../../getPageData.do',         //请求后台的URL（*）
+			url: '../../getPageData.do',         //请求后台的URL（*）
             method: 'get',                      //请求方式（*）
             striped: true,                      //是否显示行间隔色
             cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
@@ -71,7 +94,7 @@ $(function() {
             queryParams: dbQueryParams,			//传递参数（*）
             sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
             pageNumber:1,                       //初始化加载第一页，默认第一页
-            pageSize: 10,                       //每页的记录行数（*）
+            pageSize: 2,                       //每页的记录行数（*）
             pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
             search: false,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
             strictSearch: true,
@@ -95,36 +118,33 @@ $(function() {
             	field: '文件名称',
                 title: '文件名称',
                 valign: 'middle',
-                visible: true
+                visible: true,
+                align:"center",
+                
                 
             } , {
             	field: '文件路径',
                 title: '文件路径',
                 valign: 'middle',
-                visible: true
-            } ]
+                visible: false
+                
+            }  , {
+            	field: '下载',
+                title: '下载',
+                valign: 'middle',
+                visible: true,
+                align:"center",
+                formatter: function (value, row, index) {  
+                	var path=row.文件路径+"";
+              		path=path.replace(/\\/g,'%2F');
+              		var fileName=row.文件名称+"";
+              		html="<a href='../../download.do?path="+path+"&fileName="+fileName+"'>下载文件</a>";
+                    return html;
+                } 
+            }]
         });
 	};
 	TableInit();
-	if (localStorage.FormMode == "Edit") {
-		$("#附件表").css("display","block");
-		var json = { "ID": localStorage.fgwjId,"单据类型":"法规文件","table":"公告警示"};
-		var __str = JSON.stringify(json);
-		$.ajax({
-			url : "../../getListData.do",
-			type : "POST",
-			data : {
-				"v_json" : __str
-			},
-			dataType : "JSON",
-			success : function(data) {
-				$("#frmdata").fill(data[0], {
-					styleElementName : 'none'
-				});
-				$("#id").val(data[0].ID);
-			}
-		});
-	}
 	$("#file").change(function(){
 		fileCounts+=1;
 	});
@@ -136,6 +156,46 @@ $(function() {
 			formSave();
 		}
 		
+	});
+	$("#btntable-refreshFile").click(function(){
+		$("#table").bootstrapTable('refresh'); 
+	});
+	$("#btntable-deleteFile").click(function(){
+		var dataArray= $("#table").bootstrapTable('getSelections');
+		if(dataArray.length==0){
+			layer.msg("请选择附件行！");
+			return;
+		}
+		layer.confirm('确认删除吗？', {  
+	        btn: ['确定','取消'] //按钮  
+	    },function (index) {
+	    	layer.close(index);
+	    	localStorage.fjId=dataArray[0].ID;
+			var filePathArry=new Array();
+			filePathArry.push(dataArray[0].文件路径);
+			var json={"zhubiao":"附件","zhubiaoID":localStorage.fjId};
+			json.wenjian=filePathArry;
+			var __str = JSON.stringify(json);
+			$.ajax({
+				type : "POST",
+				url : "../../manyJson.do",
+				data : {
+					"v_json" : __str,
+					"action" : "D"
+				},
+				dataType : "JSON",
+				async : false,
+				success : function(data) {
+					if (data.state == 1) {
+						layer.msg("操作成功");
+						$("#table").bootstrapTable('refresh'); 
+					} else {
+						layer.msg("操作失败");
+					}
+					
+				}
+			});
+	    });
 	});
 	function formSave(){
 		var json = {};

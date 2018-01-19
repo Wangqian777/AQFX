@@ -1,4 +1,12 @@
 ﻿$(function(){
+	$.ajax({
+		url:"",
+		type:"POST",
+		data:{"type":"法规文件"},
+		dataType:"",
+	});
+	
+	
 	dbQueryParams = function (params) {
 		var listSql="select * from 公告警示 where 单据类型='法规文件'";
         var temp = {
@@ -20,7 +28,7 @@
             queryParams: dbQueryParams,			//传递参数（*）
             sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
             pageNumber:1,                       //初始化加载第一页，默认第一页
-            pageSize: 2,                       //每页的记录行数（*）
+            pageSize: 1,                       //每页的记录行数（*）
             pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
             search: false,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
             strictSearch: true,
@@ -28,7 +36,7 @@
             showRefresh: false,                  //是否显示刷新按钮
             minimumCountColumns: 2,             //最少允许的列数
             clickToSelect: true,                //是否启用点击选中行
-            height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+            height: 400,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
             uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
             showToggle:false,                    //是否显示详细视图和列表视图的切换按钮
             cardView: false,                    //是否显示详细视图
@@ -57,12 +65,6 @@
                 title: '发布时间',
                 valign: 'middle',
                 visible: true
-            } ,{
-            	
-                field: '文件地址',
-                title: '文件地址',
-                valign: 'middle',
-                visible: false
             } , {
             	
                 field: '文件名称',
@@ -112,7 +114,29 @@
 	        btn: ['确定','取消'] //按钮  
 	    },function (index) {
 	    	layer.close(index);
+<<<<<<< HEAD
+	    	var json={"FID":localStorage.fgwjId,"table":"附件"};
+	    	var __str= JSON.stringify(json);
+	    	var filePathArry=new Array();
+	    	$.ajax({
+	    		url:"../../getListData.do",
+	    		type:"POST",
+	    		data:{"v_json":__str},
+	    		dataType:"JSON",
+	    		async:false,
+	    		success:function(data){
+	    			for(var i=0;i<data.length;i++){
+	    				filePathArry.push(data[i].文件路径);
+	    			}
+	    		}
+	    	});
+	    	var json={"zhubiao":"公告警示","zhubiaoID":localStorage.fgwjId,"zibiao":"附件"};
+	    	if(filePathArry.length>0){
+	    		json.wenjian=filePathArry;
+	    	}
+=======
 	    	var json={"zhubiao":"公告警示","zhubiaoID":localStorage.fgwjId,"zibiao":"附件","wenjian":dataArray[0].文件地址};
+>>>>>>> branch 'master' of https://github.com/wangqian777/AQFX.git
 	    	FormAction(json,"D");
 	    }); 
 	});
@@ -129,13 +153,25 @@
 	$("#btntable-refresh").click(function(){
 		$("#table").bootstrapTable('refresh');
 	});
+	$("#ceshi").click(function(){
+		layer.open({
+			type:2,
+			title:'111',
+			maxmin:true,
+			shadeClose:true,
+			offset:'auto',
+			area:['900px', '600px'],
+			content:["MyHtml.html"]
+			
+		});
+	});
 	function openFormCard(url,title) {
-		 var index=layer.open({
+		 layer.open({
 				type:2,
 				title:'<span style="font-size:14px;font-weight: bold;">'+title+'<span>',
 				maxmin:true,
 				shadeClose:true,
-				offset:'auto',
+				//offset:'auto',
 				area:['900px', '600px'],
 				content:[url],
 				
@@ -143,8 +179,11 @@
 					$("#table").bootstrapTable('refresh'); 
 				}
 			});
+<<<<<<< HEAD
+=======
 		 localStorage.layerindex = index;
 		 console.log(localStorage.layerindex);
+>>>>>>> branch 'master' of https://github.com/wangqian777/AQFX.git
 	 }
 	function FormAction(data,action){
 		var __str= JSON.stringify(data);
