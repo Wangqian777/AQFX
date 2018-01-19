@@ -1,48 +1,42 @@
-﻿ ﻿
+
 <!DOCTYPE html>
-<html>
-<head>
-<title>form_md.html</title>
-
-<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-<meta http-equiv="description" content="this is my page">
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-
-<link rel="stylesheet" href="../../plugins/bootstraptable/dist/bootstrap-table.min.css" />
-<link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap.min.css" type="text/css"></link>
-<link rel="stylesheet" href="../../plugins/fancytree/skin-bootstrap/ui.fancytree.css" type="text/css"></link>
-<link rel="stylesheet" href="../../plugins/font-awesome/css/font-awesome.css" type="text/css"></link>
-<link rel="stylesheet" href="../../plugins/layui/css/layui.css" type="text/css"></link>
-<link rel="stylesheet" href="../../plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" type="text/css"></link>
-<link rel="stylesheet" href="../../plugins/bootstrap-fileinput/fileinput.min.css" type="text/css"></link>
-<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="../../plugins/bootstrap/js/bootstrap.js"></script>
-<script type="text/javascript" src="../../plugins/bootstrap/js/bootstrap-treeview.js"></script>
-<script type="text/javascript" src="../../plugins/bootstraptable/dist/bootstrap-table.js"></script>
-<script type="text/javascript" src="../../plugins/layer/layer.js"></script>
-<script type="text/javascript" src="../../js/jquery.formFill.js"></script>
-<script type="text/javascript" src="../../plugins/bootstrap/js/bootstrap.js"></script>
-<script type="text/javascript" src="../../plugins/bootstrap-datetimepicker/js/moment-with-locales.min.js"></script>
-<script type="text/javascript" src="../../plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-<script type="text/javascript" src="../../plugins/bootstrap-fileinput/fileinput.min.js"></script>
-<script type="text/javascript" src="../../plugins/bootstrap-fileinput/zh.js"></script>
-<script type="text/javascript" src="../../plugins/bootstraptable/dist/locale/bootstrap-table-zh-CN.js"></script>
-</head>
-
-<body>
-	<div class="mdatafield" style="overflow: auto;height:95%;">
+<html style="height:100%;">
+  <head>
+    <title></title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+	<link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap.css" type="text/css"></link>	
+    <link rel="stylesheet" href="../../plugins/bootstraptable/dist/bootstrap-table.css" />
+    <link rel="stylesheet" href="../../plugins/layui/css/layui.css" type="text/css"></link>
+    <link rel="stylesheet" href="../../plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" type="text/css"></link>
+	<link rel="stylesheet" href="../../plugins/bootstrap-fileinput/fileinput.min.css" type="text/css"></link>
+	<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="../../js/jquery.formFill.js"></script>
+	<script type="text/javascript" src="../../plugins/layer/layer.js"></script>
+	<script type="text/javascript" src="../../plugins/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../plugins/bootstraptable/dist/bootstrap-table.js"></script>
+	<script type="text/javascript" src="../../plugins/bootstrap-datetimepicker/js/moment-with-locales.min.js"></script>
+	<script type="text/javascript" src="../../plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript" src="../../plugins/bootstrap-fileinput/fileinput.min.js"></script>
+	<script type="text/javascript" src="../../plugins/bootstrap-fileinput/zh.js"></script>
+	<script type="text/javascript" src="../../plugins/bootstraptable/dist/locale/bootstrap-table-zh-CN.js"></script>
+  </head>
+ <body style="height:100%;">
+ 
+	<div class="mdatafield" style="overflow: auto;height:95%">
 		<div class="form_form">
 			<div class="toolbar" style="background: #DCDCDC">
 				<div class="btn-group " id="btn-group-tz" style="margin-top: 5px; padding-left: 16px; margin-bottom: 5px;">
 					<button type="button" class="btn btn-default" id="btntable-save">
 						<i class="fa fa-save"></i>&nbsp;保存
 					</button>
-					<button type="button" class="btn btn-default" id="btntable-chongzhi">
-						<i class="fa fa-search"></i>&nbsp;重置
-					</button>
+					
 				</div>
 			</div>
-			<div style="padding-top: 20px; padding-right: 20px; font-size: 13px;">
+			<div style="padding-top: 20px; padding-right: 20px;">
 				<form class="form-horizontal" role="form" id="frmdata" data-table="公告警示">
 					<input type="hidden" id="单据类型" name="单据类型" value="法规文件"/>
 					<input type="hidden" id="id" name="id" />
@@ -87,9 +81,6 @@
 				<div id="附件表"  style="margin-left: 70px;display:none;">
 					<div id="toolbar">
 						<div class="btn-group">
-							<button type="button" class="btn btn-default" id="btntable-view">
-								<i class="fa fa fa-table"></i>&nbsp;查看
-							</button>
 							<button type="button" class="btn btn-default" id="btntable-deleteFile">
 								<i class="fa fa-trash-o"></i>&nbsp;删除
 							</button>
@@ -105,6 +96,8 @@
 			</div>
 		</div>
 	</div>
-</body>
-<script type="text/javascript" src="form_md.js"></script>
+  	
+  </body>
+  <script type="text/javascript" src="form_md.js"></script>
 </html>
+

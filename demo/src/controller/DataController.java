@@ -135,7 +135,6 @@ public class DataController {
 				sql += String.format(" and %s='%s'", key, value.toString());
 			}
 		}
-		
 		mapList = dataService.getData(sql);
 		JSONArray js = JSONArray.fromObject(mapList);
 		out.print(js);
@@ -143,6 +142,21 @@ public class DataController {
 		out.close();
 		
 	}
+	//根据数据字典类型查询明细
+	@RequestMapping("getDatadictionaryByType.do")
+	public void getDatadictionaryByType(String type, HttpServletResponse respone) throws IOException{
+		respone.setContentType("text/html;charset=utf-8");
+		PrintWriter out = respone.getWriter();
+		String sql="select sj_mx.* from 数据字典 sj "
+				+ "left join 数据字典_明细 sj_mx on sj_mx.FID=sj.ID and NVL(sj_mx.是否禁用, 0)!=1 "
+				+ "where NVL(sj.是否禁用,0)!=1 and sj.名称='"+type+"'";
+		mapList = dataService.getData(sql);
+		JSONArray js = JSONArray.fromObject(mapList);
+		out.print(js);
+		out.flush();
+		out.close();
+	}
+	
 	// 单表json处理
 	@RequestMapping("SingleJson.do")
 	public void SingleJson(String v_json, String action, HttpServletResponse response) throws IOException {
@@ -221,8 +235,10 @@ public class DataController {
 					dataService.deleteData(s);
 				}
 				sql=sqlMap.get("ziSql");
-				for (String s : sql) {
-					dataService.deleteData(s);
+				if(sql!=null && sql.size()>0){
+					for (String s : sql) {
+						dataService.deleteData(s);
+					}
 				}
 			}else if(action.equals("MC")){
 				sqlMap = generateSql.generateUpdateSqlMC(v_json);
