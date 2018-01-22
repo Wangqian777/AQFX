@@ -1,4 +1,16 @@
 $(function() {
+	$.ajax({
+		type : "POST",
+		url : '../../getDatadictionaryByType.do',
+		data :"type=通知公告",
+		async : false,
+		dataType: "json", 
+		success : function(data) {
+			for (var i = 0; i < data.length; i++) {
+				$("#详细类型").append("<option value=" + data[i]["ID"] + ">" + data[i]["名称"] + "</option>");
+			}
+		}
+	});
 	var fileCounts=0;
 	var counts=0;
 	var url1 = 'http://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/631px-FullMoon2010.jpg';
@@ -19,7 +31,7 @@ $(function() {
         layoutTemplates:{actionUpload:'',actionDelete:''},
         //
 	});
-
+	
 	// 上传文件成功，回调函数
 	var urlArry=new Array(fileCounts);
 	$('#file').on("fileuploaded", function(event, data, previewId, index) {
