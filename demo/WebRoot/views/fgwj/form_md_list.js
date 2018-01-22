@@ -1,6 +1,6 @@
 ﻿$(function(){
 	$.ajax({
-		url:"",
+		url:"getDatadictionary ByType.do",
 		type:"POST",
 		data:{"type":"法规文件"},
 		dataType:"",

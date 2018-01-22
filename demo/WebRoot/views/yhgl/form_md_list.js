@@ -3,19 +3,19 @@
 	$('#left').height(height)
 	$('#right').height(height - $('#btns').outerHeight(true))
 	dbQueryParams = function(params) {
+		var listSql="select * from 用户  where 用户类别 = '用户'";
 		if ($('#username').val() != null && $('#username').val() != '') {
-			params.用户姓名 = $('#username').val();
+			listSql+=" and 用户姓名  like  '%"+$('#username').val()+"%'";
 		}
 		if ($('#logioname').val() != null && $('#logioname').val() != '') {
-			params.登录名 = $('#logioname').val();
+			listSql+=" and 登录名  like  '"+$('#logioname').val()+"'";
 		}
 		if($('#username').val() ==''&&$('#logioname').val() ==''){
-			params.业务科室 = localStorage.userID;
+			listSql+=" and 业务科室 ='"+localStorage.userID+"'";
 		} 
-		params.用户类别 = '用户';
 		var temp = { 
 			'params' : JSON.stringify(params),
-			'table' : '用户'
+			'listSql' : listSql 
 		};
 		return temp;
 	};
