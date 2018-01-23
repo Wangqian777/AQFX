@@ -1,8 +1,4 @@
 $(function() {
-	var fileCounts=0;
-	var counts=0;
-	var url1 = 'http://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/631px-FullMoon2010.jpg';
-	var url2 = 'http://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Earth_Eastern_Hemisphere.jpg/600px-Earth_Eastern_Hemisphere.jpg';
 	$.ajax({
 		url:"../../getDatadictionaryByType.do",
 		type:"POST",
@@ -41,6 +37,15 @@ $(function() {
 			$("#详细类别").attr("disabled","disabled");
 		}
 	}
+	$('#date').datetimepicker({
+		format : 'YYYY-MM-DD',
+		locale : moment.locale('zh-cn')
+	});
+	//上传start
+	var fileCounts=0;
+	var counts=0;
+	var url1 = 'http://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/631px-FullMoon2010.jpg';
+	var url2 = 'http://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Earth_Eastern_Hemisphere.jpg/600px-Earth_Eastern_Hemisphere.jpg';
 	$('#file').fileinput({// 初始化上传文件框
 		language: 'zh', //设置语言
         uploadUrl: "../../uploadFile.do", //上传的地址
@@ -83,10 +88,12 @@ $(function() {
 	$("#file").on("filecleared",function(event, data, msg){
 		fileCounts=0;
 	});
-	$('#date').datetimepicker({
-		format : 'YYYY-MM-DD',
-		locale : moment.locale('zh-cn')
+	$("#file").change(function(){
+		fileCounts+=1;
 	});
+	//上传end
+	
+	
 	dbQueryParams = function (params) {
 		var listSql="select * from 附件 where FID='"+localStorage.fgwjId+"'";
         var temp = {
@@ -159,9 +166,7 @@ $(function() {
         });
 	};
 	TableInit();
-	$("#file").change(function(){
-		fileCounts+=1;
-	});
+	
 	$("#btntable-save").click(function(){
 		
 		if(fileCounts!=0){

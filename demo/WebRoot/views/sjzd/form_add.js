@@ -2,7 +2,7 @@
 	$("#FID").val(localStorage.FID);
 	$("#id").val(localStorage.sjzdmxID);
 	if(localStorage.FormMode=="Edit"){
-		var json = { "ID": localStorage.sjzdmxID};
+		var json = { "ID": localStorage.sjzdmxID}; 
         var __str = JSON.stringify(json);
 		$.ajax({
 			url:"../../getDatadictionary_mx.do",

@@ -1,10 +1,10 @@
 $(function(){
 	dbQueryParams = function (params) {
 
-		params.单据类型="年度辨识评估";
+		var listSql="select * from 辨识评估 where 单据类型='年度辨识评估'";
         var temp = {
             'params' : JSON.stringify(params),
-            'table':'辨识评估'
+            'listSql':listSql
         };
         return temp;
     };
@@ -95,12 +95,31 @@ $(function(){
 			layer.msg("请选择数据行！");
 			return;
 		}
+		var flag=true;
 		localStorage.ndbsId=dataArray[0].ID;
 		layer.confirm('确认删除吗？', {  
 	        btn: ['确定','取消'] //按钮  
 	    },function (index) {
 	    	layer.close(index);
-	    	var json={"zhubiao":"辨识评估","zhubiaoID":localStorage.ndbsId};
+	    	var json={"FID":localStorage.ndbsId,"table":"附件"};
+	    	var __str= JSON.stringify(json);
+	    	var filePathArry=new Array();
+	    	$.ajax({
+	    		url:"../../getListData.do",
+	    		type:"POST",
+	    		data:{"v_json":__str},
+	    		dataType:"JSON",
+	    		async:false,
+	    		success:function(data){
+	    			for(var i=0;i<data.length;i++){
+	    				filePathArry.push(data[i].文件路径);
+	    			}
+	    		}
+	    	});
+	    	var json={"zhubiao":"辨识评估","zhubiaoID":localStorage.ndbsId,"zibiao":"附件"};
+	    	if(filePathArry.length>0){
+	    		json.wenjian=filePathArry;
+	    	}
 	    	FormAction(json,"D");
 	    }); 
 	});
@@ -135,7 +154,7 @@ $(function(){
 		var __str= JSON.stringify(data);
 		$.ajax({
 			type:"POST",
-			url:"../../SingleJson.do",
+			url:"../../manyJson.do",
 			data:{"v_json":__str,"action":action},
 			dataType:"JSON",
 			async:false,

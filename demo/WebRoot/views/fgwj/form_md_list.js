@@ -145,18 +145,7 @@
 	$("#btntable-refresh").click(function(){
 		$("#table").bootstrapTable('refresh');
 	});
-	$("#ceshi").click(function(){
-		layer.open({
-			type:2,
-			title:'111',
-			maxmin:true,
-			shadeClose:true,
-			offset:'auto',
-			area:['900px', '600px'],
-			content:["MyHtml.html"]
-			
-		});
-	});
+	
 	function openFormCard(url,title) {
 		 layer.open({
 				type:2,
