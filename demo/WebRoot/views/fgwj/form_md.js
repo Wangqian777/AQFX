@@ -3,6 +3,20 @@ $(function() {
 	var counts=0;
 	var url1 = 'http://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/631px-FullMoon2010.jpg';
 	var url2 = 'http://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Earth_Eastern_Hemisphere.jpg/600px-Earth_Eastern_Hemisphere.jpg';
+	$.ajax({
+		url:"../../getDatadictionaryByType.do",
+		type:"POST",
+		data:{"type":"法规文件"},
+		dataType:"JSON",
+		success:function(data){
+			var selectHtml="";
+			for(var i=0;i<data.length;i++){
+				selectHtml+="<option  value='"+data[i].ID+"'>"+data[i].名称+"</option>";
+			}
+			$("#详细类别").html(selectHtml);
+			//$(".list-group-item").eq(0).css({"background-color":"#428BCA","color":"#FFFFFF"});
+		}
+	});
 	if (localStorage.FormMode == "Edit" || localStorage.FormMode == "View") {
 		$("#附件表").css("display","block");
 		var json = { "ID": localStorage.fgwjId,"单据类型":"法规文件","table":"公告警示"};

@@ -23,7 +23,6 @@ public class DataServiceImpl implements DataService {
 
 	public PageResult getPageData(String listSql, String params) {
 		String sql = "";
-		String where = "";
 		Integer begin = 0, end = 0;
 		Integer total=0;
 		if (params != null) {

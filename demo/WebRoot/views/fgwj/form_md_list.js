@@ -1,14 +1,26 @@
 ﻿$(function(){
 	$.ajax({
-		url:"getDatadictionaryByType.do",
+		url:"../../getDatadictionaryByType.do",
 		type:"POST",
 		data:{"type":"法规文件"},
-		dataType:"",
+		dataType:"JSON",
+		async:false,
+		success:function(data){
+			var selectHtml="";
+			for(var i=0;i<data.length;i++){
+				selectHtml+="<option  value='"+data[i].ID+"'>"+data[i].名称+"</option>";
+			}
+			$("#详细类别").html(selectHtml);
+			
+		}
 	});
 	
 	
 	dbQueryParams = function (params) {
-		var listSql="select * from 公告警示 where 单据类型='法规文件'";
+		var listSql="select gsjg.*,sjzd_mx.名称 详细类别名称 from 公告警示 gsjg" +
+				" left join 数据字典_明细 sjzd_mx" +
+						" on gsjg.详细类别=sjzd_mx.ID " +
+						" where gsjg.单据类型='法规文件' and gsjg.详细类别='"+$("#详细类别").find("option:selected").val()+"'";
         var temp = {
             'params' : JSON.stringify(params),
             'listSql':listSql
@@ -55,7 +67,7 @@
                 visible: true
                 
             } , {
-            	field: '详细类别',
+            	field: '详细类别名称',
                 title: '法规类别',
                 valign: 'middle',
                 visible: true
@@ -65,29 +77,13 @@
                 title: '发布时间',
                 valign: 'middle',
                 visible: true
-            } , {
-            	
-                field: '文件名称',
-                title: '附件下载',
-                valign: 'middle',
-                visible: true,
-                formatter: function (value, row, index) {  
-                	 if(value!=undefined){
-                		 var path=row.文件地址+"";
-                		 path=path.replace(/\\/g,'%2F');
-                		 var fileName=value;
-                		 html="<a href='../../download.do?path="+path+"&fileName="+fileName+"'>"+value+"</a>";
-                         return html;
-                	 }else{
-                		 return "";
-                	 }
-                     
-                }  
             } ]
         });
 	};
 	TableInit();
-	
+	$("#btntable-search").click(function(){
+		$("#table").bootstrapTable('refresh');
+	});
 	$("#btntable-add").click(function(){
 		localStorage.FormMode="Add";
 		openFormCard("form_md.html","新增法规文件");
