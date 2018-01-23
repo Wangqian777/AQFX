@@ -147,11 +147,42 @@ $(function() {
               		html="<a href='../../download.do?path="+path+"&fileName="+fileName+"'>下载文件</a>";
                     return html;
                 } 
+            },{
+            	field: '预览',
+                title: '预览',
+                valign: 'middle',
+                visible: true,
+                align:"center",
+                formatter: function (value, row, index) {  
+                	var path=row.文件路径+"";
+              		//path=path.replace(/\\/g,'%2F');
+              		//var fileName=row.文件名称+"";
+              		html="<button name='"+path+"' type='button' class='btn-link'><i class='fa fa fa-table'></i>&nbsp;预览</button>";
+                    return html;
+                } 
             }]
         });
 	};
 	TableInit();
-	
+	$("body").delegate(".btn-link","click", function(){
+		localStorage.filePath=$(this).attr("name");
+		if(localStorage.filePath!=undefined && localStorage.filePath!=""){
+			parent.layer.open({
+				type:2,
+				title:'<span style="font-size:14px;font-weight: bold;">文档预览<span>',
+				maxmin:true,
+				shadeClose:true,
+				//offset:'auto',
+				area:['900px', '600px'],
+				content:["../yulan/filePreview.html"],
+				maxmin: true,
+				end: function(){
+				}
+			});
+		}else{
+			layer.msg("预览失败");
+		}
+	});
 	$("#btntable-save").click(function(){
 		
 		if(fileCounts!=0){

@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import service.DataService;
+import utils.DocConverter;
 import utils.GenerateSql;
 import utils.JsonResult;
 import utils.PageResult;
@@ -273,6 +276,30 @@ public class DataController {
 			out.flush();
 			out.close();
 		}
+	}
+	//office预览
+	@RequestMapping("filePreview.do")
+	public void filePreview(String filePath,HttpServletRequest request, HttpServletResponse respone) throws IOException{
+		respone.setContentType("text/html;charset=utf-8");
+		PrintWriter out = respone.getWriter();
+		//调用转换类DocConverter,并将需要转换的文件传递给该类的构造方法  
+        DocConverter d = new DocConverter(filePath);  
+        //调用conver方法开始转换，先执行doc2pdf()将office文件转换为pdf;再执行pdf2swf()将pdf转换为swf;  
+        d.conver();  
+        System.out.println(d.getswfPath());  
+        //生成swf相对路径，以便传递给flexpaper播放器  
+        String swfpath = "file"+d.getswfPath().substring(d.getswfPath().lastIndexOf("/"));  
+        System.out.println(swfpath);  
+        //将相对路径放入sessio中保存  
+        String pdfpath=swfpath.substring(0, swfpath.lastIndexOf(".")+1)+"pdf";  
+        Map map=new HashMap();  
+        map.put("swfpath", swfpath);  
+        map.put("pdfpath", pdfpath);  
+        JSONArray js = JSONArray.fromObject(map);
+		out.print(js);
+		out.flush();
+		out.close();
+        
 	}
 	
 	//登录方法

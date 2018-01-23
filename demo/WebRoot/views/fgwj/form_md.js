@@ -115,7 +115,7 @@ $(function() {
             queryParams: dbQueryParams,			//传递参数（*）
             sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
             pageNumber:1,                       //初始化加载第一页，默认第一页
-            pageSize: 2,                       //每页的记录行数（*）
+            pageSize: 10,                       //每页的记录行数（*）
             pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
             search: false,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
             strictSearch: true,
@@ -162,13 +162,43 @@ $(function() {
               		html="<a href='../../download.do?path="+path+"&fileName="+fileName+"'>下载文件</a>";
                     return html;
                 } 
+            }, {
+            	field: '预览',
+                title: '预览',
+                valign: 'middle',
+                visible: true,
+                align:"center",
+                formatter: function (value, row, index) {  
+                	var path=row.文件路径+"";
+              		//path=path.replace(/\\/g,'%2F');
+              		//var fileName=row.文件名称+"";
+              		html="<button name='"+path+"' type='button' class='btn-link'><i class='fa fa fa-table'></i>&nbsp;预览</button>";
+                    return html;
+                } 
             }]
         });
 	};
 	TableInit();
-	
+	$("body").delegate(".btn-link","click", function(){
+		localStorage.filePath=$(this).attr("name");
+		if(localStorage.filePath!=undefined && localStorage.filePath!=""){
+			parent.layer.open({
+				type:2,
+				title:'<span style="font-size:14px;font-weight: bold;">文档预览<span>',
+				maxmin:true,
+				shadeClose:true,
+				//offset:'auto',
+				area:['900px', '600px'],
+				content:["../yulan/filePreview.html"],
+				maxmin: true,
+				end: function(){
+				}
+			});
+		}else{
+			layer.msg("预览失败");
+		}
+	});
 	$("#btntable-save").click(function(){
-		
 		if(fileCounts!=0){
 			$("#file").fileinput("upload");
 		}else{
