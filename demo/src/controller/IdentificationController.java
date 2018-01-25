@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -51,7 +52,20 @@ public class IdentificationController {
 		out.close();
 	}
 	
-	
+	//判断文件是否存在
+	@RequestMapping("isExistence.do")
+	public void isExistence(String filePath,HttpServletResponse response) throws IOException{
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out=response.getWriter();
+		File file=new File(filePath);
+		if(file.exists()){
+			out.print("1");
+		}else{
+			out.print("0");
+		}
+		out.flush();
+		out.close();
+	}
 	
 	
 	public void setDataService(DataService dataService) {

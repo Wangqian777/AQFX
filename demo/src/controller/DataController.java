@@ -278,6 +278,7 @@ public class DataController {
 		}
 	}
 	//office预览
+	
 	@RequestMapping("filePreview.do")
 	public void filePreview(String filePath,HttpServletRequest request, HttpServletResponse respone) throws IOException{
 		respone.setContentType("text/html;charset=utf-8");
@@ -299,9 +300,7 @@ public class DataController {
 		out.print(js);
 		out.flush();
 		out.close();
-        
 	}
-	
 	//登录方法
 	@RequestMapping("login.do")
 	public void login(String user,String pwd,HttpServletResponse response) throws IOException{
