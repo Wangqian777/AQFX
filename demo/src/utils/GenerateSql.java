@@ -218,9 +218,16 @@ public class GenerateSql {
     			sqlMap.put("ziSql", tempList);
     		}
     		if(key.equalsIgnoreCase("wenjian")){
-    			JSONArray filePath = json.getJSONArray(key);;
+    			JSONArray filePath = json.getJSONArray(key);
+    			String filename="";
     			for(int i=0;i<filePath.size();i++){
     				File file=new File(filePath.get(i).toString());
+    				file.delete();
+    				filename=filePath.get(i).toString().substring(0,filePath.get(i).toString().lastIndexOf(".")+1)+"pdf";
+    				file=new File(filename);
+    				file.delete();
+    				filename=filePath.get(i).toString().substring(0,filePath.get(i).toString().lastIndexOf(".")+1)+"swf";
+    				file=new File(filename);
     				file.delete();
     			}
     			
@@ -243,6 +250,7 @@ public class GenerateSql {
             if(key.equals("table")){
             	map1.put("table",value.toString());
             }
+            
             if(key.equals("tabledata")){
             	JSONObject tempjson=JSONObject.fromObject(value.toString());
             	Iterator tempit = tempjson.keys();
