@@ -250,7 +250,6 @@ public class GenerateSql {
             if(key.equals("table")){
             	map1.put("table",value.toString());
             }
-            
             if(key.equals("tabledata")){
             	JSONObject tempjson=JSONObject.fromObject(value.toString());
             	Iterator tempit = tempjson.keys();
